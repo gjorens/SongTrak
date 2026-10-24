@@ -8,4 +8,4 @@ Differences from the Claude-hosted version:
 - Each person's library is stored in that browser on that device.
 - Cloud database sync and "Write with AI" are not available.
 - Save as text downloads a file; use Share > Include all song data and the library file buttons (in cloud sync settings) to move songs between devices.
-- To publish an update, replace the files; users get the new version on their next online visit (change "songtrak-v1" in sw.js to force it).
+- To publish an update, replace the files; users get the new version on their next online visit (change "songtrak-v2" in sw.js to force it).
