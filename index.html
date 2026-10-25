@@ -199,10 +199,23 @@ html,body,button,select,input,label{touch-action:manipulation}
 body.playing #tuner{align-items:stretch;justify-content:flex-end;padding:0;bottom:var(--pbh,84px);background:rgba(0,0,0,.2)}
 body.playing #tuner .box{width:min(400px,94vw);max-height:none;height:100%;border-radius:0;border-width:0 0 0 1px;animation:tnin .2s ease-out}
 @keyframes tnin{from{transform:translateX(100%)}to{transform:none}}
+/* v2.1 tuner text */
+#tuner .tn>*{flex-shrink:0}
+#tuner .tn{font-size:20px;font-weight:600;gap:14px}#tuner .tn .btn,#tuner .tn select,#tuner .tn input{font-size:19px}
+#tuner .tnh{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:26px}
+#tuner #tnclose{background:#c62828;border-color:#8e1a1a;color:#fff;font-weight:800;min-height:46px;padding:0 16px}
+#tnn{font-size:96px!important}#tnhz{font-size:34px!important;font-weight:800;color:var(--ink)}
+#tnmsg{font-size:21px;font-weight:700;color:var(--ink);min-height:1.4em}
+#tuner .tstr button{min-width:58px;height:58px;font-size:24px;font-weight:800}
+#tuner .tmeter{height:40px;border-radius:20px}#tuner .tmeter i{width:9px;margin-left:-4px}
+#tuner .tn .status{font-size:16px;color:var(--mute)}
+#tnsens{width:150px;vertical-align:middle;height:32px}.tlv{flex:1 1 90px;height:14px;border-radius:7px;background:var(--bg);border:1px solid var(--line);overflow:hidden}.tlv i{display:block;height:100%;width:0;background:var(--chord)}
+body.playing #tuner .box{width:50vw;min-width:420px}
+@media (max-width:760px){body.playing #tuner .box{width:100vw;min-width:0}#tnn{font-size:80px!important}}
 </style></head>
 <body><div class="fbanner" id="fbanner" role="status" hidden><span id="fbtxt"></span><button class="btn main" id="fbsave" type="button">Save to Files</button></div><div class="app">
 <aside>
- <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v2.0 · 25 Oct e1</small></h1>
+ <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v2.1 · 25 Oct e1</small></h1>
  <div class="tabs"><button id="fsbtn" class="gear" aria-label="Full screen" title="Full screen" hidden>⛶</button><button id="helpbtn" class="gear" aria-label="Getting started" title="Getting started">?</button><button id="setbtn" class="gear" aria-label="Settings" title="Settings">⚙</button><button id="tS" class="on" aria-haspopup="menu" aria-expanded="false">Songs ▾</button><button id="tL">Setlists</button></div>
  <input type="search" id="q" placeholder="Search songs" aria-label="Search songs">
  <div class="tools" id="sortrow"><span class="sortgrp"><span class="sdir"><button type="button" id="sup" class="on" aria-label="Sort ascending" aria-pressed="true" title="Ascending: A to Z, oldest first">▲</button><button type="button" id="sdn" aria-label="Sort descending" aria-pressed="false" title="Descending: Z to A, newest first">▼</button></span><select id="sort" aria-label="Sort songs"><option value="title">Title</option><option value="artist">Artist</option><option value="added">Date added</option><option value="set" hidden disabled>Set order</option></select></span><button class="btn" id="locate" title="Scroll to the song you are viewing" aria-label="Scroll to current song">◎ Current</button></div>
@@ -317,16 +330,17 @@ body.playing #tuner .box{width:min(400px,94vw);max-height:none;height:100%;borde
 <h4>Tips</h4><p>Edit a song to fix chords at any time. Save your library as a file now and then as a backup.</p>
 </div>
 <div class="row"><button class="btn main" id="helpclose">Close</button></div></div></div>
-<div id="tuner" class="ov" role="dialog" aria-modal="true" aria-label="Guitar tuner"><div class="box tn"><b>Guitar tuner</b>
+<div id="tuner" class="ov" role="dialog" aria-modal="true" aria-label="Guitar tuner"><div class="box tn"><div class="tnh"><b>Guitar tuner</b><button class="btn" id="tnclose" type="button">✕ Close</button></div>
 <div class="krow"><select id="tnsel" aria-label="Tuning"></select><input id="tncus" placeholder="Notes low to high, e.g. D A D G B D" aria-label="Custom tuning notes" hidden></div>
 <div class="tnote"><span id="tnn" aria-live="polite">&ndash;</span><span id="tnhz" class="status"></span></div>
 <div class="tmeter" id="tnm" aria-hidden="true"><span class="tz"></span><i id="tnneedle"></i></div>
 <div id="tnmsg" class="status" role="status">Tap Start listening, then pluck one string.</div>
 <div class="tstr" id="tnstr"></div>
-<div class="row"><button class="btn main" id="tngo" type="button">Start listening</button><button class="btn" id="tnauto" type="button">Auto string</button></div>
+<div class="row"><button class="btn main" id="tngo" type="button" hidden>Start listening</button><button class="btn" id="tnauto" type="button">Auto string</button></div>
+<div class="krow"><label class="kt">Mic sensitivity <input type="range" id="tnsens" min="1" max="5" step="1" value="3" aria-label="Microphone sensitivity"></label><span class="tlv" aria-hidden="true"><i id="tnlvi"></i></span></div>
 <div class="krow"><label class="kt"><input type="checkbox" id="tnchr"> Chromatic</label><label class="kt">A4 = <input id="tna4" type="number" min="400" max="480" step="1" value="440" style="width:72px"> Hz</label></div>
 <p class="status">Tap a string to hear its note and lock the tuner to it. Tap Auto string to let the tuner pick the nearest string.</p>
-<div class="row"><button class="btn" id="tnsave" type="button" hidden>Use for this song</button><button class="btn" id="tnclose" type="button">Close</button></div></div></div>
+<div class="row"><button class="btn" id="tnsave" type="button" hidden>Use for this song</button></div></div></div>
 <div id="cloud" class="ov" role="dialog" aria-modal="true"><div class="box"><b>Cloud files sync</b>
 <div id="cfolder" class="box0"><p>Choose a folder that your cloud service already syncs, such as iCloud Drive, Dropbox, Google Drive or OneDrive. On each device, choose that same folder. The app keeps one library file in it up to date.</p>
 <div class="row"><button class="btn main" id="cpick">Choose folder</button><button class="btn" id="cnow">Sync now</button><button class="btn" id="coff">Disconnect</button></div>
@@ -887,7 +901,7 @@ function tnStrings(){tn.m=tunParse(tn.t)||tunParse("Standard");$("tnstr").innerH
 function tnMark(i){var b=$("tnstr").querySelectorAll("button");for(var k=0;k<b.length;k++){b[k].className=(k==i?"on":"")+(k==tn.lock?" lk":"")}}
 function tnCtx(){if(!tn.ctx){var AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;tn.ctx=new AC()}if(tn.ctx.resume)tn.ctx.resume();return tn.ctx}
 function tnTone(m){var c=tnCtx();if(!c)return;var f=tnA4()*Math.pow(2,(m-69)/12),o=c.createOscillator(),g=c.createGain(),t=c.currentTime;o.type="triangle";o.frequency.value=f;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.35,t+.02);g.gain.exponentialRampToValueAtTime(.001,t+2);o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+2.1);tn.mute=Date.now()+2200}
-function tnPitch(b,sr){var N=b.length,e=0,i;for(i=0;i<N;i++)e+=b[i]*b[i];if(Math.sqrt(e/N)<.0012)return null;
+function tnPitch(b,sr,gate){var N=b.length,e=0,i;for(i=0;i<N;i++)e+=b[i]*b[i];if(Math.sqrt(e/N)<(gate||.0012))return null;
  var mn=Math.floor(sr/1100),mx=Math.min(Math.floor(sr/55),N>>1),n=new Float32Array(mx+2);
  for(var t=mn-1;t<=mx+1;t++){var r=0,m=0;for(i=0;i<N-t;i++){r+=b[i]*b[i+t];m+=b[i]*b[i]+b[i+t]*b[i+t]}n[t]=m?2*r/m:0}
  var peaks=[],pos=false;for(t=mn;t<=mx;t++){if(n[t]<0)pos=true;if(pos&&n[t]>n[t-1]&&n[t]>=n[t+1]&&n[t]>.3)peaks.push(t)}
@@ -903,17 +917,19 @@ function tnShow(f){var meter=$("tnm"),nn=$("tnn");
  $("tnneedle").style.left=Math.max(2,Math.min(98,50+cents))+"%";meter.className="tmeter"+(ok?" ok":"");
  $("tnmsg").textContent=ok?"In tune ✓":(cents<0?"Too low — tighten the string (tune up)":"Too high — loosen the string (tune down)");
  if(idx>=0)tnMark(idx)}
-function tnLoop(){if(!tn.on)return;tn.an.getFloatTimeDomainData(tn.buf);var f=Date.now()<tn.mute?null:tnPitch(tn.buf,tn.ctx.sampleRate),now=Date.now();
+function tnGate(){var v=+$("tnsens").value||3;return[.005,.0025,.0012,.0006,.0003][v-1]}
+$("tnsens").value=lsg("songtrak-tnsens")||3;$("tnsens").oninput=function(){try{localStorage.setItem("songtrak-tnsens",this.value)}catch(e){}};
+function tnLoop(){if(!tn.on)return;tn.an.getFloatTimeDomainData(tn.buf);var rs=0,bi;for(bi=0;bi<tn.buf.length;bi+=4)rs+=tn.buf[bi]*tn.buf[bi];rs=Math.sqrt(rs/(tn.buf.length/4));$("tnlvi").style.width=Math.min(100,Math.sqrt(rs/.05)*100)+"%";var f=Date.now()<tn.mute?null:tnPitch(tn.buf,tn.ctx.sampleRate,tnGate()),now=Date.now();
  if(f){tn.hist.push(f);if(tn.hist.length>5)tn.hist.shift();tn.last=now;var s=tn.hist.slice().sort(function(a,b){return a-b});tnShow(s[s.length>>1])}
  else if(now-tn.last>3000){tn.hist=[];tnShow(null)}
  tn.raf=requestAnimationFrame(function(){setTimeout(tnLoop,40)})}
-async function tnStart(){var c=tnCtx();if(!c||!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){$("tnmsg").textContent="This browser can't use the microphone. You can still tap a string to hear its note.";return}
- try{tn.stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}})}catch(e){$("tnmsg").textContent="Microphone access was blocked. Allow the microphone for this page in your browser settings, then try again.";return}
- var src=c.createMediaStreamSource(tn.stream);tn.an=c.createAnalyser();tn.an.fftSize=4096;tn.buf=new Float32Array(tn.an.fftSize);src.connect(tn.an);tn.src=src;tn.on=true;tn.hist=[];$("tngo").textContent="Stop listening";$("tnmsg").textContent="Listening… pluck one string."; tnLoop()}
-function tnStop(){tn.on=false;if(tn.raf)cancelAnimationFrame(tn.raf);try{if(tn.src)tn.src.disconnect()}catch(e){}if(tn.stream)tn.stream.getTracks().forEach(function(t){t.stop()});tn.stream=null;tn.src=null;$("tngo").textContent="Start listening";tnShow(null)}
+async function tnStart(){var c=tnCtx();if(!c||!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){$("tnmsg").textContent="This browser can't use the microphone. You can still tap a string to hear its note.";$("tngo").hidden=false;return}
+ try{tn.stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}})}catch(e){$("tnmsg").textContent="Microphone access was blocked. Allow the microphone for this page in your browser settings, then try again.";$("tngo").hidden=false;return}
+ var src=c.createMediaStreamSource(tn.stream);tn.an=c.createAnalyser();tn.an.fftSize=4096;tn.buf=new Float32Array(tn.an.fftSize);src.connect(tn.an);tn.src=src;tn.on=true;tn.hist=[];$("tngo").hidden=true;$("tnmsg").textContent="Listening… pluck one string."; tnLoop()}
+function tnStop(){tn.on=false;if(tn.raf)cancelAnimationFrame(tn.raf);try{if(tn.src)tn.src.disconnect()}catch(e){}if(tn.stream)tn.stream.getTracks().forEach(function(t){t.stop()});tn.stream=null;tn.src=null;$("tngo").textContent="Try again";tnShow(null)}
 function tnSync(){var v=$("tnsel").value,cs=v=="__c";$("tncus").hidden=!cs;tn.t=cs?($("tncus").value.trim()||"E A D G B E"):v;if(cs&&!tunParse(tn.t))tn.t="Standard";tn.lock=-1;tnStrings();
  var sv=cur&&((cur.tuning||"Standard").toLowerCase()!=tunLabel(tn.t).toLowerCase()&&tunNotes(cur.tuning)!=tunNotes(tn.t));$("tnsave").hidden=!sv}
-function openTuner(t){tunFill($("tnsel"),t);var cs=$("tnsel").value=="__c";$("tncus").hidden=!cs;$("tncus").value=cs?t:"";try{var a=localStorage.getItem("cc-a4");if(a)$("tna4").value=a}catch(e){}tnSync();$("tnmsg").textContent="Tap Start listening, then pluck one string.";$("tuner").classList.add("on")}
+function openTuner(t){tunFill($("tnsel"),t);var cs=$("tnsel").value=="__c";$("tncus").hidden=!cs;$("tncus").value=cs?t:"";try{var a=localStorage.getItem("cc-a4");if(a)$("tna4").value=a}catch(e){}tnSync();$("tnmsg").textContent="Starting the microphone…";$("tuner").classList.add("on");if(!tn.on)tnStart()}
 function closeTuner(){tnStop();$("tuner").classList.remove("on")}
 $("tnsel").onchange=tnSync;$("tncus").oninput=tnSync;
 $("tna4").onchange=function(){try{localStorage.setItem("cc-a4",String(tnA4()))}catch(e){}};
