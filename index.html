@@ -212,10 +212,26 @@ body.playing #tuner .box{width:min(400px,94vw);max-height:none;height:100%;borde
 #tnsens{width:150px;vertical-align:middle;height:32px}.tlv{flex:1 1 90px;height:14px;border-radius:7px;background:var(--bg);border:1px solid var(--line);overflow:hidden}.tlv{position:relative}.tlv b{position:absolute;top:-2px;bottom:-2px;width:3px;margin-left:-1px;background:#c62828;border-radius:2px}.tlv i{display:block;height:100%;width:0;background:var(--chord)}
 body.playing #tuner .box{width:50vw;min-width:420px}
 @media (max-width:760px){body.playing #tuner .box{width:100vw;min-width:0}#tnn{font-size:80px!important}}
+/* v2.3 looper */
+#lpp .tn{font-size:20px;font-weight:600;gap:12px}#lpp .tn>*{flex-shrink:0}#lpp .tnh{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:26px}
+#lpp #lpx{background:#c62828;border-color:#8e1a1a;color:#fff;font-weight:800;min-height:46px;padding:0 16px}
+#lpp .tn .btn,#lpp .tn input,#lpp .tn select{font-size:18px}#lpp .status{font-size:16px;color:var(--mute);font-weight:600}
+.lp .lt{border:1px solid var(--line);border-radius:12px;padding:10px;margin:0 0 10px;display:flex;flex-direction:column;gap:8px}
+.lp .lt .lh{display:flex;align-items:center;gap:10px;justify-content:space-between;font-weight:800;font-size:21px}
+.lp .lt .lr{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.lp .lt select{flex:1 1 12em;min-width:10em;width:auto;padding:8px;font-size:17px}
+.lp .lt button{min-width:52px;height:46px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;font-size:17px;font-weight:700;padding:0 10px}
+.lp .lt button.rec{background:#c62828;border-color:#8e1a1a;color:#fff}.lp .lt button.armed{animation:lpb .6s infinite alternate}
+@keyframes lpb{from{opacity:1}to{opacity:.45}}
+.lp .lt .has{color:#28aa5a}.lp .lt input[type=range]{flex:1 1 90px;height:30px}
+#plp.on,#plq.on{background:var(--chord);border-color:var(--chord);color:#fff}
+body.playing #lpp{align-items:stretch;justify-content:flex-end;padding:0;bottom:var(--pbh,84px);background:rgba(0,0,0,.2)}
+body.playing #lpp .box{width:50vw;min-width:420px;max-height:none;height:100%;border-radius:0;border-width:0 0 0 1px;animation:tnin .2s ease-out}
+@media (max-width:760px){body.playing #lpp .box{width:100vw;min-width:0}}
 </style></head>
 <body><div class="fbanner" id="fbanner" role="status" hidden><span id="fbtxt"></span><button class="btn main" id="fbsave" type="button">Save to Files</button></div><div class="app">
 <aside>
- <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v2.2 · 25 Oct e1</small></h1>
+ <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v2.3 · 25 Oct e1</small></h1>
  <div class="tabs"><button id="fsbtn" class="gear" aria-label="Full screen" title="Full screen" hidden>⛶</button><button id="helpbtn" class="gear" aria-label="Getting started" title="Getting started">?</button><button id="setbtn" class="gear" aria-label="Settings" title="Settings">⚙</button><button id="tS" class="on" aria-haspopup="menu" aria-expanded="false">Songs ▾</button><button id="tL">Setlists</button></div>
  <input type="search" id="q" placeholder="Search songs" aria-label="Search songs">
  <div class="tools" id="sortrow"><span class="sortgrp"><span class="sdir"><button type="button" id="sup" class="on" aria-label="Sort ascending" aria-pressed="true" title="Ascending: A to Z, oldest first">▲</button><button type="button" id="sdn" aria-label="Sort descending" aria-pressed="false" title="Descending: Z to A, newest first">▼</button></span><select id="sort" aria-label="Sort songs"><option value="title">Title</option><option value="artist">Artist</option><option value="added">Date added</option><option value="set" hidden disabled>Set order</option></select></span><button class="btn" id="locate" title="Scroll to the song you are viewing" aria-label="Scroll to current song">◎ Current</button></div>
@@ -293,12 +309,13 @@ body.playing #tuner .box{width:50vw;min-width:420px}
  <details><summary>Edit the beat</summary><div class="dgw"><div id="dgrid"></div></div><p class="status">Tap a square: hit, soft hit, rest. Your edit is saved with this song.</p></details>
  <div id="dstat" class="status" role="status">Drums stopped.</div>
 </div>
-<button id="pexit" aria-label="Exit play mode">✕ Exit</button><div id="pbar" role="toolbar" aria-label="Play controls"><span class="pg" id="pnav" hidden><button id="ppv" aria-label="Previous song">⏮</button><button id="pnx" aria-label="Next song">⏭</button></span><button id="pgo" class="go">Start scroll</button><button id="pdq" type="button" aria-label="Start or stop drums">🥁 Start</button><button id="pdf" type="button" hidden aria-label="Fade drums out">Fade</button><button id="pdr" type="button" aria-expanded="false">Beat ✎</button><button id="pkey" type="button" aria-expanded="false">Key</button><button id="ptn" type="button">🎸 Tune</button><span class="pg"><button id="pfs" aria-label="Smaller text">A−</button><button id="pfl" aria-label="Larger text">A+</button></span><span class="pg" id="pspd">Speed<button id="psm" aria-label="Slower">−</button><b id="psp">3</b><button id="psl" aria-label="Faster">+</button></span></div>
+<button id="pexit" aria-label="Exit play mode">✕ Exit</button><div id="pbar" role="toolbar" aria-label="Play controls"><span class="pg" id="pnav" hidden><button id="ppv" aria-label="Previous song">⏮</button><button id="pnx" aria-label="Next song">⏭</button></span><button id="pgo" class="go">Start scroll</button><button id="pdq" type="button" aria-label="Start or stop drums">🥁 Start</button><button id="pdf" type="button" hidden aria-label="Fade drums out">Fade</button><button id="pdr" type="button" aria-expanded="false">Beat ✎</button><button id="pkey" type="button" aria-expanded="false">Key</button><button id="ptn" type="button">🎸 Tune</button><button id="plp" type="button">🔁 Loops</button><button id="plq" type="button" hidden aria-label="Play or stop loops">▶ Loops</button><button id="plf" type="button" hidden aria-label="Fade loops out">Fade</button><span class="pg"><button id="pfs" aria-label="Smaller text">A−</button><button id="pfl" aria-label="Larger text">A+</button></span><span class="pg" id="pspd">Speed<button id="psm" aria-label="Slower">−</button><b id="psp">3</b><button id="psl" aria-label="Faster">+</button></span></div>
 <div id="pkp" role="dialog" aria-label="Key and capo" hidden><div class="pkh"><b>Key</b><button id="pkx" type="button" aria-label="Close">✕</button></div>
 <div class="pkr"><span>Key</span><span class="pg"><button id="pkd" type="button" aria-label="Down a half step">−</button><b id="pkv">-</b><button id="pku" type="button" aria-label="Up a half step">+</button></span></div>
 <div class="pkr"><span>Capo</span><span class="pg"><button id="pcd" type="button" aria-label="Capo down">−</button><b id="pcv">-</b><button id="pcu" type="button" aria-label="Capo up">+</button></span></div>
 <p class="pkn" id="pks"></p><p class="pkn">Changes apply to this song and are saved with it.</p></div>
 <div id="sets" class="ov" role="dialog" aria-modal="true"><div class="box"><b>Settings</b>
+<label class="kt"><input type="checkbox" id="slp"> Show Loops in the Play bar</label>
 <label>Your name <input type="text" id="uname" class="sz" autocomplete="name" placeholder="Used as the artist on songs you generate" aria-label="Your name"></label>
 <label>Appearance <select id="theme" aria-label="Appearance"><option value="auto">Match this device</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
 <label>Lyric size <select id="lsz" class="sz" aria-label="Lyric size"><option value="14">14</option><option value="16">16</option><option value="18">18</option><option value="20">20</option><option value="22">22</option><option value="26">26</option><option value="32">32</option><option value="40">40</option><option value="48">48</option></select></label>
@@ -342,6 +359,13 @@ body.playing #tuner .box{width:50vw;min-width:420px}
 <div class="krow"><label class="kt"><input type="checkbox" id="tnchr"> Chromatic</label><label class="kt">A4 = <input id="tna4" type="number" min="400" max="480" step="1" value="440" style="width:72px"> Hz</label></div>
 <p class="status">Tap a string to hear its note and lock the tuner to it. Tap Auto string to let the tuner pick the nearest string.</p>
 <div class="row"><button class="btn" id="tnsave" type="button" hidden>Use for this song</button></div></div></div>
+
+<div id="lpp" class="ov" role="dialog" aria-modal="true" aria-label="Looper"><div class="box tn lp"><div class="tnh"><b>Loops</b><button class="btn" id="lpx" type="button">✕ Close</button></div>
+<p class="status" id="lpmsg">Record one track, then add the others on top. The first take sets the loop length.</p>
+<div class="krow"><label class="kt">Lead-in <select id="lpli" aria-label="Lead-in clicks"><option value="0">None</option><option value="4" selected>4 clicks</option><option value="8">8 clicks</option></select></label><label class="kt">Latency <input id="lplat" type="number" min="0" max="300" step="5" value="30" style="width:76px" aria-label="Latency in milliseconds"> ms</label></div>
+<div id="lptr"></div>
+<div class="row"><button class="btn main" id="lpplay" type="button">▶ Play loops</button><button class="btn" id="lpfade" type="button">Fade out</button><button class="btn" id="lpclr" type="button">Clear all</button></div>
+<p class="status">Rec replaces a track. Dub adds a new layer on top of what is already recorded. Undo steps back one recording. All tracks stay in step because they share one loop length. If the loops sound late or early, adjust Latency.</p></div></div>
 <div id="cloud" class="ov" role="dialog" aria-modal="true"><div class="box"><b>Cloud files sync</b>
 <div id="cfolder" class="box0"><p>Choose a folder that your cloud service already syncs, such as iCloud Drive, Dropbox, Google Drive or OneDrive. On each device, choose that same folder. The app keeps one library file in it up to date.</p>
 <div class="row"><button class="btn main" id="cpick">Choose folder</button><button class="btn" id="cnow">Sync now</button><button class="btn" id="coff">Disconnect</button></div>
@@ -1320,5 +1344,74 @@ setTimeout(async function(){var ok=false;try{if(localStorage.getItem("cc2help")=
  $("pkd").onclick=go("dn");$("pku").onclick=go("up");$("pcd").onclick=go("cd");$("pcu").onclick=go("cu");
  var ex=$("pexit");if(ex)ex.addEventListener("click",function(){open(false)});
  if(window.ResizeObserver)new ResizeObserver(function(){document.documentElement.style.setProperty("--pbh",$("pbar").offsetHeight+"px")}).observe($("pbar"));
+})();
+
+/* v2.3 looper: 3 tracks, per-track input, lead-in, rec/dub/undo/clear, fade, saved with each song */
+(function(){
+var NT=3,NAMES=["Guitar","Voice","Drums / other"],ctx=null,tr=[],sid=null,D=0,SR=44100,playing=false,t0=0,srcs=[],gains=[],rec=null,fadeTk=0,db=null;
+for(var q=0;q<NT;q++)tr.push({pcm:null,prev:null,vol:1,mute:false});
+function msg(t){$("lpmsg").textContent=t}
+function aud(){if(!ctx){var AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;ctx=new AC()}if(ctx.resume)ctx.resume();SR=ctx.sampleRate;return ctx}
+function lat(){return((ctx&&ctx.baseLatency)||0)+((ctx&&ctx.outputLatency)||0)+(+$("lplat").value||0)/1000}
+/* storage */
+function idb(){return new Promise(function(res,rej){if(db)return res(db);var r=indexedDB.open("songtrak-loops",1);r.onupgradeneeded=function(){r.result.createObjectStore("t")};r.onsuccess=function(){db=r.result;res(db)};r.onerror=function(){rej(r.error)}})}
+function put(i){return idb().then(function(d){return new Promise(function(res){var t=d.transaction("t","readwrite"),st=t.objectStore("t"),k=sid+"|"+i;if(tr[i].pcm)st.put({sr:SR,pcm:tr[i].pcm.buffer.slice(0),vol:tr[i].vol,mute:tr[i].mute},k);else st.delete(k);t.oncomplete=function(){res()};t.onerror=function(){res()}})}).catch(function(){})}
+function loadSong(){var id=cur&&cur.id;if(id===sid)return;stopAll(true);sid=id;D=0;tr.forEach(function(x){x.pcm=null;x.prev=null;x.vol=1;x.mute=false});draw();if(!id)return;var mine=id;idb().then(function(d){for(var i=0;i<NT;i++)(function(i){var rq=d.transaction("t").objectStore("t").get(mine+"|"+i);rq.onsuccess=function(){if(sid!==mine||!rq.result)return;var r=rq.result;SR=r.sr;tr[i].pcm=new Float32Array(r.pcm);tr[i].vol=r.vol==null?1:r.vol;tr[i].mute=!!r.mute;D=Math.max(D,tr[i].pcm.length);draw();bar()}})(i)}).catch(function(){})}
+function any(){return tr.some(function(x){return x.pcm})}
+/* playback */
+function play(at){if(!aud()||!any())return;stopAll(true);t0=at||ctx.currentTime+.08;var tk=++fadeTk;srcs=[];gains=[];tr.forEach(function(x,i){if(!x.pcm)return;var b=ctx.createBuffer(1,x.pcm.length,SR);b.copyToChannel(x.pcm,0);var sr=ctx.createBufferSource();sr.buffer=b;sr.loop=true;var g=ctx.createGain();g.gain.value=x.mute?0:x.vol;sr.connect(g);g.connect(ctx.destination);sr.start(t0);srcs.push(sr);gains[i]=g});playing=true;bar();draw()}
+function stopAll(quiet){fadeTk++;srcs.forEach(function(s){try{s.stop()}catch(e){}});srcs=[];gains=[];playing=false;if(!quiet){bar();draw()}}
+function fade(sec){if(!playing)return;var tk=++fadeTk,t=ctx.currentTime;gains.forEach(function(g){if(!g)return;g.gain.cancelScheduledValues(t);g.gain.setValueAtTime(g.gain.value,t);g.gain.linearRampToValueAtTime(.0001,t+sec)});setTimeout(function(){if(tk===fadeTk)stopAll()},sec*1000+80)}
+/* recording */
+async function getStream(i){var did=lsg("songtrak-loopin"+i)||"",base={echoCancellation:false,noiseSuppression:false,autoGainControl:false};try{return await navigator.mediaDevices.getUserMedia({audio:did?Object.assign({deviceId:{exact:did}},base):base})}catch(e){if(did)return await navigator.mediaDevices.getUserMedia({audio:base});throw e}}
+var wl=null;async function chunkNode(src){if(ctx.audioWorklet&&window.Blob&&!wl){try{var u=URL.createObjectURL(new Blob(["class R extends AudioWorkletProcessor{process(i){var c=i[0][0];if(c)this.port.postMessage({t:currentTime,d:c.slice()});return true}}registerProcessor('stloop',R)"],{type:"application/javascript"}));await ctx.audioWorklet.addModule(u);wl=true}catch(e){wl=false}}
+ var out=[];if(wl){var n=new AudioWorkletNode(ctx,"stloop",{numberOfInputs:1,numberOfOutputs:1});n.port.onmessage=function(e){out.push(e.data)};src.connect(n);var z=ctx.createGain();z.gain.value=0;n.connect(z);z.connect(ctx.destination);return{chunks:out,stop:function(){try{src.disconnect(n);n.disconnect()}catch(e){}}}}
+ var sp=ctx.createScriptProcessor(2048,1,1);sp.onaudioprocess=function(e){out.push({t:e.playbackTime-2048/SR,d:new Float32Array(e.inputBuffer.getChannelData(0))})};src.connect(sp);var z2=ctx.createGain();z2.gain.value=0;sp.connect(z2);z2.connect(ctx.destination);return{chunks:out,stop:function(){try{src.disconnect(sp);sp.disconnect()}catch(e){}}}}
+function extract(chunks,ws,n){var o=new Float32Array(n);chunks.forEach(function(c){var off=Math.round((c.t-ws)*SR),len=c.d.length;if(off>=n||off+len<=0)return;var a=Math.max(0,-off),b=Math.min(len,n-off);for(var k=a;k<b;k++)o[off+k]=c.d[k]});return o}
+function peak(a){var m=0;for(var i=0;i<a.length;i+=16){var v=Math.abs(a[i]);if(v>m)m=v}return m}
+async function record(i,mode){if(rec){return}if(!aud()){msg("This browser can't record audio.");return}
+ if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){msg("This browser can't use the microphone.");return}
+ var st;try{st=await getStream(i)}catch(e){msg("Microphone access was blocked. Allow it in your browser settings, then try again.");return}
+ var src=ctx.createMediaStreamSource(st),cn=await chunkNode(src),first=!any()||D===0,lead=first?(+$("lpli").value||0):0,bpm=(cur&&cur.drums&&cur.drums.b)||100,beat=60/bpm,now=ctx.currentTime;
+ rec={i:i,mode:mode,first:first,cn:cn,st:st};draw();
+ var start;
+ if(first){start=now+.15+lead*beat;for(var k=0;k<lead;k++)click(now+.15+k*beat,k%4===0);rec.start=start;msg(lead?"Count-in… then play. Tap Stop to finish the loop.":"Recording. Tap Stop to finish the loop.");draw();return}
+ // later tracks: play existing loops from a fresh start and record exactly one loop
+ stopAll(true);start=now+.4;play(start);rec.start=start;msg("Recording one loop… keep playing.");draw();
+ var wait=(start-now+D/SR+lat()+.35)*1000;rec.timer=setTimeout(function(){finish(false)},wait)}
+function click(t,hi){var o=ctx.createOscillator(),g=ctx.createGain();o.frequency.value=hi?1500:1000;g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(.5,t+.002);g.gain.exponentialRampToValueAtTime(.0001,t+.06);o.connect(g);g.connect(ctx.destination);o.start(t);o.stop(t+.08)}
+function stopRec(){if(!rec)return;if(rec.first){rec.end=ctx.currentTime;setTimeout(function(){finish(true)},(lat()+.3)*1000)}else{clearTimeout(rec.timer);finish(false)}}
+function finish(isFirst){var r=rec;if(!r)return;rec=null;try{r.cn.stop()}catch(e){}if(r.st)r.st.getTracks().forEach(function(t){t.stop()});
+ var n=isFirst?Math.round((r.end-r.start)*SR):D;if(n<SR*.5){msg("That was too short. Try again.");draw();return}
+ var L=lat(),pcm=extract(r.cn.chunks,r.start+L,n),pk=peak(pcm);if(pk<.002){msg("Nothing was recorded. Check the input and try again.");draw();return}
+ var x=tr[r.i];x.prev=x.pcm;
+ if(isFirst){D=n;tr.forEach(function(o,j){if(j!==r.i&&o.pcm&&o.pcm.length!==D)o.pcm=null})}
+ if(r.mode==="dub"&&x.pcm&&x.pcm.length===n){var m=new Float32Array(n);for(var k=0;k<n;k++)m[k]=Math.max(-1,Math.min(1,x.pcm[k]+pcm[k]));x.pcm=m}else x.pcm=pcm;
+ put(r.i);msg("Saved "+NAMES[r.i]+" ("+(n/SR).toFixed(1)+" s loop).");play();draw()}
+/* ui */
+function draw(){var h="";for(var i=0;i<NT;i++){var x=tr[i],has=!!x.pcm,rc=rec&&rec.i===i;h+='<div class="lt" data-i="'+i+'"><div class="lh"><span>'+NAMES[i]+(has?' <span class="has">●</span>':'')+'</span><span class="lr"><button data-a="'+(rc?'stop':'rec')+'" class="'+(rc?'rec armed':'')+'">'+(rc?'■ Stop':'● Rec')+'</button>'+(has?'<button data-a="dub">+ Dub</button>':'')+(x.prev||has?'<button data-a="undo">↶ Undo</button>':'')+(has?'<button data-a="clr">✕ Clear</button>':'')+'</span></div><div class="lr"><select data-a="in" aria-label="'+NAMES[i]+' input"></select>'+(has?'<button data-a="mute">'+(x.mute?'Muted':'Mute')+'</button><input type="range" data-a="vol" min="0" max="100" value="'+Math.round(x.vol*100)+'" aria-label="'+NAMES[i]+' volume">':'')+'</div></div>'}
+ $("lptr").innerHTML=h;fillIns();$("lpplay").textContent=playing?"■ Stop loops":"▶ Play loops"}
+var devs=[];function fillIns(){document.querySelectorAll("#lptr select[data-a=in]").forEach(function(sel){var i=+sel.closest(".lt").dataset.i,want=lsg("songtrak-loopin"+i)||"";sel.innerHTML='<option value="">Default input</option>'+devs.map(function(d,n){return'<option value="'+esc(d.deviceId)+'">'+esc(d.label||"Input "+(n+1))+"</option>"}).join("");sel.value=devs.some(function(d){return d.deviceId==want})?want:""})}
+function listDevs(){if(!navigator.mediaDevices||!navigator.mediaDevices.enumerateDevices)return;navigator.mediaDevices.enumerateDevices().then(function(l){devs=l.filter(function(d){return d.kind=="audioinput"&&d.deviceId&&d.deviceId!="default"&&d.deviceId!="communications"});if(!rec)fillIns()}).catch(function(){})}
+$("lptr").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;var i=+b.closest(".lt").dataset.i,a=b.dataset.a,x=tr[i];
+ if(a=="rec")record(i,"rec");else if(a=="dub")record(i,"dub");else if(a=="stop")stopRec();
+ else if(a=="clr"){x.prev=x.pcm;x.pcm=null;put(i);if(!any()){D=0;stopAll()}else play();draw();bar()}
+ else if(a=="undo"){var t=x.pcm;x.pcm=x.prev;x.prev=t;put(i);if(any()){if(!D)D=x.pcm?x.pcm.length:D;play()}else stopAll();draw();bar()}
+ else if(a=="mute"){x.mute=!x.mute;if(gains[i])gains[i].gain.value=x.mute?0:x.vol;put(i);draw()}});
+$("lptr").addEventListener("input",function(e){var r=e.target;if(r.dataset.a!="vol")return;var i=+r.closest(".lt").dataset.i;tr[i].vol=r.value/100;if(gains[i]&&!tr[i].mute)gains[i].gain.value=tr[i].vol;clearTimeout(r._t);r._t=setTimeout(function(){put(i)},400)});
+$("lptr").addEventListener("change",function(e){var r=e.target;if(r.dataset.a!="in")return;var i=+r.closest(".lt").dataset.i;try{localStorage.setItem("songtrak-loopin"+i,r.value)}catch(x){}});
+$("lpplay").onclick=function(){if(playing)stopAll();else if(any())play();else msg("Record a track first.")};
+$("lpfade").onclick=function(){fade(4)};
+$("lpclr").onclick=async function(){if(!any())return;if(!await ask("Clear all loops for this song?",{ok:"Clear all"}))return;stopAll();for(var i=0;i<NT;i++){tr[i].prev=null;tr[i].pcm=null;put(i)}D=0;draw();bar()};
+$("lplat").value=lsg("songtrak-looplat")||30;$("lplat").onchange=function(){try{localStorage.setItem("songtrak-looplat",this.value)}catch(e){}};
+function openP(){loadSong();$("lpp").classList.add("on");draw();listDevs()}
+function closeP(){if(rec)return;$("lpp").classList.remove("on")}
+$("plp").onclick=openP;$("lpx").onclick=closeP;$("lpp").onclick=function(e){if(e.target==this)closeP()};
+$("plq").onclick=function(){loadSong();if(playing)stopAll();else if(any())play()};$("plf").onclick=function(){fade(4)};
+function bar(){var show=lsg("songtrak-nolooper")!=="1";$("plp").hidden=!show;var h=any()&&show;$("plq").hidden=!h;$("plq").textContent=playing?"■ Loops":"▶ Loops";$("plq").classList.toggle("on",playing);$("plf").hidden=!(h&&playing);$("plp").classList.toggle("on",any())}
+$("slp").checked=lsg("songtrak-nolooper")!=="1";$("slp").onchange=function(){try{localStorage.setItem("songtrak-nolooper",this.checked?"0":"1")}catch(e){}bar()};
+setInterval(function(){if(document.body.classList.contains("playing")){if((cur&&cur.id)!==sid){loadSong();bar()}}else if(playing&&!rec)stopAll()},400);
+bar();
+window.__loop={play:play,stop:stopAll,any:any,tr:tr,state:function(){return{D:D,playing:playing,sid:sid}},rec:record,stopRec:stopRec};
 })();
 </script></body></html>
