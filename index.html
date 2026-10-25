@@ -244,7 +244,7 @@ body.playing #pexit{top:max(26px,calc(env(safe-area-inset-top,0px) + 10px))}
 </style></head>
 <body><div class="fbanner" id="fbanner" role="status" hidden><span id="fbtxt"></span><button class="btn main" id="fbsave" type="button">Save to Files</button></div><div class="app">
 <aside>
- <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v2.4 · 25 Oct e1</small></h1>
+ <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v2.5 · 25 Oct e1</small></h1>
  <div class="tabs"><button id="fsbtn" class="gear" aria-label="Full screen" title="Full screen" hidden>⛶</button><button id="helpbtn" class="gear" aria-label="Getting started" title="Getting started">?</button><button id="setbtn" class="gear" aria-label="Settings" title="Settings">⚙</button><button id="tS" class="on" aria-haspopup="menu" aria-expanded="false">Songs ▾</button><button id="tL">Setlists</button></div>
  <input type="search" id="q" placeholder="Search songs" aria-label="Search songs">
  <div class="tools" id="sortrow"><span class="sortgrp"><span class="sdir"><button type="button" id="sup" class="on" aria-label="Sort ascending" aria-pressed="true" title="Ascending: A to Z, oldest first">▲</button><button type="button" id="sdn" aria-label="Sort descending" aria-pressed="false" title="Descending: Z to A, newest first">▼</button></span><select id="sort" aria-label="Sort songs"><option value="title">Title</option><option value="artist">Artist</option><option value="added">Date added</option><option value="set" hidden disabled>Set order</option></select></span><button class="btn" id="locate" title="Scroll to the song you are viewing" aria-label="Scroll to current song">◎ Current</button></div>
@@ -1402,7 +1402,7 @@ function finish(isFirst){var r=rec;if(!r)return;rec=null;try{r.cn.stop()}catch(e
  var x=tr[r.i];x.prev=x.pcm;
  if(isFirst){D=n;tr.forEach(function(o,j){if(j!==r.i&&o.pcm&&o.pcm.length!==D)o.pcm=null})}
  if(r.mode==="dub"&&x.pcm&&x.pcm.length===n){var m=new Float32Array(n);for(var k=0;k<n;k++)m[k]=Math.max(-1,Math.min(1,x.pcm[k]+pcm[k]));x.pcm=m}else x.pcm=pcm;
- put(r.i);msg("Saved "+NAMES[r.i]+" ("+(n/SR).toFixed(1)+" s loop).");play();draw()}
+ var wasNew=!x.prev;put(r.i);if(wasNew){for(var q=1;q<=NT;q++){var nx=(r.i+q)%NT;if(!tr[nx].pcm){act=nx;break}}}msg("Saved "+NAMES[r.i]+" ("+(n/SR).toFixed(1)+" s loop).");play();draw()}
 /* ui */
 function draw(){var h="";for(var i=0;i<NT;i++){var x=tr[i],has=!!x.pcm,rc=rec&&rec.i===i;h+='<div class="lt'+(i===act?' act':'')+'" data-i="'+i+'"><div class="lh"><span>'+NAMES[i]+(has?' <span class="has">●</span>':'')+'</span><span class="lr"><button data-a="'+(rc?'stop':'rec')+'" class="'+(rc?'rec armed':'')+'">'+(rc?'■ Stop':'● Rec')+'</button>'+(has?'<button data-a="dub">+ Dub</button>':'')+(x.prev||has?'<button data-a="undo">↶ Undo</button>':'')+(has?'<button data-a="clr">✕ Clear</button>':'')+'</span></div><div class="lr"><select data-a="in" aria-label="'+NAMES[i]+' input"></select>'+(has?'<button data-a="mute">'+(x.mute?'Muted':'Mute')+'</button><input type="range" data-a="vol" min="0" max="100" value="'+Math.round(x.vol*100)+'" aria-label="'+NAMES[i]+' volume">':'')+'</div></div>'}
  $("lptr").innerHTML=h;fillIns();$("lpplay").textContent=playing?"■ Stop loops":"▶ Play loops"}
@@ -1439,7 +1439,7 @@ function fmt(t){t=Math.max(0,t);var m=Math.floor(t/60),s=Math.floor(t%60);return
 requestAnimationFrame(ringTickSafe);
 function ringTickSafe(){if(ctx)ringTick();else requestAnimationFrame(ringTickSafe)}
 /* foot pedal: MIDI where the browser has it, otherwise keys (most pedals send keys) */
-var PA=[["rec","Record / stop"],["dub","Dub / stop"],["play","Play / stop loops"],["next","Next track"]],pm={},learn=null;
+var PA=[["auto","Record or dub (auto)"],["rec","Record / stop"],["dub","Dub / stop"],["play","Play / stop loops"],["next","Next track"]],pm={},learn=null;
 try{pm=JSON.parse(lsg("songtrak-pedal")||"{}")||{}}catch(e){pm={}}
 function pname(c){if(!c)return"not set";var a=c.split(":");if(a[0]=="k")return"Key "+a[1].replace(/^(Key|Digit)/,"");var t={144:"Note",176:"CC",192:"Program"}[+a[1]]||"MIDI";return"MIDI "+t+" "+a[2]}
 function drawMap(){$("lpmap").innerHTML=PA.map(function(a){return'<div class="pm"><span>'+a[1]+'</span><b>'+(learn===a[0]?"press now…":pname(pm[a[0]]))+'</b><button data-p="'+a[0]+'" data-m="l">Learn</button><button data-p="'+a[0]+'" data-m="c">Clear</button></div>'}).join("")}
@@ -1449,7 +1449,7 @@ function doAct(a){if(!document.body.classList.contains("playing"))return;loadSon
  if(a=="next"){act=(act+1)%NT;draw();msg("Active track: "+NAMES[act]);return}
  if(a=="play"){if(rec)stopRec();else if(playing)stopAll();else if(any())play();return}
  if(rec){stopRec();return}
- if(a=="rec")record(act,"rec");else if(a=="dub")record(act,tr[act].pcm?"dub":"rec")}
+ if(a=="rec")record(act,"rec");else if(a=="dub")record(act,tr[act].pcm?"dub":"rec");else if(a=="auto")record(act,tr[act].pcm?"dub":"rec")}
 function trig(code){if(learn){pm[learn]=code;Object.keys(pm).forEach(function(k){if(k!=learn&&pm[k]==code)delete pm[k]});learn=null;savePm();drawMap();return true}
  var hit=false;PA.forEach(function(a){if(pm[a[0]]==code){hit=true;doAct(a[0])}});return hit}
 window.addEventListener("keydown",function(e){var t=e.target&&e.target.tagName;if(t=="INPUT"||t=="SELECT"||t=="TEXTAREA")return;if(e.repeat)return;if(["Shift","Control","Alt","Meta"].indexOf(e.key)>=0)return;var code="k:"+(e.code||e.key);if(trig(code))e.preventDefault()},true);
