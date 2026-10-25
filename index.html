@@ -177,7 +177,7 @@ body.playing #dpanel:not([hidden]){display:flex}
 .ver{font:700 11px/1 "Atkinson Hyperlegible",system-ui,sans-serif;letter-spacing:.03em;color:var(--mute);align-self:flex-end;margin:0 0 3px 2px;white-space:nowrap}</style></head>
 <body><div class="fbanner" id="fbanner" role="status" hidden><span id="fbtxt"></span><button class="btn main" id="fbsave" type="button">Save to Files</button></div><div class="app">
 <aside>
- <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v1.6 · 24 Oct e1</small></h1>
+ <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v1.7 · 24 Oct e1</small></h1>
  <div class="tabs"><button id="fsbtn" class="gear" aria-label="Full screen" title="Full screen" hidden>⛶</button><button id="helpbtn" class="gear" aria-label="Getting started" title="Getting started">?</button><button id="setbtn" class="gear" aria-label="Settings" title="Settings">⚙</button><button id="tS" class="on" aria-haspopup="menu" aria-expanded="false">Songs ▾</button><button id="tL">Setlists</button></div>
  <input type="search" id="q" placeholder="Search songs" aria-label="Search songs">
  <div class="tools" id="sortrow"><span class="sortgrp"><span class="sdir"><button type="button" id="sup" class="on" aria-label="Sort ascending" aria-pressed="true" title="Ascending: A to Z, oldest first">▲</button><button type="button" id="sdn" aria-label="Sort descending" aria-pressed="false" title="Descending: Z to A, newest first">▼</button></span><select id="sort" aria-label="Sort songs"><option value="title">Title</option><option value="artist">Artist</option><option value="added">Date added</option><option value="set" hidden disabled>Set order</option></select></span><button class="btn" id="locate" title="Scroll to the song you are viewing" aria-label="Scroll to current song">◎ Current</button></div>
@@ -283,7 +283,7 @@ body.playing #dpanel:not([hidden]){display:flex}
 <h4>8. Share</h4><p><b>Share ▾</b> sends a song by email, message or WhatsApp, saves it as text, or prints it. Turn on <b>Include all song data</b> to send its key, capo and details to another SongTrak user. Setlists share the same way, with every song included in one file. If an imported song has the same name as one you already have, you can keep both.</p>
 <h4>9. Import</h4><p><b>Import</b> accepts text from the clipboard, one or more files, or a whole folder. It reads ChordPro (.pro, .cho, .crd, .chopro), .onsong and .txt files, SongTrak files, and OnSong backup files (.backup).</p>
 <h4>Full screen on iPad</h4><p>The ⛶ button at the top switches to full screen when your browser allows it. For the best result, open SongTrak in Safari, tap Share, choose <b>Add to Home Screen</b>, and launch it from that icon. It then runs full screen with no browser bars.</p>
-<h4>Saving your library to a file</h4><p>Open <b>Cloud files sync</b>. On a computer, choose your synced folder and the app keeps a file up to date there. On an iPad or iPhone, tap <b>Save to Files</b>, pick your cloud folder (such as iCloud Drive) and replace the old <b>chord-charts-library.json</b>. The app then asks whether it was saved. After you have saved a file once, a bar reminds you whenever you have changes that are not in the file yet. On another device, use <b>Load library file</b>. If the file is older than what is on the device, the app warns you first.</p>
+<h4>Saving your library to a file</h4><p>Open <b>Cloud files sync</b>. On a computer, choose your synced folder and the app keeps a file up to date there. On an iPad or iPhone, tap <b>Save to Files</b>, pick your cloud folder (such as iCloud Drive) and replace the old <b>songtrak-library.json</b> (older versions called it chord-charts-library.json). A good habit is a shared iCloud Drive folder called <b>SharedAppData</b> for your app files. Never replace a file that belongs to another app. The app then asks whether it was saved. After you have saved a file once, a bar reminds you whenever you have changes that are not in the file yet. On another device, use <b>Load library file</b>. If the file is older than what is on the device, the app warns you first.</p>
 <h4>10. Settings and sync</h4><p>The ⚙ button sets text size, colours, sharps or flats, and light or dark appearance. These apply to the whole app on this device. Cloud sync keeps your library up to date across devices, and if two devices change the same thing, the latest change wins.</p>
 <h4>Tips</h4><p>Edit a song to fix chords at any time. Save your library as a file now and then as a backup.</p>
 </div>
@@ -616,7 +616,7 @@ $("mgshare").onclick=function(e){e.stopPropagation();var m=$("shmenu");if(!m.hid
 document.addEventListener("click",function(e){if(!$("shmenu").hidden&&e.target.isConnected&&!e.target.closest("#shmenu"))closeSH()});
 document.addEventListener("keydown",function(e){if(e.key=="Escape"&&!$("shmenu").hidden){closeSH();$("share").focus()}});
 /* ---- cloud folder sync ---- */
-var dirH=null,CF="chord-charts-library.json";
+var dirH=null,CF="songtrak-library.json",CFOLD="chord-charts-library.json",libName="";
 function cst(t){$("cst").textContent=t}
 function idb(){return new Promise(function(r,j){var q=indexedDB.open("cc-h",1);q.onupgradeneeded=function(){q.result.createObjectStore("h")};q.onsuccess=function(){r(q.result)};q.onerror=j})}
 async function hput(h){try{var d=await idb();d.transaction("h","readwrite").objectStore("h").put(h,"dir")}catch(e){}}
@@ -624,7 +624,7 @@ async function hdel(){try{var d=await idb();d.transaction("h","readwrite").objec
 async function hget(){try{var d=await idb();return await new Promise(function(r){var q=d.transaction("h").objectStore("h").get("dir");q.onsuccess=function(){r(q.result||null)};q.onerror=function(){r(null)}})}catch(e){return null}}
 async function perm(h,askp){try{var o={mode:"readwrite"};if(await h.queryPermission(o)=="granted")return true;if(askp&&await h.requestPermission(o)=="granted")return true}catch(e){}return false}
 function adopt(a,j){at=a;apply(j);try{localStorage.setItem("cc2",JSON.stringify({at:at,j:j}))}catch(e){}cur=songs.filter(function(x){return cur&&x.id==cur.id})[0]||songs[0]||null;draw()}
-async function cloudRead(){try{var f=await(await dirH.getFileHandle(CF)).getFile();return JSON.parse(await f.text())}catch(e){return null}}
+async function cloudRead(){try{var fh;try{fh=await dirH.getFileHandle(CF)}catch(e){fh=await dirH.getFileHandle(CFOLD)}var f=await fh.getFile();return JSON.parse(await f.text())}catch(e){return null}}
 var needPerm=false,lastCS=0;
 async function cloudSync(askp){lastCS=Date.now();if(askp&&document.body.classList.contains("playing"))askp=false;if(!dirH)return;
  try{if(!await perm(dirH,askp)){needPerm=true;cst("Folder \""+dirH.name+"\" needs permission. Tap anywhere or choose Sync now to allow it.");return}needPerm=false;
@@ -672,10 +672,10 @@ function fmtT(t){try{return new Date(t).toLocaleString([], {dateStyle:"medium",t
 function fbanner(){var show=fileMode&&fileDirty&&!dirH;$("fbanner").hidden=!show;if(show)$("fbtxt").textContent="Changes are not saved to your library file yet. "+(lastFileAt?"Last saved "+fmtT(lastFileAt)+".":"")}
 function markFile(saved){fileMode=true;fileDirty=!saved;if(saved)lastFileAt=at||Date.now();try{localStorage.setItem("songtrak-filemode","1");if(saved)localStorage.setItem("songtrak-lastfile",String(lastFileAt))}catch(e){}fbanner()}
 function outName(){return CF}
-async function exportLib(){var a=at||Date.now(),j=JSON.stringify({at:a,j:snap()}),file=new File([j],outName(),{type:"application/json"});
+async function exportLib(){if(/ledger/i.test(libName)&&!await ask("The library you loaded came from a file named \u201c"+libName+"\u201d, which looks like a Ledger file.\n\nSongTrak will save as "+CF+". In the Save screen, do NOT choose or replace a Ledger file.",{ok:"Continue",alt:"Cancel"}))return;var a=at||Date.now(),j=JSON.stringify({at:a,j:snap()}),file=new File([j],outName(),{type:"application/json"});
  if(TOUCH&&navigator.canShare&&navigator.canShare({files:[file]})){
   try{await navigator.share({files:[file]})}catch(e){if(e&&e.name=="AbortError"){cst("Save cancelled. Your changes are still not in a file.");return}throw e}
-  var yes=await ask("The share sheet closed, but the app can't see where the file went.\n\nDid you save it into your cloud folder (for example iCloud Drive) and replace the old "+outName()+"?",{ok:"Yes, saved",alt:"Not yet",noCancel:true});
+  var yes=await ask("The share sheet closed, but the app can't see where the file went.\n\nDid you save it into your cloud folder (for example iCloud Drive) and replace the old "+outName()+"? (Never replace a file that belongs to another app, such as Ledger.)",{ok:"Yes, saved",alt:"Not yet",noCancel:true});
   if(yes===true){markFile(true);cst("Library file saved "+fmtT(Date.now())+".")}else{markFile(false);cst("Not saved yet. Tap Save to Files again when you are ready.")}return}
  try{var dl=window.claude&&await claude.use("downloads");if(!dl)throw 0;await dl.save({filename:outName(),data:j});markFile(true);cst("Library file saved "+fmtT(Date.now())+". Move it into your cloud folder if it went to Downloads.")}
  catch(e){cst(e&&e.code=="declined"?"Save cancelled.":"Saving a file isn't available in this view.")}}
@@ -691,7 +691,7 @@ function isEncLib(t){return /^\s*SONGTRAK-LIBRARY-(GZ|B64)\s/.test(t)}
 async function libDecode(t){var m=t.match(/^\s*SONGTRAK-LIBRARY-(GZ|B64)\s/),body=t.slice(m[0].length).replace(/END-SONGTRAK-LIBRARY[\s\S]*$/,"").replace(/[^A-Za-z0-9+\/=]/g,""),bin=atob(body),bytes=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);
  if(m[1]=="GZ"){var ds=new DecompressionStream("gzip"),w=ds.writable.getWriter();w.write(bytes);w.close();bytes=new Uint8Array(await new Response(ds.readable).arrayBuffer())}
  return new TextDecoder().decode(bytes)}
-async function libFromText(txt,name){
+async function libFromText(txt,name){libName=name||"";
  if(isEncLib(txt)){try{txt=await libDecode(txt)}catch(e){cst("That library text looks damaged or incomplete. Copy it again, making sure every line is included.");return false}}
  try{var o=JSON.parse(txt);if(!o||!o.j)throw 0;JSON.parse(o.j);
   var older=at&&o.at&&o.at<at,msg=older?"This file is OLDER than the library on this device.\n\nFile saved: "+fmtT(o.at)+"\nThis device: "+fmtT(at)+"\n\nLoad it anyway and replace this library?":"Replace the library on this device with the one in "+name+"?";
