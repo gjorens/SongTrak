@@ -174,10 +174,24 @@ body.playing #dpanel:not([hidden]){display:flex}
 #dpanel .dgc.b{margin-left:7px}#dpanel .dgc[data-v="2"]{background:var(--chord)}#dpanel .dgc[data-v="1"]{background:color-mix(in srgb,var(--chord) 40%,transparent)}
 #dpanel .dgc.cur{box-shadow:0 0 0 3px var(--ink)}.dgn{font-size:11px;color:var(--mute);text-align:center}
 #pdr.on{background:var(--chord);color:#fff;border-color:var(--chord)}
-.ver{font:700 11px/1 "Atkinson Hyperlegible",system-ui,sans-serif;letter-spacing:.03em;color:var(--mute);align-self:flex-end;margin:0 0 3px 2px;white-space:nowrap}</style></head>
+.ver{font:700 11px/1 "Atkinson Hyperlegible",system-ui,sans-serif;letter-spacing:.03em;color:var(--mute);align-self:flex-end;margin:0 0 3px 2px;white-space:nowrap}/* v1.8 play window */
+body.playing main{padding:0 0 calc(var(--pbh,84px) + 6px)}
+body.playing .chart{border-radius:0;border:0;box-shadow:none;padding:10px 18px 16px;margin:0;min-height:calc(100vh - var(--pbh,84px));min-height:calc(100dvh - var(--pbh,84px))}
+body.playing h2{font-size:28px;margin:0 70px 2px 0}
+#pbar{gap:6px;padding:6px 10px calc(6px + env(safe-area-inset-bottom,0px))}
+#pbar button{height:40px;min-width:40px;padding:0 10px;font-size:16px}
+#pbar #pdq.on{background:var(--chord);border-color:var(--chord);color:#fff}
+#pkp{display:none;position:fixed;top:0;bottom:var(--pbh,84px);right:0;width:min(300px,85vw);z-index:9;background:var(--panel);color:var(--ink);border-left:1px solid var(--line);box-shadow:-10px 0 30px rgba(0,0,0,.25);padding:14px;flex-direction:column;gap:14px;transform:translateX(100%);transition:transform .2s}
+body.playing #pkp{display:flex}#pkp.open{transform:none}#pkp[hidden]{display:none!important}
+#pkp .pkh{display:flex;justify-content:space-between;align-items:center;font-size:18px}
+#pkp .pkr{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:17px}
+#pkp .pg{display:inline-flex;align-items:center;gap:8px}#pkp .pg b{min-width:70px;text-align:center}
+#pkp button{min-width:44px;height:44px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;font-size:18px}
+#pkp .pg b{min-width:92px}#pkp .pkn{color:var(--mute);font-size:13px;margin:0}
+</style></head>
 <body><div class="fbanner" id="fbanner" role="status" hidden><span id="fbtxt"></span><button class="btn main" id="fbsave" type="button">Save to Files</button></div><div class="app">
 <aside>
- <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v1.7 · 24 Oct e1</small></h1>
+ <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v1.8 · 25 Oct e1</small></h1>
  <div class="tabs"><button id="fsbtn" class="gear" aria-label="Full screen" title="Full screen" hidden>⛶</button><button id="helpbtn" class="gear" aria-label="Getting started" title="Getting started">?</button><button id="setbtn" class="gear" aria-label="Settings" title="Settings">⚙</button><button id="tS" class="on" aria-haspopup="menu" aria-expanded="false">Songs ▾</button><button id="tL">Setlists</button></div>
  <input type="search" id="q" placeholder="Search songs" aria-label="Search songs">
  <div class="tools" id="sortrow"><span class="sortgrp"><span class="sdir"><button type="button" id="sup" class="on" aria-label="Sort ascending" aria-pressed="true" title="Ascending: A to Z, oldest first">▲</button><button type="button" id="sdn" aria-label="Sort descending" aria-pressed="false" title="Descending: Z to A, newest first">▼</button></span><select id="sort" aria-label="Sort songs"><option value="title">Title</option><option value="artist">Artist</option><option value="added">Date added</option><option value="set" hidden disabled>Set order</option></select></span><button class="btn" id="locate" title="Scroll to the song you are viewing" aria-label="Scroll to current song">◎ Current</button></div>
@@ -255,7 +269,11 @@ body.playing #dpanel:not([hidden]){display:flex}
  <details><summary>Edit the beat</summary><div class="dgw"><div id="dgrid"></div></div><p class="status">Tap a square: hit, soft hit, rest. Your edit is saved with this song.</p></details>
  <div id="dstat" class="status" role="status">Drums stopped.</div>
 </div>
-<button id="pexit" aria-label="Exit play mode">✕ Exit</button><div id="pbar" role="toolbar" aria-label="Play controls"><span class="pg" id="pnav" hidden><button id="ppv" aria-label="Previous song">⏮</button><button id="pnx" aria-label="Next song">⏭</button></span><button id="pgo" class="go">Start scroll</button><button id="pdr" type="button" aria-expanded="false">🥁 Drums</button><span class="pg">Speed<button id="psm" aria-label="Slower">−</button><b id="psp">3</b><button id="psl" aria-label="Faster">+</button></span><span class="pg"><button id="pfs" aria-label="Smaller text">A−</button><button id="pfl" aria-label="Larger text">A+</button></span></div>
+<button id="pexit" aria-label="Exit play mode">✕ Exit</button><div id="pbar" role="toolbar" aria-label="Play controls"><span class="pg" id="pnav" hidden><button id="ppv" aria-label="Previous song">⏮</button><button id="pnx" aria-label="Next song">⏭</button></span><button id="pgo" class="go">Start scroll</button><button id="pdq" type="button" aria-label="Start or stop drums">🥁 Start</button><button id="pdf" type="button" hidden aria-label="Fade drums out">Fade</button><button id="pdr" type="button" aria-expanded="false">Beat ✎</button><button id="pkey" type="button" aria-expanded="false">Key</button><span class="pg">Speed<button id="psm" aria-label="Slower">−</button><b id="psp">3</b><button id="psl" aria-label="Faster">+</button></span><span class="pg"><button id="pfs" aria-label="Smaller text">A−</button><button id="pfl" aria-label="Larger text">A+</button></span></div>
+<div id="pkp" role="dialog" aria-label="Key and capo" hidden><div class="pkh"><b>Key</b><button id="pkx" type="button" aria-label="Close">✕</button></div>
+<div class="pkr"><span>Key</span><span class="pg"><button id="pkd" type="button" aria-label="Down a half step">−</button><b id="pkv">-</b><button id="pku" type="button" aria-label="Up a half step">+</button></span></div>
+<div class="pkr"><span>Capo</span><span class="pg"><button id="pcd" type="button" aria-label="Capo down">−</button><b id="pcv">-</b><button id="pcu" type="button" aria-label="Capo up">+</button></span></div>
+<p class="pkn" id="pks"></p><p class="pkn">Changes apply to this song and are saved with it.</p></div>
 <div id="sets" class="ov" role="dialog" aria-modal="true"><div class="box"><b>Settings</b>
 <label>Your name <input type="text" id="uname" class="sz" autocomplete="name" placeholder="Used as the artist on songs you generate" aria-label="Your name"></label>
 <label>Appearance <select id="theme" aria-label="Appearance"><option value="auto">Match this device</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
@@ -802,10 +820,13 @@ function ui(){if(!on)return;var now=ctx.currentTime,q=null;while(queue.length&&q
  if(q){setCur(q.s);el("dstat").textContent=q.s<0?"Count-in: "+q.ci+" to go.":"Drums playing: "+pat.sig+" at "+bpmV()+" BPM."}
  raf=requestAnimationFrame(ui)}
 function setCur(s){if(s===lastCur)return;var a=el("dgrid").querySelectorAll(".dgc.cur");for(var i=0;i<a.length;i++)a[i].classList.remove("cur");lastCur=s;if(s>=0){var b=el("dgrid").querySelectorAll('.dgc[data-i="'+s+'"]');for(var j=0;j<b.length;j++)b[j].classList.add("cur")}}
-function start(){if(on)return;if(!audio()){el("dstat").textContent="This browser can't play sound.";return}
+var fadeTok=0;function start(){if(on)return;fadeTok++;if(master)setVol();if(!audio()){el("dstat").textContent="This browser can't play sound.";return}
  on=true;stp=0;lastCur=-1;queue=[];ciTot=ciLeft=(+el("dci").value)*pat.beats;nextT=ctx.currentTime+.08;tick();timer=setInterval(tick,25);raf=requestAnimationFrame(ui);el("dgo").textContent="Stop drums";el("dgo").classList.add("on");el("pdr").classList.add("on")}
 function stop(){if(!on&&!timer)return;on=false;clearInterval(timer);timer=0;cancelAnimationFrame(raf);queue=[];setCur(-1);el("dgo").textContent="Start drums";el("dgo").classList.remove("on");el("pdr").classList.remove("on");el("dstat").textContent="Drums stopped."}
-window.__drStart=start;window.__drStop=stop;window.__drOn=function(){return on};window.__drSync=function(){return el("dsync").checked};
+function fade(sec){if(!on||!master){stop();return}var tk=++fadeTok,t=ctx.currentTime;master.gain.cancelScheduledValues(t);master.gain.setValueAtTime(master.gain.value,t);master.gain.linearRampToValueAtTime(.0001,t+sec);setTimeout(function(){if(tk===fadeTok){stop();setVol()}},sec*1000+80)}
+el("pdq").onclick=function(){if(on)stop();else{fromSongIfNeeded();start()}};el("pdf").onclick=function(){fade(5)};
+setInterval(function(){el("pdq").textContent=on?"🥁 Stop":"🥁 Start";el("pdq").classList.toggle("on",on);el("pdf").hidden=!on},300);
+window.__drStart=start;window.__drStop=stop;window.__drFade=fade;window.__drOn=function(){return on};window.__drSync=function(){return el("dsync").checked};
 /* controls */
 el("dgo").onclick=function(){on?stop():start()};
 el("pdr").onclick=function(){var p=el("dpanel"),open=p.hidden;p.hidden=!open;this.setAttribute("aria-expanded",String(open));if(open){document.documentElement.style.setProperty("--pbh",el("pbar").offsetHeight+"px");fromSongIfNeeded()}};
@@ -1256,4 +1277,16 @@ var _rdM=runDetect;runDetect=function(){var c=parseInt($("ec").value)||0,mv=$("e
 load();cur=byId(hist[hp])||songs[0];draw();if(cur&&hist.indexOf(cur.id)<0){hist=[cur.id];hp=0}renderList();initSync();
 setTimeout(async function(){var ok=false;try{if(localStorage.getItem("cc2help")==null){localStorage.setItem("cc2help","1");ok=localStorage.getItem("cc2help")=="1"}}catch(x){}
  if(!ok)return;var r=await ask("Welcome to SongTrak! Would you like a quick tour of what it can do?",{ok:"Show me around",alt:"Not now",noCancel:true});if(r===true)$("helpbtn").click()},700);
+
+/* v1.8 play window: key slide-out and bar height */
+(function(){var p=$("pkp"),b=$("pkey");
+ function txt(id){var e=$(id),n=e.firstChild;return((n&&n.nodeType==3?n.textContent:e.textContent)||"").replace(/\s+/g," ").trim()}
+ function upd(){$("pkv").textContent=txt("tr");$("pcv").textContent=txt("capo");var sm=$("tr").querySelector("small");$("pks").textContent=sm?sm.textContent:""}
+ function open(o){if(o){upd();p.hidden=false;requestAnimationFrame(function(){p.classList.add("open")})}else{p.classList.remove("open");setTimeout(function(){if(!p.classList.contains("open"))p.hidden=true},220)}b.setAttribute("aria-expanded",String(!!o))}
+ b.onclick=function(){open(p.hidden||!p.classList.contains("open"))};$("pkx").onclick=function(){open(false)};
+ function go(id){return function(){var y=window.scrollY;$(id).click();upd();window.scrollTo(0,y);requestAnimationFrame(function(){window.scrollTo(0,y)})}}
+ $("pkd").onclick=go("dn");$("pku").onclick=go("up");$("pcd").onclick=go("cd");$("pcu").onclick=go("cu");
+ var ex=$("pexit");if(ex)ex.addEventListener("click",function(){open(false)});
+ if(window.ResizeObserver)new ResizeObserver(function(){document.documentElement.style.setProperty("--pbh",$("pbar").offsetHeight+"px")}).observe($("pbar"));
+})();
 </script></body></html>
