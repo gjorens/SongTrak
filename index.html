@@ -194,10 +194,15 @@ html,body,button,select,input,label{touch-action:manipulation}
 #pbar #pspd{margin-left:auto;padding:4px 6px 4px 22px;border-left:2px solid var(--line);gap:8px;font-weight:700;font-size:15px}
 #pbar #pspd button{min-width:60px;height:54px;font-size:28px;font-weight:800}
 #pbar #pspd b{min-width:30px;font-size:24px}
+/* v2.0 tuner */
+#tnsel,#etn{width:auto;flex:1 1 14em;min-width:12em;padding:8px}#tncus{flex:1 1 14em;min-width:12em}
+body.playing #tuner{align-items:stretch;justify-content:flex-end;padding:0;bottom:var(--pbh,84px);background:rgba(0,0,0,.2)}
+body.playing #tuner .box{width:min(400px,94vw);max-height:none;height:100%;border-radius:0;border-width:0 0 0 1px;animation:tnin .2s ease-out}
+@keyframes tnin{from{transform:translateX(100%)}to{transform:none}}
 </style></head>
 <body><div class="fbanner" id="fbanner" role="status" hidden><span id="fbtxt"></span><button class="btn main" id="fbsave" type="button">Save to Files</button></div><div class="app">
 <aside>
- <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v1.9 · 25 Oct e1</small></h1>
+ <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v2.0 · 25 Oct e1</small></h1>
  <div class="tabs"><button id="fsbtn" class="gear" aria-label="Full screen" title="Full screen" hidden>⛶</button><button id="helpbtn" class="gear" aria-label="Getting started" title="Getting started">?</button><button id="setbtn" class="gear" aria-label="Settings" title="Settings">⚙</button><button id="tS" class="on" aria-haspopup="menu" aria-expanded="false">Songs ▾</button><button id="tL">Setlists</button></div>
  <input type="search" id="q" placeholder="Search songs" aria-label="Search songs">
  <div class="tools" id="sortrow"><span class="sortgrp"><span class="sdir"><button type="button" id="sup" class="on" aria-label="Sort ascending" aria-pressed="true" title="Ascending: A to Z, oldest first">▲</button><button type="button" id="sdn" aria-label="Sort descending" aria-pressed="false" title="Descending: Z to A, newest first">▼</button></span><select id="sort" aria-label="Sort songs"><option value="title">Title</option><option value="artist">Artist</option><option value="added">Date added</option><option value="set" hidden disabled>Set order</option></select></span><button class="btn" id="locate" title="Scroll to the song you are viewing" aria-label="Scroll to current song">◎ Current</button></div>
@@ -275,7 +280,7 @@ html,body,button,select,input,label{touch-action:manipulation}
  <details><summary>Edit the beat</summary><div class="dgw"><div id="dgrid"></div></div><p class="status">Tap a square: hit, soft hit, rest. Your edit is saved with this song.</p></details>
  <div id="dstat" class="status" role="status">Drums stopped.</div>
 </div>
-<button id="pexit" aria-label="Exit play mode">✕ Exit</button><div id="pbar" role="toolbar" aria-label="Play controls"><span class="pg" id="pnav" hidden><button id="ppv" aria-label="Previous song">⏮</button><button id="pnx" aria-label="Next song">⏭</button></span><button id="pgo" class="go">Start scroll</button><button id="pdq" type="button" aria-label="Start or stop drums">🥁 Start</button><button id="pdf" type="button" hidden aria-label="Fade drums out">Fade</button><button id="pdr" type="button" aria-expanded="false">Beat ✎</button><button id="pkey" type="button" aria-expanded="false">Key</button><span class="pg"><button id="pfs" aria-label="Smaller text">A−</button><button id="pfl" aria-label="Larger text">A+</button></span><span class="pg" id="pspd">Speed<button id="psm" aria-label="Slower">−</button><b id="psp">3</b><button id="psl" aria-label="Faster">+</button></span></div>
+<button id="pexit" aria-label="Exit play mode">✕ Exit</button><div id="pbar" role="toolbar" aria-label="Play controls"><span class="pg" id="pnav" hidden><button id="ppv" aria-label="Previous song">⏮</button><button id="pnx" aria-label="Next song">⏭</button></span><button id="pgo" class="go">Start scroll</button><button id="pdq" type="button" aria-label="Start or stop drums">🥁 Start</button><button id="pdf" type="button" hidden aria-label="Fade drums out">Fade</button><button id="pdr" type="button" aria-expanded="false">Beat ✎</button><button id="pkey" type="button" aria-expanded="false">Key</button><button id="ptn" type="button">🎸 Tune</button><span class="pg"><button id="pfs" aria-label="Smaller text">A−</button><button id="pfl" aria-label="Larger text">A+</button></span><span class="pg" id="pspd">Speed<button id="psm" aria-label="Slower">−</button><b id="psp">3</b><button id="psl" aria-label="Faster">+</button></span></div>
 <div id="pkp" role="dialog" aria-label="Key and capo" hidden><div class="pkh"><b>Key</b><button id="pkx" type="button" aria-label="Close">✕</button></div>
 <div class="pkr"><span>Key</span><span class="pg"><button id="pkd" type="button" aria-label="Down a half step">−</button><b id="pkv">-</b><button id="pku" type="button" aria-label="Up a half step">+</button></span></div>
 <div class="pkr"><span>Capo</span><span class="pg"><button id="pcd" type="button" aria-label="Capo down">−</button><b id="pcv">-</b><button id="pcu" type="button" aria-label="Capo up">+</button></span></div>
@@ -882,12 +887,12 @@ function tnStrings(){tn.m=tunParse(tn.t)||tunParse("Standard");$("tnstr").innerH
 function tnMark(i){var b=$("tnstr").querySelectorAll("button");for(var k=0;k<b.length;k++){b[k].className=(k==i?"on":"")+(k==tn.lock?" lk":"")}}
 function tnCtx(){if(!tn.ctx){var AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;tn.ctx=new AC()}if(tn.ctx.resume)tn.ctx.resume();return tn.ctx}
 function tnTone(m){var c=tnCtx();if(!c)return;var f=tnA4()*Math.pow(2,(m-69)/12),o=c.createOscillator(),g=c.createGain(),t=c.currentTime;o.type="triangle";o.frequency.value=f;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.35,t+.02);g.gain.exponentialRampToValueAtTime(.001,t+2);o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+2.1);tn.mute=Date.now()+2200}
-function tnPitch(b,sr){var N=b.length,e=0,i;for(i=0;i<N;i++)e+=b[i]*b[i];if(Math.sqrt(e/N)<.008)return null;
+function tnPitch(b,sr){var N=b.length,e=0,i;for(i=0;i<N;i++)e+=b[i]*b[i];if(Math.sqrt(e/N)<.0012)return null;
  var mn=Math.floor(sr/1100),mx=Math.min(Math.floor(sr/55),N>>1),n=new Float32Array(mx+2);
  for(var t=mn-1;t<=mx+1;t++){var r=0,m=0;for(i=0;i<N-t;i++){r+=b[i]*b[i+t];m+=b[i]*b[i]+b[i+t]*b[i+t]}n[t]=m?2*r/m:0}
  var peaks=[],pos=false;for(t=mn;t<=mx;t++){if(n[t]<0)pos=true;if(pos&&n[t]>n[t-1]&&n[t]>=n[t+1]&&n[t]>.3)peaks.push(t)}
  if(!peaks.length)return null;var best=0;peaks.forEach(function(p){if(n[p]>best)best=n[p]});var pk=peaks.filter(function(p){return n[p]>=.9*best})[0],a=n[pk-1],bb=n[pk],c=n[pk+1],d=a-2*bb+c,sh=d?.5*(a-c)/d:0;
- return best<.6?null:sr/(pk+sh)}
+ return best<.65?null:sr/(pk+sh)}
 function tnShow(f){var meter=$("tnm"),nn=$("tnn");
  if(!f){nn.textContent="–";nn.className="";$("tnhz").textContent="";$("tnneedle").style.left="50%";meter.className="tmeter";return}
  var mf=69+12*Math.log2(f/tnA4()),tgt,idx=-1,name;
@@ -900,7 +905,7 @@ function tnShow(f){var meter=$("tnm"),nn=$("tnn");
  if(idx>=0)tnMark(idx)}
 function tnLoop(){if(!tn.on)return;tn.an.getFloatTimeDomainData(tn.buf);var f=Date.now()<tn.mute?null:tnPitch(tn.buf,tn.ctx.sampleRate),now=Date.now();
  if(f){tn.hist.push(f);if(tn.hist.length>5)tn.hist.shift();tn.last=now;var s=tn.hist.slice().sort(function(a,b){return a-b});tnShow(s[s.length>>1])}
- else if(now-tn.last>600){tn.hist=[];tnShow(null)}
+ else if(now-tn.last>3000){tn.hist=[];tnShow(null)}
  tn.raf=requestAnimationFrame(function(){setTimeout(tnLoop,40)})}
 async function tnStart(){var c=tnCtx();if(!c||!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){$("tnmsg").textContent="This browser can't use the microphone. You can still tap a string to hear its note.";return}
  try{tn.stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}})}catch(e){$("tnmsg").textContent="Microphone access was blocked. Allow the microphone for this page in your browser settings, then try again.";return}
@@ -918,7 +923,7 @@ $("tngo").onclick=function(){if(tn.on)tnStop();else tnStart()};
 $("tnclose").onclick=closeTuner;$("tuner").onclick=function(e){if(e.target==this)closeTuner()};
 document.addEventListener("visibilitychange",function(){if(document.hidden&&tn.on)tnStop()});
 $("tnsave").onclick=function(){if(!cur)return;var t=$("tnsel").value=="__c"?tn.t:$("tnsel").value;if(tunIsStd(t))delete cur.tuning;else cur.tuning=t;save();draw();renderList();$("tnsave").hidden=true;$("tnmsg").textContent="Saved as this song's tuning."};
-$("tune").onclick=function(){openTuner(cur&&cur.tuning||"Standard")};
+$("tune").onclick=function(){openTuner(cur&&cur.tuning||"Standard")};$("ptn").onclick=function(){openTuner(cur&&cur.tuning||"Standard")};
 $("etune").onclick=function(){var t=edTuning();openTuner(t===false||!t?"Standard":t)};
 $("helpbtn").onclick=function(){$("help").classList.add("on");$("help").querySelector(".box").scrollTop=0};$("helpclose").onclick=function(){$("help").classList.remove("on")};$("help").onclick=function(e){if(e.target==this)this.classList.remove("on")};
 $("setbtn").onclick=function(){syncTsz();$("sets").classList.add("on")};
