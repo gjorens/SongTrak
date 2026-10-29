@@ -22,4 +22,11 @@ SongTrak is a single-file web app for guitarists: chord charts and lyrics, setli
 Use Playwright with a local server (`python3 -m http.server`). Cover: library load, save to Files (mock `navigator.share`), drums panel, tuner pitch detection, import and export round trips. The iPad file picker is unreliable for this user, so keep the paste, drag-and-drop and Load test songs routes working.
 
 ## Release flow
-Work on a branch, open a pull request, and let the owner merge. Do not push to `main` directly.
+Work on a branch and open a pull request. The owner (Gerry) said on 29 Oct 2026 that Claude may merge routine pull requests itself, because the app is not in beta yet. Mention in the reply which pull requests were merged and the version that is now live.
+
+Ask first, and do not merge until the owner says yes, for risky changes:
+- anything that changes the library file format, the storage keys, or how data is saved, loaded, imported or deleted (risk of losing songs or loops);
+- changes to `sw.js` caching logic (risk of the iPad app getting stuck on an old copy);
+- anything that removes a feature or data.
+
+Never push to `main` directly. Merge through the pull request, using a normal merge commit.
