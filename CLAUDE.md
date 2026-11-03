@@ -13,6 +13,8 @@ SongTrak is a single-file web app for guitarists: chord charts and lyrics, setli
 - Show the version beside the app name (`<small id="ver">` in the header, form `v1.4 · 24 Oct e1`). Bump it and the `sw.js` cache name on every change, so the user can tell which copy their iPad is running.
 - Edit `index.html` with small, exact string replacements and check that the script still parses before committing.
 - Storage keys: `cc2` (library in localStorage), `songtrak-*` for newer keys. Prefix any new key with `songtrak-` (GitHub Pages sites under one username share storage).
+- Device-local keys (not in the library file): `songtrak-nav` (navigation history, newest last, max 100 events `{t,s,l,v,ts}`), `songtrak-loops` (IndexedDB for recorded loops), `songtrak-tnin`/`songtrak-tnsens` (tuner), `songtrak-pedal`, `songtrak-nolooper`.
+- Left column has two views: Songs, and Setlists (list of setlists; tapping one opens it with its songs, same sort and A-Z rail). `slOpen` says whether a setlist is open; `mgrOn` is the 3-column setlist manager.
 - Library file format: `{at, j}` where `j` is a JSON string `{songs, lists, hist, hp, uname}`. "Copy library text" wraps it as compressed, line-wrapped text starting `SONGTRAK-LIBRARY-GZ`.
 - Song files are ChordPro-style: `{key: value}` directive header, then chords inline as `[G]word`, sections as `# Verse`.
 - Key model: `key` is the original key; `mkey` is My Key (sounding key); `capo` and `mkr` (chords rewritten into My Key) are stored separately.
