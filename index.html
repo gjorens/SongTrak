@@ -256,7 +256,7 @@ aside .tools[hidden],aside .frow[hidden],#slhead[hidden],#slrow[hidden]{display:
 </style></head>
 <body><div class="fbanner" id="fbanner" role="status" hidden><span id="fbtxt"></span><button class="btn main" id="fbsave" type="button">Save to Files</button></div><div class="app">
 <aside>
- <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v3.1 · 2 Nov e1</small></h1>
+ <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v3.2 · 2 Nov e1</small></h1>
  <div class="tabs gears"><button id="hnav" class="gear" aria-label="History: tap to go back one step, press and hold for the list" title="History: tap = back, hold = list">🕘</button><button id="fsbtn" class="gear" aria-label="Full screen" title="Full screen" hidden>⛶</button><button id="helpbtn" class="gear" aria-label="Getting started" title="Getting started">?</button><button id="setbtn" class="gear" aria-label="Settings" title="Settings">⚙</button></div>
  <div class="tabs"><button id="tS" class="on" aria-haspopup="menu" aria-expanded="false">Songs ▾</button><button id="tL">Setlists</button></div>
  <input type="search" id="q" placeholder="Search songs" aria-label="Search songs">
@@ -596,7 +596,7 @@ $("file").onchange=function(){runImport(Array.prototype.slice.call(this.files),t
 $("eb").addEventListener("paste",function(){var t=this;setTimeout(function(){var v=t.value;if(!/\[[^\]]+\]/.test(v)||/^\s*\{/m.test(v)){var o=parseSong(v,"");t.value=o.body;if(!$("et").value)$("et").value=o.title;if(!$("ea").value)$("ea").value=o.artist;if(!$("ek").value)$("ek").value=o.key;if(!$("ec").value&&o.capo)$("ec").value=o.capo}},0)});
 /* ---- events ---- */
 $("list").onclick=async function(e){var t=e.target,b=t.closest(".song"),sr=t.closest("[data-sl]");
- if(sr){openSL(sr.dataset.sl);return}
+ if(sr){if(await leaveOk())openSL(sr.dataset.sl);return}
  if(t.dataset.mv!=null&&curSL){var i=+t.dataset.mv,d=+t.dataset.d,j=i+d;if(j>=0&&j<curSL.ids.length){var x=curSL.ids[i];curSL.ids[i]=curSL.ids[j];curSL.ids[j]=x;save();renderList()}return}
  if(t.dataset.rm!=null&&curSL){curSL.ids.splice(+t.dataset.rm,1);save();renderList();return}
  if(b&&await leaveOk())pick(b.dataset.id)};
@@ -1355,7 +1355,7 @@ $("smenu").onclick=async function(e){var b=e.target.closest("button");if(!b)retu
 document.addEventListener("click",function(e){if(!$("smenu").hidden&&!e.target.closest("#smenu"))closeSM()});
 document.addEventListener("keydown",function(e){if(e.key=="Escape"&&!$("smenu").hidden){closeSM();$("tS").focus()}});
 var prevSort="title";
-function openSL(id){var l=lists.filter(function(x){return x.id==id})[0];if(!l)return;curSL=l;tab="L";slOpen=true;if($("sort").value!="set")prevSort=$("sort").value;$("sort").value="set";sdir="asc";sdirUI();setMgr(false);renderList()}
+function openSL(id){var l=lists.filter(function(x){return x.id==id})[0];if(!l)return;curSL=l;tab="L";slOpen=true;if($("sort").value!="set")prevSort=$("sort").value;$("sort").value="set";sdir="asc";sdirUI();setMgr(false);var f0=l.ids.map(byId).filter(Boolean)[0];if(f0)pick(f0.id);else renderList()}
 $("slback").onclick=function(){slOpen=false;setMgr(false);renderList()};
 $("slmgr").onclick=async function(){if(!await leaveOk())return;if(!mgrOn&&!curSL)curSL=lists[0]||null;setMgr(!mgrOn);renderList()};
 $("sort").addEventListener("change",function(){if(this.value!="set")prevSort=this.value});
@@ -1493,7 +1493,7 @@ function push(t,force){if(restoring)return;var e={t:t,s:cur?cur.id:null,l:inSL()
 function dim(){b.classList.toggle("dim",hc>=ev.length-1)}
 var _rl=renderList;renderList=function(){_rl.apply(this,arguments);var k=skey();if(k!==last){var pa=last.split("|"),pc=k.split("|"),last0=!!pa[0];last=k;if(!restoring&&(cur||inSL()||tab=="L"))push(last0&&(pa[0]!==pc[0]||pa[1]!==pc[1])?"list":"song")}else dim()};
 async function restore(e){if(!await leaveOk()){return 0}
- var l=e.l&&lists.filter(function(x){return x.id==e.l})[0],s=e.s&&byId(e.s);if(!l&&!s&&e.v!="L")return -1;
+ var l=e.l&&lists.filter(function(x){return x.id==e.l})[0],s=e.s&&byId(e.s);if(l&&e.t=="list"){var f1=l.ids.map(byId).filter(Boolean)[0];if(f1)s=f1}if(!l&&!s&&e.v!="L")return -1;
  restoring=true;try{if(l){curSL=l;tab="L";slOpen=true;if($("sort").value!="set")prevSort=$("sort").value;$("sort").value="set";sdir="asc";sdirUI()}else if(e.v=="L"){tab="L";slOpen=false}else{tab="S";slOpen=false}
   setMgr(false);if(s)pick(s.id);renderList();last=skey()}finally{restoring=false}return 1}
 async function back(){closeM();while(hc<ev.length-1){hc++;var r=await restore(ev[ev.length-1-hc]);if(r===1){dim();return}if(r===0){hc--;return}}dim()}
