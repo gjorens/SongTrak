@@ -256,7 +256,7 @@ aside .tools[hidden],aside .frow[hidden],#slhead[hidden],#slrow[hidden]{display:
 </style></head>
 <body><div class="fbanner" id="fbanner" role="status" hidden><span id="fbtxt"></span><button class="btn main" id="fbsave" type="button">Save to Files</button></div><div class="app">
 <aside>
- <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v3.5 · 4 Nov e1</small></h1>
+ <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v3.6 · 4 Nov e1</small></h1>
  <div class="tabs gears"><button id="hnav" class="gear" aria-label="History: tap to go back one step, press and hold for the list" title="History: tap = back, hold = list">🕘</button><button id="fsbtn" class="gear" aria-label="Full screen" title="Full screen" hidden>⛶</button><button id="helpbtn" class="gear" aria-label="Getting started" title="Getting started">?</button><button id="setbtn" class="gear" aria-label="Settings" title="Settings">⚙</button></div>
  <div class="tabs"><button id="tS" class="on" aria-haspopup="menu" aria-expanded="false">Songs ▾</button><button id="tL">Setlists</button></div>
  <input type="search" id="q" placeholder="Search songs" aria-label="Search songs">
@@ -480,10 +480,9 @@ async function vGuard(){var t=byId(vdirty.id),r=await ask("Save the key or capo 
 function isRew(s){return s.mkr===undefined?(!!s.mkey&&!s.capo):!!s.mkr}
 function bodyKey(s){return isRew(s)&&s.mkey?tc(s.mkey,-(s.capo||0)):s.key}
 function renderChart(){var c=$("chart");c.style.setProperty("--fs",fs+"px");c.style.setProperty("--cs",cs+"px");if(!cur){c.innerHTML='<p class="empty">Pick a song, or add one.</p>';return}
- var cp=cur.capo||0,bk=bodyKey(cur),k=bk?tc(bk,shift+cp):"";$("capo").textContent=cp?"Capo "+cp:"No capo";$("tr").innerHTML=esc(k||"Key")+"<small>"+semiTxt(k)+"</small>";$("vd").hidden=!(vdirty&&vdirty.id==cur.id);
- var h="<h2>"+esc(cur.title)+'</h2><p class="meta">'+esc(cur.artist||"")+(k?" · Key of "+esc(k):"")+(cur.key&&k&&keyCanon(tc(cur.key,shift))!==keyCanon(k)?" · original key "+esc(tc(cur.key,shift)):"")+(cur.tuning&&!tunIsStd(cur.tuning)?" · Tuning: "+esc(tunLabel(cur.tuning)):"")+(addedOf(cur)?" · Added "+esc(fmtD(addedOf(cur))):"")+"</p>";
+ var cp=cur.capo||0,bk=bodyKey(cur),k=bk?tc(bk,shift+cp):"";$("capo").textContent=cp?"Capo "+cp+(k?" ("+k+")":""):"No capo";$("tr").innerHTML=esc(k||"Key")+"<small>"+semiTxt(k)+"</small>";$("vd").hidden=!(vdirty&&vdirty.id==cur.id);
+ var ks=cp&&bk?tc(bk,shift):k;var h="<h2>"+esc(cur.title)+'</h2><p class="meta">'+esc(cur.artist||"")+(cp&&k?" · Key of "+esc(ks)+" · Capo "+cp+" ("+esc(k)+")":(k?" · Key of "+esc(k):""))+(cur.key&&ks&&keyCanon(tc(cur.key,shift))!==keyCanon(ks)?" · original key "+esc(tc(cur.key,shift)):"")+(cur.tuning&&!tunIsStd(cur.tuning)?" · Tuning: "+esc(tunLabel(cur.tuning)):"")+(addedOf(cur)?" · Added "+esc(fmtD(addedOf(cur))):"")+"</p>";
  if(cur.style||cur.mood||(cur.tags&&cur.tags.length))h+='<p class="meta2">'+[cur.style,cur.mood].filter(Boolean).concat(cur.tags||[]).map(esc).join(" · ")+"</p>";
- if(cp)h+='<p class="shape">Capo '+cp+': chords below are the shapes to play'+(k?" (shapes in "+esc(tc(bk,shift))+", sounding in "+esc(k)+")":"")+".</p>";
  var ind=false;c.style.setProperty("--ind",indA);
  cur.body.split("\n").forEach(function(line){
   if(/^#\s*/.test(line)){var nm=line.replace(/^#\s*/,"");ind=!/^verse\b/i.test(nm.trim());h+='<div class="sec'+(ind?" ind":"")+'">'+esc(nm)+"</div>";return}
