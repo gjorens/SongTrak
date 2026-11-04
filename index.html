@@ -269,7 +269,7 @@ body #fbanner.fbanner button{min-height:0;height:36px;margin:0;align-self:center
 </style></head>
 <body><div class="fbanner" id="fbanner" role="status" hidden><span id="fbtxt"></span><button class="btn main" id="fbsave" type="button">Save to Files</button></div><div class="app">
 <aside>
- <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v3.13 · 4 Nov e1</small></h1>
+ <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v3.14 · 4 Nov e1</small></h1>
  <div class="tabs gears"><button id="hnav" class="gear" aria-label="History: tap to go back one step, press and hold for the list" title="History: tap = back, hold = list">🕘</button><button id="fsbtn" class="gear" aria-label="Full screen" title="Full screen" hidden>⛶</button><button id="helpbtn" class="gear" aria-label="Getting started" title="Getting started">?</button><button id="setbtn" class="gear" aria-label="Settings" title="Settings">⚙</button></div>
  <div class="tabs"><button id="tS" class="on" aria-haspopup="menu" aria-expanded="false">Songs ▾</button><button id="tL">Setlists</button></div>
  <input type="search" id="q" placeholder="Search songs" aria-label="Search songs">
@@ -416,7 +416,7 @@ body #fbanner.fbanner button{min-height:0;height:36px;margin:0;align-self:center
 </div>
 <p class="status" id="cst">No folder chosen.</p>
 <p id="chint"></p>
-<div class="row"><button class="btn" id="csave">Save library file</button><button class="btn" id="cload">Load library file</button><button class="btn" id="cany" type="button">Open any file</button><button class="btn" id="cpaste" type="button">Paste library text</button><button class="btn" id="ccopy" type="button">Copy library text</button><button class="btn" id="ctest" type="button">Load test songs</button></div>
+<div class="row"><button class="btn" id="csave">Save library file</button><button class="btn" id="cload">Load library file</button><button class="btn" id="cany" type="button">Open any file</button><button class="btn" id="cpaste" type="button">Paste library text</button><button class="btn" id="ccopy" type="button">Copy library text</button><button class="btn" id="ctest" type="button">Load test songs</button><button class="btn" id="chealth" type="button">Library health</button></div>
 <p class="status">If the file picker will not select your file: tap Load test songs for the test library, or on another device tap Copy library text and here tap Import, then From clipboard. You can also drag the file onto this page from the Files app in Split View.</p>
 <p class="status">If two devices change songs at the same time, the most recent change wins.</p>
 <div class="row"><button class="btn" id="cclose">Close</button></div></div></div>
@@ -445,8 +445,24 @@ var SEED=[
 var N=["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"],FL={Db:"C#",Eb:"D#",Gb:"F#",Ab:"G#",Bb:"A#"};
 var textCapo=0,useFlats=false,uname="",indA=0,cs=20,songs=[],lists=[],hist=[],hp=-1,cur=null,curSL=null,shift=0,fs=20,timer=null,isNew=false,tab="S",at=0,dbDoc=null,saveT=null,$=function(i){return document.getElementById(i)};
 function snap(){return JSON.stringify({songs:songs,lists:lists,hist:hist.slice(-50),hp:Math.min(hp,49),uname:uname})}
-function apply(j){var d=JSON.parse(j);if(typeof d.uname=="string")uname=d.uname;songs=d.songs||[];lists=d.lists||[];hist=d.hist||[];hp=typeof d.hp=="number"?d.hp:hist.length-1}
-function load(){try{var d=localStorage.getItem("cc2");if(d){var o=JSON.parse(d);at=o.at||0;apply(o.j)}}catch(e){}if(!songs.length)songs=JSON.parse(JSON.stringify(SEED));try{var t=localStorage.getItem("cc-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}}
+/* v3.14 library safety: health log, damaged-copy keeper, rolling backups, per-song checks */
+var HK="songtrak-health",BK="songtrak-bak",CK="songtrak-corrupt",loadNote="",lastMsg="",lastBak=0;
+function lsGet(k,d){try{var v=localStorage.getItem(k);var o=v?JSON.parse(v):d;return Array.isArray(o)?o:d}catch(e){return d}}
+function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}}
+function hlog(a,d){var l=lsGet(HK,[]);l.push({t:Date.now(),a:a,d:d||""});lsSet(HK,l.slice(-100))}
+function keepBad(src,raw){var l=lsGet(CK,[]);l.push({t:Date.now(),src:src,raw:raw});l=l.slice(-2);var ok=lsSet(CK,l);if(!ok&&l.length>1){l=l.slice(-1);ok=lsSet(CK,l)}return ok}
+function cleanLib(d){var bad=[],ss=[],ls=[];
+ d.songs.forEach(function(x,i){if(!x||typeof x!="object"||x.id==null||x.id===""){bad.push(x);return}if(typeof x.title!="string")x.title=x.title==null?"Untitled":String(x.title);if(x.body!=null&&typeof x.body!="string")x.body=String(x.body);ss.push(x)});
+ (Array.isArray(d.lists)?d.lists:[]).forEach(function(l){if(!l||typeof l!="object"||l.id==null||!Array.isArray(l.ids)){bad.push(l);return}if(typeof l.name!="string")l.name=String(l.name==null?"Setlist":l.name);ls.push(l)});
+ return{songs:ss,lists:ls,bad:bad}}
+function apply(j){var d=JSON.parse(j);if(!d||typeof d!="object"||!Array.isArray(d.songs))throw 0;var c=cleanLib(d);lastMsg="";
+ if(c.bad.length){var kept=keepBad("unreadable items",JSON.stringify(c.bad));hlog("Skipped unreadable items",c.bad.length+" item(s) not loaded"+(kept?"; copy kept":""));lastMsg=c.bad.length+" unreadable item(s) in the library could not be loaded and were set aside. See Library health."}
+ if(typeof d.uname=="string")uname=d.uname;songs=c.songs;lists=c.lists;hist=(Array.isArray(d.hist)?d.hist:[]).filter(function(h){return typeof h=="string"||typeof h=="number"});hp=typeof d.hp=="number"?d.hp:hist.length-1}
+function backupLib(j,gap,why){try{if(!j)return;var bk=lsGet(BK,[]),last=bk[bk.length-1],now=Date.now();if(last&&(last.j===j||now-last.t<gap))return;var n=0;try{n=JSON.parse(j).songs.length}catch(e){}
+ bk.push({t:now,at:at,n:n,j:j});bk=bk.slice(-3);if(!lsSet(BK,bk)){bk=bk.slice(-2);if(!lsSet(BK,bk)){bk=bk.slice(-1);lsSet(BK,bk)}}hlog("Backup taken",why+", "+n+" songs")}catch(e){}}
+function load(){var d=null,good=false;try{d=localStorage.getItem("cc2");if(d){var o=JSON.parse(d);if(!o||typeof o.j!="string")throw 0;apply(o.j);at=o.at||0;good=true;loadNote=lastMsg}}catch(e){songs=[];lists=[];hist=[];hp=-1;at=0;if(d){var kept=keepBad("browser copy",d);hlog("Stored library could not be read",d.length+" characters"+(kept?"; damaged copy set aside":"; could not keep a copy"));loadNote="The library stored on this device could not be read, so sample songs are shown. "+(kept?"The damaged copy was set aside, not deleted. ":"")+"Open Cloud files sync, then Library health, to restore a backup or load your library file."}}
+ if(good&&d)try{backupLib(JSON.parse(d).j,6*3600*1000,"on start")}catch(e){}
+ if(!songs.length)songs=JSON.parse(JSON.stringify(SEED));try{var t=localStorage.getItem("cc-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}}
 function save(){at=Date.now();var j=snap();try{localStorage.setItem("cc2",JSON.stringify({at:at,j:j}))}catch(e){}clearTimeout(saveT);saveT=setTimeout(function(){if(dirH)cloudSync(false);if(dbDoc){dbPush(j,at).then(function(){$("sync").textContent="Synced across your devices"},function(){$("sync").textContent="Sync failed; saved on this device"})}},700)}
 var dbSub=null,dbBase="",dbN=1,dbQ=Promise.resolve(),dbSeq=0;
 function dbSplit(j){var P=100000,o=[],i=0;while(i<j.length){var e=Math.min(j.length,i+P);if(e<j.length){var c=j.charCodeAt(e-1);if(c>=0xD800&&c<=0xDBFF)e--}o.push(j.slice(i,e));i=e}return o.length?o:[""]}
@@ -738,7 +754,7 @@ async function hput(h){try{var d=await idb();d.transaction("h","readwrite").obje
 async function hdel(){try{var d=await idb();d.transaction("h","readwrite").objectStore("h").delete("dir")}catch(e){}}
 async function hget(){try{var d=await idb();return await new Promise(function(r){var q=d.transaction("h").objectStore("h").get("dir");q.onsuccess=function(){r(q.result||null)};q.onerror=function(){r(null)}})}catch(e){return null}}
 async function perm(h,askp){try{var o={mode:"readwrite"};if(await h.queryPermission(o)=="granted")return true;if(askp&&await h.requestPermission(o)=="granted")return true}catch(e){}return false}
-function adopt(a,j){at=a;apply(j);try{localStorage.setItem("cc2",JSON.stringify({at:at,j:j}))}catch(e){}cur=songs.filter(function(x){return cur&&x.id==cur.id})[0]||songs[0]||null;draw()}
+function adopt(a,j){backupLib(snap(),600000,"before replacing");apply(j);at=a;hlog("Library replaced",songs.length+" songs"+(lastMsg?"; "+lastMsg:""));if(lastMsg)setTimeout(function(){cst(lastMsg)},0);try{localStorage.setItem("cc2",JSON.stringify({at:at,j:j}))}catch(e){}cur=songs.filter(function(x){return cur&&x.id==cur.id})[0]||songs[0]||null;draw()}
 async function cloudRead(){try{var fh;try{fh=await dirH.getFileHandle(CF)}catch(e){fh=await dirH.getFileHandle(CFOLD)}var f=await fh.getFile();return JSON.parse(await f.text())}catch(e){return null}}
 var needPerm=false,lastCS=0;
 async function cloudSync(askp){lastCS=Date.now();if(askp&&document.body.classList.contains("playing"))askp=false;if(!dirH)return;
@@ -757,6 +773,16 @@ $("coff").onclick=function(){dirH=null;hdel();cst("Disconnected. Your songs stay
 $("csave").onclick=async function(){try{var dl=window.claude&&await claude.use("downloads");if(!dl){cst("Saving files isn't available in this view.");return}
  await dl.save({filename:CF,data:JSON.stringify({at:at||Date.now(),j:snap()})});cst("Library file ready. Save it into your cloud folder.")}catch(e){cst(e&&e.code=="declined"?"Save cancelled.":"Saving failed.")}};
 $("cload").onclick=function(){$("cfile").click()};
+$("chealth").onclick=async function(){var l=lsGet(HK,[]),bk=lsGet(BK,[]),bd=lsGet(CK,[]);
+ var t="Backups on this device: "+(bk.length?bk.map(function(b){return fmtT(b.t)+" ("+b.n+" songs)"}).join("; "):"none yet")+"\nDamaged copies set aside: "+bd.length+"\n\nLog, newest first:\n"+(l.length?l.slice().reverse().map(function(e){return fmtT(e.t)+" · "+e.a+(e.d?" · "+e.d:"")}).join("\n"):"Nothing has needed repair.");
+ var r=await ask("Library health",{text:t,ok:"Copy log",alt:(bk.length||bd.length)?"Backups…":""});
+ if(r===true){try{await navigator.clipboard.writeText(t);cst("Log copied.")}catch(e){cst("Could not copy. Select the text and copy it.")}return}
+ if(r!=="alt")return;
+ var ch=bk.slice().reverse().map(function(b,i){return{label:"Restore backup from "+fmtT(b.t)+" ("+b.n+" songs)",v:{k:"bak",i:bk.length-1-i}}}).concat(bd.slice().reverse().map(function(b,i){return{label:"Show damaged copy from "+fmtT(b.t)+" ("+b.src+")",v:{k:"bad",i:bd.length-1-i}}}));
+ var v=await chooseDlg("Backups and damaged copies",ch,"Restoring first backs up the current library, so it can be undone.");if(!v)return;
+ if(v.k=="bak"){var b=bk[v.i];if(await ask("Replace the library on this device with the backup from "+fmtT(b.t)+" ("+b.n+" songs)?",{ok:"Restore"})){try{adopt(Date.now(),b.j);save();hlog("Backup restored",fmtT(b.t));renderList();cst("Backup restored.")}catch(e){cst("That backup could not be restored.")}}}
+ else{var x=bd[v.i];await ask("Damaged copy from "+fmtT(x.t)+". Select all and copy it if you need it.",{text:x.raw,ok:"Close",noCancel:true})}};
+
 $("cfile").onchange=async function(){var f=this.files[0],inp=this;if(!f)return;
  try{var o=JSON.parse(await f.text());if(!o||!o.j)throw 0;JSON.parse(o.j);
   if(await ask("Replace the library on this device with the one in "+f.name+"?",{ok:"Replace"})){adopt(o.at||Date.now(),o.j);save();cst("Library loaded from "+f.name+".")}}
@@ -1381,7 +1407,7 @@ var _rdM=runDetect;runDetect=function(){var c=parseInt($("ec").value)||0,mv=$("e
   if(rw&&mv&&oldOk){var d=(+mv.slice(1)-c-+oldOk.slice(1)+120)%12;$("ek").value=keyName(dq+((di-d+120)%12));$("emk").value=dq+((di+c)%12)}
   else{$("emr").value="";$("emk").value=c?dq+((di+c)%12):""}}
  syncMK()};$("dkey").onclick=function(){runDetect()};
-load();cur=byId(hist[hp])||songs[0];draw();if(cur&&hist.indexOf(cur.id)<0){hist=[cur.id];hp=0}renderList();initSync();
+load();cur=byId(hist[hp])||songs[0];draw();if(cur&&hist.indexOf(cur.id)<0){hist=[cur.id];hp=0}renderList();initSync();if(loadNote)setTimeout(function(){ask(loadNote,{ok:"OK",noCancel:true})},500);
 setTimeout(async function(){var ok=false;try{if(localStorage.getItem("cc2help")==null){localStorage.setItem("cc2help","1");ok=localStorage.getItem("cc2help")=="1"}}catch(x){}
  if(!ok)return;var r=await ask("Welcome to SongTrak! Would you like a quick tour of what it can do?",{ok:"Show me around",alt:"Not now",noCancel:true});if(r===true)$("helpbtn").click()},700);
 
