@@ -307,10 +307,13 @@ body.selecting aside .tabs,body.selecting aside .tools:not(#selrow){opacity:.4}
 #cloud .cstat:empty{display:none}
 #cloud .box0[hidden]{display:none}
 body #fbanner.fbanner{top:env(safe-area-inset-top,0px)}
+/* v3.24 plain-language choice dialogs */
+.chb .btn.act{padding:10px 14px;margin:0}
+#chn{font-size:15px;line-height:1.4}
 </style></head>
 <body><div class="fbanner" id="fbanner" role="status" hidden><span id="fbtxt"></span><button class="btn main" id="fbsave" type="button">Back up now</button></div><div class="app">
 <aside>
- <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v3.23 · 7 Nov e1</small></h1>
+ <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v3.24 · 7 Nov e1</small></h1>
  <div class="tabs gears"><button id="hnav" class="gear" aria-label="History: tap to go back one step, press and hold for the list" title="History: tap = back, hold = list">🕘</button><button id="fsbtn" class="gear" aria-label="Full screen" title="Full screen" hidden>⛶</button><button id="helpbtn" class="gear" aria-label="Getting started" title="Getting started">?</button><button id="setbtn" class="gear" aria-label="Settings" title="Settings">⚙</button></div>
  <div class="tabs"><button id="tS" class="on" aria-haspopup="menu" aria-expanded="false">Songs ▾</button><button id="tL">Setlists</button></div>
  <input type="search" id="q" placeholder="Search songs" aria-label="Search songs">
@@ -802,7 +805,7 @@ function metaTextFor(c,opt){var sl=opt.noSL?[]:lists.filter(function(l){return l
 var shMy=false;
 function listText(l){var sg=l.ids.map(byId).filter(Boolean),h="{songtrak_setlist: 1}\n{setlist: "+String(l.name).replace(/[\r\n}]+/g," ")+"}\n{count: "+sg.length+"}\n{mykeys: "+(shMy?1:0)+"}\n";
  return h+sg.map(function(c){return"\n{new_song}\n"+metaTextFor(c,{noSL:true,noMy:!shMy})}).join("")}
-function chooseDlg(title,choices,note){return new Promise(function(res){var o=$("chs");$("cht").textContent=title;$("chn").textContent=note||"";var h="";choices.forEach(function(c,i){h+='<button class="btn'+(c.danger?" danger":"")+'" type="button" data-i="'+i+'">'+esc(c.label)+"</button>"});$("chb").innerHTML=h;o.classList.add("on");
+function chooseDlg(title,choices,note,cancelLabel){return new Promise(function(res){var o=$("chs");$("cht").textContent=title;$("chn").textContent=note||"";$("chx").hidden=cancelLabel===false;$("chx").textContent=cancelLabel||"Cancel";var h="";choices.forEach(function(c,i){h+='<button class="btn'+(c.sub?" act":"")+(c.danger?" danger":"")+'" type="button" data-i="'+i+'">'+(c.sub?"<b>"+esc(c.label)+"</b><small>"+esc(c.sub)+"</small>":esc(c.label))+"</button>"});$("chb").innerHTML=h;o.classList.add("on");
  function end(v){o.classList.remove("on");$("chb").onclick=$("chx").onclick=null;document.removeEventListener("keydown",kd);res(v)}
  function kd(e){if(e.key=="Escape")end(null)}document.addEventListener("keydown",kd);
  $("chb").onclick=function(e){var b=e.target.closest("button");if(b)end(choices[+b.dataset.i].v)};$("chx").onclick=function(){end(null)};var f=$("chb").querySelector("button");if(f)f.focus()})}
@@ -938,10 +941,10 @@ function fmtT(t){try{return new Date(t).toLocaleString([], {dateStyle:"medium",t
 function fbanner(){var show=fileMode&&fileDirty&&!dirH;$("fbanner").hidden=!show;if(show)$("fbtxt").textContent="Your latest changes are not backed up yet."+(lastFileAt?" Last backup: "+fmtT(lastFileAt)+".":"")}
 function markFile(saved){fileMode=true;fileDirty=!saved;if(saved)lastFileAt=at||Date.now();try{localStorage.setItem("songtrak-filemode","1");if(saved)localStorage.setItem("songtrak-lastfile",String(lastFileAt))}catch(e){}fbanner()}
 function outName(){return CF}
-async function exportLib(){if(/ledger/i.test(libName)&&!await ask("The library you loaded came from a file named \u201c"+libName+"\u201d, which looks like a Ledger file.\n\nSongTrak will save as "+CF+". In the Save screen, do NOT choose or replace a Ledger file.",{ok:"Continue",alt:"Cancel"}))return;var a=at||Date.now(),j=JSON.stringify({at:a,j:snap()}),file=new File([j],outName(),{type:"application/json"});
+async function exportLib(){if(/ledger/i.test(libName)){var go=await chooseDlg("This looks like your Ledger file",[{label:"Continue and save my backup",sub:"The backup is saved as "+CF+".",v:true},{label:"Don\u2019t save now",sub:"Go back without saving anything.",v:false}],"The songs you opened came from a file named \u201c"+libName+"\u201d. That name looks like it belongs to another app, Ledger. When the Files screen appears, do not pick or replace that file.",false);if(!go)return}var a=at||Date.now(),j=JSON.stringify({at:a,j:snap()}),file=new File([j],outName(),{type:"application/json"});
  if(TOUCH&&navigator.canShare&&navigator.canShare({files:[file]})){
   try{await navigator.share({files:[file]})}catch(e){if(e&&e.name=="AbortError"){cst("Save cancelled. Your latest changes are not backed up yet.");return}throw e}
-  var yes=await ask("The list closed, but the app can't see where the file went.\n\nDid you save the backup, and replace the older "+outName()+" if there was one? (Never replace a file that belongs to another app.)",{ok:"Yes, saved",alt:"Not yet",noCancel:true});
+  var yes=await chooseDlg("Did your backup get saved?",[{label:"Yes, it was saved",sub:"I picked a folder and saved the file called "+outName()+". If an older copy was already there, I replaced it.",v:true},{label:"No, not yet",sub:"I cancelled or did not finish. Keep the reminder bar showing so I can back up later.",v:false}],"After you tap Save, you choose where the file goes. The app cannot see that, so please tell it what happened. Only replace a file called "+outName()+". Never replace a file that belongs to another app.",false);
   if(yes===true){markFile(true);cst("Backup saved "+fmtT(Date.now())+".")}else{markFile(false);cst("Not backed up yet. Tap Save backup file when you are ready.")}return}
  try{var dl=window.claude&&await claude.use("downloads");if(!dl)throw 0;await dl.save({filename:outName(),data:j});markFile(true);cst("Backup saved "+fmtT(Date.now())+". If it went to Downloads, move it into your cloud folder.")}
  catch(e){cst(e&&e.code=="declined"?"Save cancelled.":"Saving a file isn't available in this view.")}}
