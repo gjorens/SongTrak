@@ -278,16 +278,18 @@ body #fbanner.fbanner button{min-height:0;height:36px;margin:0;align-self:center
 #selbar[hidden]{display:none}
 #selcnt{font-weight:700;flex:1 1 100%}
 #selbar .btn:disabled{opacity:.45}
-#seldel{background:#d32f2f;color:#fff;border-color:#d32f2f;font-weight:700}
 .selbox{display:inline-block;width:1.5em;font-size:1.15em;vertical-align:middle}
 .list.songs .song.sel{outline:2px solid var(--chord);outline-offset:-2px}
 /* v3.19 dialogs sit above the save banner */
 .ov{z-index:50}
 #dlg{z-index:55}
+/* v3.20 while selecting, everything except the Select actions, song rows and dialogs is disabled */
+body.selecting button:not(#selbar button):not(.song):not(#rail button):not(.ov button):not(#dlg button):not(#undo button),body.selecting main{pointer-events:none;opacity:.4}
+body.selecting aside .tabs,body.selecting aside .tools{opacity:.4}
 </style></head>
 <body><div class="fbanner" id="fbanner" role="status" hidden><span id="fbtxt"></span><button class="btn main" id="fbsave" type="button">Save to Files</button></div><div class="app">
 <aside>
- <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v3.19 · 6 Nov e1</small></h1>
+ <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v3.20 · 7 Nov e1</small></h1>
  <div class="tabs gears"><button id="hnav" class="gear" aria-label="History: tap to go back one step, press and hold for the list" title="History: tap = back, hold = list">🕘</button><button id="fsbtn" class="gear" aria-label="Full screen" title="Full screen" hidden>⛶</button><button id="helpbtn" class="gear" aria-label="Getting started" title="Getting started">?</button><button id="setbtn" class="gear" aria-label="Settings" title="Settings">⚙</button></div>
  <div class="tabs"><button id="tS" class="on" aria-haspopup="menu" aria-expanded="false">Songs ▾</button><button id="tL">Setlists</button></div>
  <input type="search" id="q" placeholder="Search songs" aria-label="Search songs">
@@ -709,7 +711,7 @@ function swOk(){return tab=="S"&&!inSL()&&!mgrOn&&!selOn&&!document.body.classLi
 var selOn=false,selIds={};
 function selCount(){return Object.keys(selIds).length}
 function selDraw(){var n=selCount();$("selcnt").textContent=n+(n==1?" song selected":" songs selected");$("selexp").disabled=$("seldel").disabled=!n;[].forEach.call($("list").querySelectorAll(".song"),function(b){var on=!!selIds[b.dataset.id];b.classList.toggle("sel",on);var x=b.querySelector(".selbox");if(x){x.textContent=on?"\u2611":"\u2610";x.setAttribute("aria-checked",on)}})}
-function selPost(){var ok=tab=="S"&&!inSL()&&!mgrOn;if(selOn&&!ok){selOn=false;selIds={}}document.body.classList.toggle("selecting",selOn);$("selbtn").hidden=!ok;$("selbar").hidden=!selOn;if(!selOn)return;
+function selPost(){var ok=tab=="S"&&!inSL()&&!mgrOn;if(selOn&&!ok){selOn=false;selIds={}}document.body.classList.toggle("selecting",selOn);try{document.querySelector("main").inert=selOn}catch(e){}$("selbtn").hidden=!ok;$("selbar").hidden=!selOn;if(!selOn)return;
  [].forEach.call($("list").querySelectorAll(".song"),function(b){var x=document.createElement("span");x.className="selbox";x.setAttribute("role","checkbox");b.insertBefore(x,b.firstChild)});selDraw()}
 function selMode(on){selOn=on;selIds={};renderList()}
 $("selbtn").onclick=function(){selMode(true)};$("seldone").onclick=function(){selMode(false)};
