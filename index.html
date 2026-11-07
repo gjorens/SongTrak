@@ -266,10 +266,17 @@ body #fbanner.fbanner button{min-height:0;height:36px;margin:0;align-self:center
 @media (max-width:600px){body #fbanner.fbanner{font-size:16px}body #fbanner.fbanner button{height:34px;font-size:16px;padding:0 12px}}
 /* v3.10 setlist rows match the Setlists button colour */
 .list.songs .song.sl-row,.list .song.sl-row{background:var(--listbg)}
+/* v3.17 swipe to delete */
+.list.songs{overflow-x:hidden}
+.list.songs .song{position:relative;touch-action:pan-y;transition:transform .15s}
+.swdel{position:absolute;top:0;bottom:0;right:-88px;width:88px;display:flex;align-items:center;justify-content:center;background:#d32f2f;color:#fff;font-weight:800;font-size:16px;border-radius:6px;cursor:pointer}
+#undo{position:fixed;z-index:60;left:50%;transform:translateX(-50%);bottom:max(16px,env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:14px;background:#2b2b2b;color:#fff;padding:8px 8px 8px 16px;border-radius:12px;box-shadow:0 6px 22px rgba(0,0,0,.4);font-size:16px;max-width:92vw}
+#undo[hidden]{display:none}
+#undo .btn{background:#fff;color:#111;font-weight:800}
 </style></head>
 <body><div class="fbanner" id="fbanner" role="status" hidden><span id="fbtxt"></span><button class="btn main" id="fbsave" type="button">Save to Files</button></div><div class="app">
 <aside>
- <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v3.16 · 6 Nov e1</small></h1>
+ <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v3.17 · 6 Nov e1</small></h1>
  <div class="tabs gears"><button id="hnav" class="gear" aria-label="History: tap to go back one step, press and hold for the list" title="History: tap = back, hold = list">🕘</button><button id="fsbtn" class="gear" aria-label="Full screen" title="Full screen" hidden>⛶</button><button id="helpbtn" class="gear" aria-label="Getting started" title="Getting started">?</button><button id="setbtn" class="gear" aria-label="Settings" title="Settings">⚙</button></div>
  <div class="tabs"><button id="tS" class="on" aria-haspopup="menu" aria-expanded="false">Songs ▾</button><button id="tL">Setlists</button></div>
  <input type="search" id="q" placeholder="Search songs" aria-label="Search songs">
@@ -410,6 +417,7 @@ body #fbanner.fbanner button{min-height:0;height:36px;margin:0;align-self:center
 <p class="status">Rec replaces a track. Dub adds a new layer on top of what is already recorded. Undo steps back one recording. All tracks stay in step because they share one loop length. If the loops sound late or early, adjust Latency.</p></div></div>
 <div id="slmenu" hidden role="menu" aria-label="Setlists for this song"></div>
 <div id="hmenu" hidden role="menu" aria-label="History"></div>
+<div id="undo" hidden role="status"><span id="undot"></span><button type="button" class="btn" id="undob">Undo</button></div>
 <div id="cloud" class="ov" role="dialog" aria-modal="true"><div class="box"><b>Cloud files sync</b>
 <div id="cfolder" class="box0"><p>Choose a folder that your cloud service already syncs, such as iCloud Drive, Dropbox, Google Drive or OneDrive. On each device, choose that same folder. The app keeps one library file in it up to date.</p>
 <div class="row"><button class="btn main" id="cpick">Choose folder</button><button class="btn" id="cnow">Sync now</button><button class="btn" id="coff">Disconnect</button></div>
@@ -661,7 +669,37 @@ async function saveSong(){var t=$("et").value.trim();if(!t){$("et").focus();retu
  if(isNew){o.id="s"+Date.now();o.added=Date.now();songs.push(o);cur=o}else{Object.assign(cur,o)}
  var wasNew=isNew;applySL(cur.id);vdirty=null;save();pick(cur.id);if(wasNew)setTimeout(function(){$("locate").click()},0);return true}
 $("save").onclick=saveSong;
-$("del").onclick=async function(){if(!cur||!await ask('Delete "'+cur.title+'"?',{ok:"Delete"}))return;var id=cur.id;songs=songs.filter(function(s){return s.id!=id});lists.forEach(function(l){l.ids=l.ids.filter(function(x){return x!=id})});hist=hist.filter(function(x){return x!=id});hp=hist.length-1;save();cur=songs[0]||null;if(cur)pick(cur.id,true);else draw()};
+$("del").onclick=async function(){if(!cur||!await ask('Delete "'+cur.title+'"? You can undo it right after.',{ok:"Delete"}))return;showUndo(deleteSong(cur.id))};
+/* v3.17 swipe to delete, with confirmation, undo and a recoverable trash */
+var TK="songtrak-trash",undoE=null,undoT=null;
+function trashAdd(e){var l=lsGet(TK,[]);l.push(e);l=l.slice(-20);if(!lsSet(TK,l)){l=l.slice(-5);lsSet(TK,l)}}
+function deleteSong(id){var s=byId(id);if(!s)return null;var memb=[];lists.forEach(function(l){var i=l.ids.indexOf(id);if(i>-1)memb.push({l:l.id,i:i})});
+ var order=sorted().map(function(x){return x.id}),oi=order.indexOf(id),next=order[oi+1]||order[oi-1]||null;
+ backupLib(snap(),600000,"before delete");var e={t:Date.now(),s:JSON.parse(JSON.stringify(s)),m:memb};trashAdd(e);
+ songs=songs.filter(function(x){return x.id!=id});lists.forEach(function(l){l.ids=l.ids.filter(function(x){return x!=id})});hist=hist.filter(function(x){return x!=id});hp=hist.length-1;
+ hlog("Song deleted",s.title);save();
+ if(cur&&cur.id==id){cur=byId(next)||songs[0]||null;if(cur)pick(cur.id,true);else draw()}else renderList();return e}
+function undelete(e){if(!e||byId(e.s.id))return false;songs.push(e.s);e.m.forEach(function(m){var l=lists.filter(function(x){return x.id==m.l})[0];if(l&&l.ids.indexOf(e.s.id)<0)l.ids.splice(Math.min(m.i,l.ids.length),0,e.s.id)});
+ lsSet(TK,lsGet(TK,[]).filter(function(x){return !(x.t===e.t&&x.s.id===e.s.id)}));hlog("Song restored",e.s.title);save();renderList();return true}
+function showUndo(e){if(!e)return;undoE=e;$("undot").textContent='Deleted "'+e.s.title+'".';$("undo").hidden=false;clearTimeout(undoT);undoT=setTimeout(function(){$("undo").hidden=true;undoE=null},10000)}
+$("undob").onclick=function(){var e=undoE;$("undo").hidden=true;undoE=null;clearTimeout(undoT);if(e&&undelete(e))pick(e.s.id,true)};
+var sw={el:null,x:0,y:0,on:false,open:null,sup:0,id:-1};
+function swClose(){if(sw.open){sw.open.classList.remove("swo");sw.open.style.transform="";var d=sw.open.querySelector(".swdel");if(d)d.remove();sw.open=null}}
+function swOk(){return tab=="S"&&!inSL()&&!mgrOn&&!document.body.classList.contains("editing")}
+$("list").addEventListener("pointerdown",function(e){var b=e.target.closest(".song");if(e.target.closest(".swdel"))return;if(sw.open&&sw.open!==b)swClose();if(!b||!swOk()||e.pointerType=="mouse"&&e.button)return;sw.el=b;sw.x=e.clientX;sw.y=e.clientY;sw.on=false;sw.id=e.pointerId});
+$("list").addEventListener("pointermove",function(e){var b=sw.el;if(!b||e.pointerId!=sw.id)return;var dx=e.clientX-sw.x,dy=e.clientY-sw.y;
+ if(!sw.on){if(Math.abs(dx)>12&&Math.abs(dx)>1.5*Math.abs(dy)){sw.on=true;if(sw.open&&sw.open!==b)swClose();b.style.transition="none";try{b.setPointerCapture(e.pointerId)}catch(x){}}else return}
+ b.style.transform="translateX("+Math.max(-88,Math.min(0,dx+(b===sw.open?-88:0)))+"px)"});
+function swEnd(e){var b=sw.el;if(!b||e.pointerId!=sw.id)return;sw.el=null;if(!sw.on)return;sw.on=false;sw.sup=Date.now();b.style.transition="";var dx=e.clientX-sw.x+(b===sw.open?-88:0);
+ if(e.type!="pointercancel"&&dx<-44){if(sw.open&&sw.open!==b)swClose();b.style.transform="translateX(-88px)";b.classList.add("swo");if(!b.querySelector(".swdel")){var d=document.createElement("span");d.className="swdel";d.setAttribute("role","button");d.textContent="Delete";b.appendChild(d)}sw.open=b}
+ else{if(b===sw.open)swClose();else b.style.transform=""}}
+$("list").addEventListener("pointerup",swEnd);$("list").addEventListener("pointercancel",swEnd);
+$("list").addEventListener("scroll",swClose);
+$("list").addEventListener("click",async function(e){var d=e.target.closest(".swdel");
+ if(d){e.stopPropagation();e.preventDefault();var id=d.parentNode.dataset.id,s=byId(id);swClose();if(!s)return;var n=lists.filter(function(l){return l.ids.indexOf(id)>-1}).length;
+  if(await ask('Delete "'+s.title+'"'+(n?" (it is in "+n+(n==1?" setlist":" setlists")+" and will be removed from them)":"")+"? You can undo it right after.",{ok:"Delete"}))showUndo(deleteSong(id));return}
+ if(Date.now()-sw.sup<400){e.stopPropagation();e.preventDefault();return}
+ if(sw.open&&e.target.closest(".song")===sw.open){e.stopPropagation();e.preventDefault();swClose()}},true);
 
 function songText(){var cp=cur.capo||0,bk=bodyKey(cur),k=bk?tc(bk,shift+cp):"",t=cur.title+(cur.artist?" - "+cur.artist:"")+"\n";
  if(k)t+="Key: "+k+"\n";if(cp)t+="Capo: "+cp+" (chords are shapes)\n";t+="\n";
@@ -773,13 +811,14 @@ $("coff").onclick=function(){dirH=null;hdel();cst("Disconnected. Your songs stay
 $("csave").onclick=async function(){try{var dl=window.claude&&await claude.use("downloads");if(!dl){cst("Saving files isn't available in this view.");return}
  await dl.save({filename:CF,data:JSON.stringify({at:at||Date.now(),j:snap()})});cst("Library file ready. Save it into your cloud folder.")}catch(e){cst(e&&e.code=="declined"?"Save cancelled.":"Saving failed.")}};
 $("cload").onclick=function(){$("cfile").click()};
-$("chealth").onclick=async function(){var l=lsGet(HK,[]),bk=lsGet(BK,[]),bd=lsGet(CK,[]);
- var t="Backups on this device: "+(bk.length?bk.map(function(b){return fmtT(b.t)+" ("+b.n+" songs)"}).join("; "):"none yet")+"\nDamaged copies set aside: "+bd.length+"\n\nLog, newest first:\n"+(l.length?l.slice().reverse().map(function(e){return fmtT(e.t)+" · "+e.a+(e.d?" · "+e.d:"")}).join("\n"):"Nothing has needed repair.");
- var r=await ask("Library health",{text:t,ok:"Copy log",alt:(bk.length||bd.length)?"Backups…":""});
+$("chealth").onclick=async function(){var l=lsGet(HK,[]),bk=lsGet(BK,[]),bd=lsGet(CK,[]),tr=lsGet(TK,[]);
+ var t="Backups on this device: "+(bk.length?bk.map(function(b){return fmtT(b.t)+" ("+b.n+" songs)"}).join("; "):"none yet")+"\nDamaged copies set aside: "+bd.length+"\nRecently deleted songs: "+tr.length+"\n\nLog, newest first:\n"+(l.length?l.slice().reverse().map(function(e){return fmtT(e.t)+" · "+e.a+(e.d?" · "+e.d:"")}).join("\n"):"Nothing has needed repair.");
+ var r=await ask("Library health",{text:t,ok:"Copy log",alt:(bk.length||bd.length||tr.length)?"Backups…":""});
  if(r===true){try{await navigator.clipboard.writeText(t);cst("Log copied.")}catch(e){cst("Could not copy. Select the text and copy it.")}return}
  if(r!=="alt")return;
- var ch=bk.slice().reverse().map(function(b,i){return{label:"Restore backup from "+fmtT(b.t)+" ("+b.n+" songs)",v:{k:"bak",i:bk.length-1-i}}}).concat(bd.slice().reverse().map(function(b,i){return{label:"Show damaged copy from "+fmtT(b.t)+" ("+b.src+")",v:{k:"bad",i:bd.length-1-i}}}));
+ var ch=bk.slice().reverse().map(function(b,i){return{label:"Restore backup from "+fmtT(b.t)+" ("+b.n+" songs)",v:{k:"bak",i:bk.length-1-i}}}).concat(tr.slice().reverse().map(function(b,i){return{label:"Restore deleted song \u201c"+b.s.title+"\u201d ("+fmtT(b.t)+")",v:{k:"del",i:tr.length-1-i}}})).concat(bd.slice().reverse().map(function(b,i){return{label:"Show damaged copy from "+fmtT(b.t)+" ("+b.src+")",v:{k:"bad",i:bd.length-1-i}}}));
  var v=await chooseDlg("Backups and damaged copies",ch,"Restoring first backs up the current library, so it can be undone.");if(!v)return;
+ if(v.k=="del"){cst(undelete(tr[v.i])?"Song restored.":"That song is already in the library.");return}
  if(v.k=="bak"){var b=bk[v.i];if(await ask("Replace the library on this device with the backup from "+fmtT(b.t)+" ("+b.n+" songs)?",{ok:"Restore"})){try{adopt(Date.now(),b.j);save();hlog("Backup restored",fmtT(b.t));renderList();cst("Backup restored.")}catch(e){cst("That backup could not be restored.")}}}
  else{var x=bd[v.i];await ask("Damaged copy from "+fmtT(x.t)+". Select all and copy it if you need it.",{text:x.raw,ok:"Close",noCancel:true})}};
 
