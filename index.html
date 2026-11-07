@@ -286,10 +286,16 @@ body #fbanner.fbanner button{min-height:0;height:36px;margin:0;align-self:center
 /* v3.20 while selecting, everything except the Select actions, song rows and dialogs is disabled */
 body.selecting button:not(#selbar button):not(.song):not(#rail button):not(.ov button):not(#dlg button):not(#undo button),body.selecting main{pointer-events:none;opacity:.4}
 body.selecting aside .tabs,body.selecting aside .tools{opacity:.4}
+/* v3.21 bigger A-Z rail: wider, letters share the full height so there are no dead gaps */
+#rail{width:38px;padding:0;font-size:12px}
+#rail button{flex:1 1 0;min-height:0;width:100%;padding:0;font-size:inherit;display:flex;align-items:center;justify-content:center}
+@media (max-width:700px){#rail{width:32px}}
+#railtip{position:fixed;z-index:45;width:60px;height:60px;border-radius:14px;background:var(--chord);color:#fff;font-size:34px;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.35);pointer-events:none}
+#railtip[hidden]{display:none}
 </style></head>
 <body><div class="fbanner" id="fbanner" role="status" hidden><span id="fbtxt"></span><button class="btn main" id="fbsave" type="button">Save to Files</button></div><div class="app">
 <aside>
- <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v3.20 · 7 Nov e1</small></h1>
+ <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v3.21 · 7 Nov e1</small></h1>
  <div class="tabs gears"><button id="hnav" class="gear" aria-label="History: tap to go back one step, press and hold for the list" title="History: tap = back, hold = list">🕘</button><button id="fsbtn" class="gear" aria-label="Full screen" title="Full screen" hidden>⛶</button><button id="helpbtn" class="gear" aria-label="Getting started" title="Getting started">?</button><button id="setbtn" class="gear" aria-label="Settings" title="Settings">⚙</button></div>
  <div class="tabs"><button id="tS" class="on" aria-haspopup="menu" aria-expanded="false">Songs ▾</button><button id="tL">Setlists</button></div>
  <input type="search" id="q" placeholder="Search songs" aria-label="Search songs">
@@ -433,6 +439,7 @@ body.selecting aside .tabs,body.selecting aside .tools{opacity:.4}
 <p class="status">Rec replaces a track. Dub adds a new layer on top of what is already recorded. Undo steps back one recording. All tracks stay in step because they share one loop length. If the loops sound late or early, adjust Latency.</p></div></div>
 <div id="slmenu" hidden role="menu" aria-label="Setlists for this song"></div>
 <div id="hmenu" hidden role="menu" aria-label="History"></div>
+<div id="railtip" hidden aria-hidden="true"></div>
 <div id="undo" hidden role="status"><span id="undot"></span><button type="button" class="btn" id="undob">Undo</button></div>
 <div id="cloud" class="ov" role="dialog" aria-modal="true"><div class="box"><b>Cloud files sync</b>
 <div id="cfolder" class="box0"><p>Choose a folder that your cloud service already syncs, such as iCloud Drive, Dropbox, Google Drive or OneDrive. On each device, choose that same folder. The app keeps one library file in it up to date.</p>
@@ -1159,8 +1166,13 @@ $("setclose").onclick=function(){$("sets").classList.remove("on")};
  function jump(k){var ks=Array.prototype.map.call(r.children,function(b){return b.dataset.k}),i=ks.indexOf(k),el=null;
   for(;i<ks.length&&!el;i++)el=$("list").querySelector('[data-l="'+ks[i]+'"]');if(!el)el=$("list").querySelector('[data-l]:last-of-type')&&$("list").lastElementChild;
   if(el)$("list").scrollTop=el.offsetTop-2}
- function at(e){var el=document.elementFromPoint(e.clientX,e.clientY);if(el&&el.dataset&&el.dataset.k&&r.contains(el))jump(el.dataset.k)}
- r.addEventListener("pointerdown",function(e){e.preventDefault();at(e)});r.addEventListener("pointermove",function(e){if(e.buttons||e.pointerType=="touch")at(e)})})();
+ var tip=$("railtip");
+ function at(e){var el=document.elementFromPoint(e.clientX,e.clientY);if(el&&el.dataset&&el.dataset.k&&r.contains(el)){jump(el.dataset.k);var q=r.getBoundingClientRect();tip.textContent=el.dataset.k;tip.style.left=Math.max(4,q.left-72)+"px";tip.style.top=Math.max(4,Math.min(innerHeight-64,e.clientY-30))+"px";tip.hidden=false}}
+ function done(){tip.hidden=true}
+ r.addEventListener("pointerdown",function(e){e.preventDefault();at(e)});r.addEventListener("pointermove",function(e){if(e.buttons||e.pointerType=="touch")at(e)});
+ r.addEventListener("pointerup",done);r.addEventListener("pointercancel",done);r.addEventListener("pointerleave",function(e){if(!e.buttons)done()});
+ function fit(){var h=r.clientHeight/27;r.style.fontSize=Math.max(8,Math.min(17,Math.floor(h*.85)))+"px"}
+ try{new ResizeObserver(fit).observe(r)}catch(e){}fit()})();
 
 $("locate").onclick=function(){if(!cur)return;if(!metaOK(cur,$("fst").value,$("fmd").value,$("fkw").value)){$("fst").value=$("fmd").value=$("fkw").value=""}var q=$("q").value.toLowerCase();if(q&&(cur.title+cur.artist).toLowerCase().indexOf(q)<0)$("q").value="";renderList();
  var el=$("list").querySelector(".song.on");if(el)$("list").scrollTop=Math.max(0,el.offsetTop-$("list").clientHeight/2+el.offsetHeight/2)};
