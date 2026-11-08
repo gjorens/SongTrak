@@ -346,11 +346,12 @@ body.playing #tuner .box,body.playing #lpp .box{border-radius:16px;border-width:
 body.playing #pkp{right:12px;bottom:calc(var(--pbh,84px) + 12px);border-radius:16px;border:1px solid var(--line)}
 #pkp{transform:translateX(calc(100% + 24px))}
 @media (max-width:760px){body.playing #tuner,body.playing #lpp{padding-right:0}body.playing #tuner .box,body.playing #lpp .box{border-radius:16px 0 0 16px}}
+#sets .tnh{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:calc(26px*var(--ui,1));position:sticky;top:-18px;margin:-18px -18px 0;padding:14px 18px 10px;background:var(--panel);z-index:2}#sets #setclose{background:#c62828;border-color:#8e1a1a;color:#fff;font-weight:800;min-height:calc(46px*var(--ui,1));padding:0 16px}
 @media screen and (max-width:1100px){body.editing aside{display:none}body.editing .app{display:block}.edact{position:sticky;bottom:0;z-index:5;background:var(--bg);padding:10px 0 calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}}
 </style><script>try{var u_=localStorage.getItem("songtrak-ui");if(/^(1\.25|1\.5|1\.75)$/.test(u_))document.documentElement.style.setProperty("--ui",u_)}catch(e){}</script></head>
 <body><div class="fbanner" id="fbanner" role="status" hidden><span id="fbtxt"></span><button class="btn main" id="fbsave" type="button">Back up now</button></div><div class="app">
 <aside><div id="lsplit" role="separator" aria-orientation="vertical" aria-label="Drag to change the width of the left panel. Double tap to reset." title="Drag to resize. Double tap to reset."></div>
- <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v3.52 · 8 Nov e1</small></h1>
+ <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v3.53 · 8 Nov e1</small></h1>
  <div class="tabs gears"><button id="hnav" class="gear" aria-label="History: tap to go back one step, press and hold for the list" title="History: tap = back, hold = list">‹</button><button id="fsbtn" class="gear" aria-label="Full screen" title="Full screen" hidden>⛶</button><button id="helpbtn" class="gear" aria-label="Getting started" title="Getting started">?</button><button id="setbtn" class="gear" aria-label="Settings" title="Settings">⚙</button></div>
  <div class="tabs"><button id="tS" class="on" aria-haspopup="menu" aria-expanded="false">Songs ▾</button><button id="tL">Setlists</button></div>
  <input type="search" id="q" placeholder="Search songs" aria-label="Search songs">
@@ -443,7 +444,7 @@ body.playing #pkp{right:12px;bottom:calc(var(--pbh,84px) + 12px);border-radius:1
 <div class="pkr"><span>Key</span><span class="pg"><button id="pkd" type="button" aria-label="Down a half step">−</button><b id="pkv">-</b><button id="pku" type="button" aria-label="Up a half step">+</button></span></div>
 <div class="pkr"><span>Capo</span><span class="pg"><button id="pcd" type="button" aria-label="Capo down">−</button><b id="pcv">-</b><button id="pcu" type="button" aria-label="Capo up">+</button></span></div>
 <p class="pkn" id="pks"></p><p class="pkn">Changes apply to this song and are saved with it.</p></div>
-<div id="sets" class="ov" role="dialog" aria-modal="true"><div class="box"><b>Settings</b>
+<div id="sets" class="ov" role="dialog" aria-modal="true"><div class="box"><div class="tnh"><b>Settings</b><button class="btn" id="setclose" type="button">✕ Close</button></div>
 <label class="kt"><input type="checkbox" id="slp"> Show Loops in the Play bar</label>
 <label>Your name <input type="text" id="uname" class="sz" autocomplete="name" placeholder="Used as the artist on songs you generate" aria-label="Your name"></label>
 <label>Appearance <select id="theme" aria-label="Appearance"><option value="auto">Match this device</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
@@ -458,7 +459,7 @@ body.playing #pkp{right:12px;bottom:calc(var(--pbh,84px) + 12px);border-radius:1
 <label>Accidentals <select id="acc" class="sz" aria-label="Show sharps or flats"><option value="s">Sharps (C♯, F♯)</option><option value="f">Flats (D♭, B♭)</option></select></label>
 <label>Device type <select id="dev" aria-label="Device type"><option value="auto">Detect automatically</option><option value="apple">iPhone or iPad</option><option value="android">Android</option><option value="computer">Computer</option></select></label>
 <p class="status">These settings apply to the whole app on this device, not to a single song.</p>
-<div class="row"><button class="btn" id="setclose">Close</button></div></div></div>
+</div></div>
 <div id="help" class="ov" role="dialog" aria-modal="true"><div class="box"><b>Getting started with SongTrak</b>
 <div class="hlp">
 <h4>1. View a song</h4><p>Tap a song in the list to see its chords above the lyrics. Use the <b>Key</b> control to transpose (the number of half-tones is shown) and the <b>capo</b> − / + buttons to change the capo. Your key and capo are saved separately from the song's <b>Original Key</b>. When you change either, a bar appears so you can <b>Save</b> or <b>Discard</b>.</p><details class="hmore"><summary>More info…</summary><div class="hm"><p>Each song stores its <b>Original Key</b>, your <b>My Key</b> (the key you want it to sound in), the <b>capo</b>, and whether the chords are rewritten into My Key. These are separate settings, so changing one never overwrites the song’s Original Key. <b>Save</b> keeps your choices with that song, and <b>Discard</b> goes back to the last saved ones.</p></div></details>
@@ -1285,7 +1286,7 @@ $("colreset").onclick=function(){try{localStorage.removeItem("cc-cc");localStora
 applyCols();indA=+lsg("cc-ind")||0;$("ind").value=indA;$("ind").onchange=function(){indA=+this.value;try{localStorage.setItem("cc-ind",indA)}catch(e){}renderChart()};
 (function(){var u="1";try{u=localStorage.getItem("songtrak-ui")||"1"}catch(e){}if(!/^(1|1\.25|1\.5|1\.75)$/.test(u))u="1";$("uisz").value=u;$("uisz").onchange=function(){document.documentElement.style.setProperty("--ui",this.value);try{localStorage.setItem("songtrak-ui",this.value)}catch(e){}}})();
 $("lfs").value=lsg("cc-lf")||"16";document.documentElement.style.setProperty("--lf",$("lfs").value+"px");$("lfs").onchange=function(){document.documentElement.style.setProperty("--lf",this.value+"px");try{localStorage.setItem("cc-lf",this.value)}catch(e){}};
-$("setclose").onclick=function(){$("sets").classList.remove("on")};
+$("setclose").onclick=function(){$("sets").classList.remove("on")};$("sets").onclick=function(e){if(e.target==this)this.classList.remove("on")};
 
 /* ---- fast scroll rail ---- */
 (function(){var r=$("rail"),h="";"#ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").forEach(function(k){h+='<button data-k="'+k+'" aria-label="Jump to '+k+'">'+k+"</button>"});r.innerHTML=h;
