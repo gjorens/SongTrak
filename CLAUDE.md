@@ -20,6 +20,9 @@ SongTrak is a single-file web app for guitarists: chord charts and lyrics, setli
 - Key model: `key` is the original key; `mkey` is My Key (sounding key); `capo` and `mkr` (chords rewritten into My Key) are stored separately.
 - Per-song extras: `tuning`, `drums` (`p`, `b` tempo, `w` swing, `h` human feel, `c` count-in, `s` sync with scroll, `n` bars 1 to 4, `t` turnaround (a fill bar replaces the last bar of every t bars; one of 2, 3, 4, 6, 8, 12, 16; absent when off), `f` three one-bar fill row sets that the turnaround rotates through, kept even when the turnaround is off, `u` id of the saved pattern in use, `e` edited rows; row letters k s h o r c plus a crash, d ride, t tom high, u tom low, p clap, w cowbell, y shaker, b tambourine; the song keeps its own copy of the beat, so exports and deleted saved patterns never lose it), `speed`.
 
+## Beat editor layout
+- Controls in `#dpanel` are 44px high. "Edit the beat" has rows by function: Beat length (bars select, bar tabs `#dbt`, pattern save buttons), Turnaround (select, fill tabs `#dft`, fill save buttons), a plain-language hint line `#dhint`, the grid, and More sounds. Opening it adds the `tall` class so the panel fills most of the screen.
+
 ## Select mode and export
 - Select (Songs view) shows checkboxes; Delete is batch, with a backup first and Undo. Export writes ChordPro (`{title:}`, `{artist:}`, `{key:}`, `{capo:}`, sections as `{comment: Verse 1}`), as a zip (stored, one `.txt` per song) or one text file joined by `{new_song}`. Import splits `{new_song}` files and confirms multi-song imports.
 
