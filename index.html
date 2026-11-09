@@ -269,7 +269,7 @@ aside .tools[hidden],aside .frow[hidden],#slhead[hidden],#slrow[hidden]{display:
 #slsel{display:none}
 .list .sl-row{border-left:4px solid var(--chord)}
 #hmenu{position:fixed;z-index:31;width:min(340px,92vw);max-height:65vh;overflow:auto;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 26px rgba(0,0,0,.35);padding:4px}
-#hmenu[hidden]{display:none}#hmenu button{display:block;width:100%;text-align:left;border:0;background:none;padding:9px 10px;border-radius:8px;color:var(--ink)}
+#hmenu[hidden]{display:none}#hmenu,#hmenu *{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}#hmenu button{display:block;width:100%;text-align:left;border:0;background:none;padding:9px 10px;border-radius:8px;color:var(--ink)}
 #hmenu button small{display:block;color:var(--mute);margin-left:1.6em}#hmenu button.cur{background:var(--sel);font-weight:700}#hmenu button:hover{background:var(--sel)}
 #hmenu .hd{padding:6px 10px;color:var(--mute);font-size:calc(13px*var(--ui,1))}
 /* v3.8 setlist checklist menu */
@@ -360,7 +360,7 @@ body.playing #pkp{right:12px;bottom:calc(var(--pbh,84px) + 12px);border-radius:1
 </style><script>try{var u_=localStorage.getItem("songtrak-ui");if(/^(1\.25|1\.5|1\.75)$/.test(u_))document.documentElement.style.setProperty("--ui",u_)}catch(e){}</script></head>
 <body><div class="fbanner" id="fbanner" role="status" hidden><span id="fbtxt"></span><button class="btn main" id="fbsave" type="button">Back up now</button></div><div class="app">
 <aside><div id="lsplit" role="separator" aria-orientation="vertical" aria-label="Drag to change the width of the left panel. Double tap to reset." title="Drag to resize. Double tap to reset."></div>
- <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v3.73 · 8 Nov e1</small></h1>
+ <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v3.74 · 8 Nov e1</small></h1>
  <div class="tabs gears"><button id="hnav" class="gear" aria-label="History: tap to go back one step, press and hold for the list" title="History: tap = back, hold = list">‹</button><button id="fsbtn" class="gear" aria-label="Full screen" title="Full screen" hidden>⛶</button><button id="helpbtn" class="gear" aria-label="Getting started" title="Getting started">?</button><button id="setbtn" class="gear" aria-label="Settings" title="Settings">⚙</button></div>
  <div class="tabs"><button id="tS" class="on" aria-haspopup="menu" aria-expanded="false">Songs ▾</button><button id="tL">Setlists</button></div>
  <input type="search" id="q" placeholder="Search songs" aria-label="Search songs">
@@ -1864,7 +1864,7 @@ window.__loop={play:play,stop:stopAll,any:any,tr:tr,state:function(){return{D:D,
 
 /* v3.0 navigation history: songtrak-nav (this device only) */
 (function(){
-var K="songtrak-nav",ev=[],hc=0,last="",restoring=false,pt=0,fired=false,b=$("hnav"),m=$("hmenu");
+var K="songtrak-nav",ev=[],hc=0,last="",restoring=false,pt=0,fired=false,blockSel=0,b=$("hnav"),m=$("hmenu");
 try{ev=JSON.parse(localStorage.getItem(K)||"[]")||[]}catch(e){ev=[]}
 function sv(){try{localStorage.setItem(K,JSON.stringify(ev.slice(-100)))}catch(e){}}
 function skey(){return mgrOn?tab+"|"+(curSL?curSL.id:"")+"|m":tab+"|"+(inSL()?curSL.id:"")+"|"+(cur?cur.id:"")}
@@ -1885,8 +1885,8 @@ function openM(){if(!ev.length)return;var h="",ic={song:"👁",play:"▶",list:"
  m.innerHTML='<div class="hd">History — tap to reopen</div>'+(h||'<div class="hd">Nothing yet</div>');m.hidden=false;placeM(m,b);var c=m.querySelector(".cur");if(c)m.scrollTop=Math.max(0,c.offsetTop-60)}
 function closeM(){m.hidden=true}
 m.onclick=async function(e){var x=e.target.closest("button[data-i]");if(!x)return;var i=+x.dataset.i,t=ev[i];closeM();if(!t)return;var r=await restore(t);if(r===1)push(t.t,true)};
-b.addEventListener("contextmenu",function(e){e.preventDefault()});
-b.addEventListener("pointerdown",function(){fired=false;clearTimeout(pt);pt=setTimeout(function(){fired=true;openM()},500)});
+b.addEventListener("contextmenu",function(e){e.preventDefault()});m.addEventListener("contextmenu",function(e){e.preventDefault()});document.addEventListener("selectstart",function(e){if(Date.now()<blockSel||e.target.closest&&e.target.closest("#hmenu"))e.preventDefault()});
+b.addEventListener("pointerdown",function(){fired=false;clearTimeout(pt);pt=setTimeout(function(){fired=true;openM();try{getSelection().removeAllRanges()}catch(x){}blockSel=Date.now()+1200},500)});
 ["pointerleave","pointercancel"].forEach(function(n){b.addEventListener(n,function(){clearTimeout(pt)})});
 b.addEventListener("pointerup",function(e){clearTimeout(pt);if(!fired)back()});
 b.addEventListener("click",function(e){if(e.detail===0)back()});
