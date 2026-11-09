@@ -42,6 +42,3 @@ Ask first, and do not merge until the owner says yes, for risky changes:
 - anything that removes a feature or data.
 
 Never push to `main` directly. Merge through the pull request, using a normal merge commit.
-
-## Open items to raise with Gerry
-- At the start of the next session, remind Gerry about the USB audio interface test (tuner input from a DI box and the looper). He had no results as of 7 Nov 2026. Keep reminding each session until he reports back, then delete this item.
