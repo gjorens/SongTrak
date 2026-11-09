@@ -358,7 +358,7 @@ body.playing #pkp{right:12px;bottom:calc(var(--pbh,84px) + 12px);border-radius:1
 #sets .setg{display:flex;flex-direction:column;gap:6px}#sets .srow{display:flex;align-items:center;flex-wrap:wrap;gap:6px 14px}#sets .srow>b{min-width:calc(72px*var(--ui,1))}
 @media screen and (max-width:1100px){body.editing aside{display:none}body.editing .app{display:block}.edact{position:sticky;bottom:0;z-index:5;background:var(--bg);padding:10px 0 calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}}
 #fbtop:empty{display:none}#fbtop:not(:empty){padding:8px 12px 0}#mgtop{min-height:calc(60px*var(--ui,1))}body.managing{--mgbar:calc(60px*var(--ui,1) + 12px)}
-#fbslot:empty{display:none}#fbslot:not(:empty){display:flex;justify-content:flex-end;margin-bottom:var(--g,12px)}
+#fbslot{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:var(--g,12px)}body.managing #fbslot,body.playing #fbslot{display:none}
 body #fbanner.fbanner[hidden]{display:none}
 body #fbanner.fbanner{position:static;margin-left:auto;width:fit-content;max-width:100%;padding:6px 8px 6px 16px;gap:14px;border:2px solid #c77700;border-radius:14px;font-size:calc(17px*var(--ui,1));box-shadow:0 3px 12px rgba(199,119,0,.3)}
 body #fbanner.fbanner #fbtxt{display:flex;flex-direction:column;flex:0 1 auto}
@@ -374,7 +374,7 @@ body.playing #fbanner.fbanner{display:none}
 </style><script>try{var u_=localStorage.getItem("songtrak-ui");if(/^(1\.25|1\.5|1\.75)$/.test(u_))document.documentElement.style.setProperty("--ui",u_)}catch(e){}</script></head>
 <body><div class="fbanner" id="fbanner" role="status" hidden><span id="fbtxt"></span><button class="btn main" id="fbsave" type="button">Back up now</button></div><div id="fbtop"></div><div class="app">
 <aside><div id="lsplit" role="separator" aria-orientation="vertical" aria-label="Drag to change the width of the left panel. Double tap to reset." title="Drag to resize. Double tap to reset."></div>
- <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v3.79 · 9 Nov e1</small></h1>
+ <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v3.80 · 9 Nov e1</small></h1>
  <div class="tabs gears"><button id="hnav" class="gear" aria-label="History: tap to go back one step, press and hold for the list" title="History: tap = back, hold = list">‹</button><button id="fsbtn" class="gear" aria-label="Full screen" title="Full screen" hidden>⛶</button><button id="helpbtn" class="gear" aria-label="Getting started" title="Getting started">?</button><button id="setbtn" class="gear" aria-label="Settings" title="Settings">⚙</button></div>
  <div class="tabs"><button id="tS" class="on" aria-haspopup="menu" aria-expanded="false">Songs ▾</button><button id="tL">Setlists</button></div>
  <input type="search" id="q" placeholder="Search songs" aria-label="Search songs">
@@ -391,7 +391,7 @@ body.playing #fbanner.fbanner{display:none}
  <div class="status" id="sync">Saved on this device</div>
 </aside>
 <main>
- <div id="fbslot"></div>
+ <div id="fbslot"><button class="btn main view-only" id="play">Play</button><button class="btn view-only" id="share" aria-haspopup="menu" aria-expanded="false">Share</button><button class="btn view-only" id="edit">Edit</button></div>
  <div id="mgtop"><button id="mgdone" type="button" aria-label="Exit Manage setlists and return to the song list">‹ Done</button><span>Manage setlists</span></div>
  <div id="mgr">
   <section class="mg-col mg-lists"><h3>Setlists</h3><div class="mg-scroll" id="mgL"></div><div class="row"><button class="btn" id="mgnew">New</button><button class="btn" id="mgcopy">Copy</button><button class="btn" id="mgshare" aria-haspopup="menu">Share ▾</button><button class="btn" id="mgren">Rename</button><button class="btn" id="mgdel">Delete</button></div></section>
@@ -399,7 +399,6 @@ body.playing #fbanner.fbanner{display:none}
   <section class="mg-col"><h3>Not in this setlist</h3><input type="search" id="mgq" placeholder="Search songs" aria-label="Search songs not in this setlist"><div class="frow"><select id="mgs" aria-label="Filter by style"></select><select id="mgm" aria-label="Filter by mood"></select><select id="mgk" aria-label="Filter by keyword"></select><button class="btn" id="mgclr" hidden title="Clear filters" aria-label="Clear filters">✕</button></div><div class="mgw"><div class="mg-scroll" id="mgOut" data-drop="out"></div><div id="mgrail" aria-label="Jump to letter"></div></div></section>
  </div>
  <div class="bar view-only">
-  <button class="btn main" id="play">Play</button>
   <span class="pill" title="Transpose"><button id="dn" aria-label="Transpose down">−</button><b id="tr">Key</b><button id="up" aria-label="Transpose up">+</button></span>
   
   <span class="pill" title="History" hidden><button id="hb" aria-label="Back">‹</button><button id="hf" aria-label="Forward">›</button></span>
@@ -409,8 +408,6 @@ body.playing #fbanner.fbanner{display:none}
     <span class="grow"></span>
   <button class="btn" id="tune" type="button">🎸 Tune</button>
   <button class="btn" id="listen" aria-haspopup="menu">♫ Listen &amp; find ▾</button>
-  <button class="btn" id="share" aria-haspopup="menu" aria-expanded="false">Share</button>
-  <button class="btn" id="edit">Edit</button>
  </div>
  <div class="vd view-only" id="vd" hidden role="status"><span>Key or capo changed for this song.</span><button class="btn main" id="vsv" type="button">Save</button><button class="btn" id="vdc" type="button">Discard</button></div>
  <div class="chart" id="chart"></div>
