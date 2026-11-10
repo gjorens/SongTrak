@@ -9,3 +9,5 @@ Differences from the Claude-hosted version:
 - Cloud database sync and "Write with AI" are not available.
 - Save as text downloads a file; use Share > Include all song data and the library file buttons (in cloud sync settings) to move songs between devices.
 - To publish an update, replace the files; users get the new version on their next online visit (change "songtrak-v2" in sw.js to force it).
+
+Licence: Copyright (c) 2026 Gerry Jorens. All rights reserved. See the LICENSE file.
