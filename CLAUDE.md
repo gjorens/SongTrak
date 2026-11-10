@@ -48,3 +48,5 @@ Never push to `main` directly. Merge through the pull request, using a normal me
 - Play drawers have no Close buttons (hidden by CSS in Play mode); a tab closes its own drawer. `.phead` (title, artist/key line, style/mood) is `position:sticky` at the top of the chart in Play mode.
 - The key/capo "changed, Save or Discard" note `#vd` moves into the Key drawer (`#pkfb`) while Playing (`window.__placeVd`), and the Key tab shows a yellow dot (`.alert`) while it is showing. The "Not backed up yet" bar `#fbanner` stays hidden in Play.
 - v3.97: Mute buttons (Mixer and Loops panel) are speaker icons (`spk()`), red with a line through when muted. Output side options read BOTH SIDES, LEFT, RIGHT. `#dhint` is hidden (`hintText` returns ""), `#dedit` is always open, and drawer width is `--dw` (up to 760px; Key drawer up to 460px).
+
+- v3.98: Help has a "Sample connection to iPad" section (inline SVG, classes prefixed `sc-`) before Mixer and Pedalboard.
