@@ -36,7 +36,9 @@ Use Playwright with a local server (`python3 -m http.server`). Cover: library lo
 ## Release flow
 Work on a branch and open a pull request. The owner (Gerry) said on 29 Oct 2026 that Claude may merge routine pull requests itself, because the app is not in beta yet. Mention in the reply which pull requests were merged and the version that is now live.
 
-Ask first, and do not merge until the owner says yes, for risky changes:
+Update 10 Nov 2026: Gerry said Claude may merge ALL pull requests itself from now on, including the risky kinds below, until he says otherwise. Still say plainly in the reply what a risky change touches (storage keys, file format, sw.js caching, removed features) and which pull request was merged. If he withdraws this, go back to asking first.
+
+Previously: ask first, and do not merge until the owner says yes, for risky changes:
 - anything that changes the library file format, the storage keys, or how data is saved, loaded, imported or deleted (risk of losing songs or loops);
 - changes to `sw.js` caching logic (risk of the iPad app getting stuck on an old copy);
 - anything that removes a feature or data.
