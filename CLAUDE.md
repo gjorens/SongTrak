@@ -50,3 +50,4 @@ Never push to `main` directly. Merge through the pull request, using a normal me
 - v3.97: Mute buttons (Mixer and Loops panel) are speaker icons (`spk()`), red with a line through when muted. Output side options read BOTH SIDES, LEFT, RIGHT. `#dhint` is hidden (`hintText` returns ""), `#dedit` is always open, and drawer width is `--dw` (up to 760px; Key drawer up to 460px).
 
 - v3.98: Help has a "Sample connection to iPad" section (inline SVG, classes prefixed `sc-`) before Mixer and Pedalboard.
+- v3.100: `--dw` never exceeds the screen: `min(760px, 100vw - rail - 6px, max(440px, ...))`, so drawers fit an iPhone.
