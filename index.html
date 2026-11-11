@@ -378,7 +378,7 @@ body.playing #fbanner.fbanner{display:none}
 #dpanel .dk b{font-weight:700;margin-left:6px}#dpanel .edl{flex:0 0 calc(112px*var(--ui,1))}
 
 /* v3.91 drawers, tabs, mixer and pedalboard */
-:root{--rail:calc(46px*var(--ui,1));--dtop:calc(env(safe-area-inset-top,0px) + var(--st,0px) + 78px);--dw:min(760px,max(440px,calc(100vw - var(--rail) - 200px)))}
+:root{--rail:calc(46px*var(--ui,1));--dtop:calc(env(safe-area-inset-top,0px) + var(--st,0px) + 78px);--dw:min(760px,calc(100vw - var(--rail) - 6px),max(440px,calc(100vw - var(--rail) - 200px)))}
 #dtabs,#mixp,#fxp{display:none}
 body.playing #dtabs{display:flex;position:fixed;right:0;top:var(--dtop);bottom:var(--pbh,84px);width:var(--rail);flex-direction:column;gap:6px;z-index:10}
 #dtabs button{flex:1 1 0;min-height:calc(50px*var(--ui,1));max-height:calc(120px*var(--ui,1));writing-mode:vertical-rl;transform:rotate(180deg);border:0;border-radius:0 12px 12px 0;background:var(--c);color:#fff;font-weight:800;font-size:calc(15px*var(--ui,1));letter-spacing:.08em;padding:0;opacity:.8;text-shadow:0 1px 2px rgba(0,0,0,.35)}
@@ -422,7 +422,7 @@ body.playing #pkp .vd button{background:#2b1d00;border-color:#2b1d00;color:#fff;
 </style><script>try{var u_=localStorage.getItem("songtrak-ui");if(/^(1\.25|1\.5|1\.75)$/.test(u_))document.documentElement.style.setProperty("--ui",u_)}catch(e){}</script></head>
 <body><div class="fbanner" id="fbanner" role="status" hidden><span id="fbtxt"></span><button class="btn main" id="fbsave" type="button">Back up now</button></div><div id="fbtop"></div><div class="app">
 <aside><div id="lsplit" role="separator" aria-orientation="vertical" aria-label="Drag to change the width of the left panel. Double tap to reset." title="Drag to resize. Double tap to reset."></div>
- <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v3.99 · 10 Nov e1</small></h1>
+ <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v3.101 · 10 Nov e1</small></h1>
  <div class="tabs gears"><button id="hnav" class="gear" aria-label="History: tap to go back one step, press and hold for the list" title="History: tap = back, hold = list">‹</button><button id="fsbtn" class="gear" aria-label="Full screen" title="Full screen" hidden>⛶</button><button id="helpbtn" class="gear" aria-label="Getting started" title="Getting started">?</button><button id="setbtn" class="gear" aria-label="Settings" title="Settings">⚙</button></div>
  <div class="tabs"><button id="tS" class="on" aria-haspopup="menu" aria-expanded="false">Songs ▾</button><button id="tL">Setlists</button></div>
  <input type="search" id="q" placeholder="Search songs" aria-label="Search songs">
