@@ -70,3 +70,4 @@ Never push to `main` directly. Merge through the pull request, using a normal me
 - v3.113: the input channel choice array is `CHS` (it was also named `CHN` from v3.101, which overwrote the Guitar/Voice/Bass/Pass-through names and showed "d"); `CHN` is only the four track names.
 - v3.115: Help (Mixer and Pedalboard, More info) explains how the four chains, My chains and the per-song tick box fit together.
 - v3.116: Pedals drawer has "Paste a chain…" (`fxPaste`) and "Copy request for Claude" (`fxReq`, text built from `FXC` by `fxReqText`). Paste format: one line `SONGTRAK-CHAIN {"name":"..","c":[{"t":"fz","on":1,"p":{..}}]}`, cleaned by `cleanChain` and added to My chains (`fx.p`). New starter chains in `FXP0`: Hendrix-style fuzz, Blues crunch, Gilmour-style lead, Surf twang. No new storage keys or file format change.
+- v3.117: Copy request for Claude first asks for the artist, song or sound in a pop-up box (`fxReq`), then copies the request with it filled in.
