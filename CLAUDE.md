@@ -53,3 +53,4 @@ Never push to `main` directly. Merge through the pull request, using a normal me
 - v3.101: input streams ask for 2 channels (`channelCount:{ideal:2}`); `wireIn` picks the channel from `songtrak-inch`, falling back to channel 1 with a message if the device gives only one.
 - v3.100: `--dw` never exceeds the screen: `min(760px, 100vw - rail - 6px, max(440px, ...))`, so drawers fit an iPhone.
 - v3.102: the Settings, Help, Tuner, Mixer, Pedalboard, Loops and Backup close buttons share the red "✕ Exit" style of `#pexit` (one CSS rule after it).
+- v3.103: Exit buttons are `white-space:nowrap` and slimmer under 520px wide, so "✕ Exit" stays on one line on an iPhone.
