@@ -60,3 +60,4 @@ Never push to `main` directly. Merge through the pull request, using a normal me
 - v3.105: Select mode shows a red "✕ Exit select" button (`#seldone`, same look as Exit) and an explanation line `#selhint` while everything else is switched off.
 - v3.106: under 520px wide the Play bar is two rows (nav, A−/A+, Speed; then drums Start and Start scroll; `.pright`/`.pgrp` use `display:contents` and `order`), and the Play tabs are narrower (`--rail` 32px).
 - v3.107: the Backup and restore status line `#cst` is a highlighted box (accent border and tint, bold) with a short flash, and scrolls into view when its text changes.
+- v3.108: "Copy songs as text" explains how the clipboard reaches another device (note or message to yourself; Universal Clipboard) on the button, in the status message and in Help.
