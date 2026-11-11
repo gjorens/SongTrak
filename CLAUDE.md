@@ -76,3 +76,4 @@ Never push to `main` directly. Merge through the pull request, using a normal me
 - v3.120: `#fxname` is styled (dark field, light text, 16px so iOS does not zoom); Save to My chains and My chains… share one row under it; the bottom row is Copy request for Claude, then Paste a chain….
 - v3.121: My chains… starts with a sort line (A to Z / newest first, key `songtrak-chsort`); newest first lists your saved chains (by the time in their id) before the starters. No file format change.
 - v3.122: `chooseDlg` option `{exit:true}` (class `hasx` on `#chs`) shows the cancel button as the red top-right "✕ Exit"; used by My chains and its action list.
+- v3.123: choosing a web search or Listen link also copies "title artist" to the clipboard first (and shows it under the Find button), because on iPhone Ultimate Guitar redirects to the App Store and the search is lost. No storage or file format change.
