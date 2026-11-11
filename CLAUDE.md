@@ -57,3 +57,4 @@ Never push to `main` directly. Merge through the pull request, using a normal me
 - v3.102: the Settings, Help, Tuner, Mixer, Pedalboard, Loops and Backup close buttons share the red "✕ Exit" style of `#pexit` (one CSS rule after it).
 - v3.103: Exit buttons are `white-space:nowrap` and slimmer under 520px wide, so "✕ Exit" stays on one line on an iPhone.
 - v3.104: channel choice defaults to `d` (Default): the stream is requested exactly as before, with no `channelCount`. Only `1`, `2` or `m` ask for 2 channels (iPhone recording failed with the 2-channel request).
+- v3.105: Select mode shows a red "✕ Exit select" button (`#seldone`, same look as Exit) and an explanation line `#selhint` while everything else is switched off.
