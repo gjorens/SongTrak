@@ -16,11 +16,11 @@ Agreed with Gerry on 11 Nov 2026 (v3.124). Give this file to any new Claude conv
 | 8 | Spacing from controls to a window or panel edge | 12 px everywhere. | `--pad: 12px` |
 | 9 | Exit buttons | Red fill, white "✕ Exit" text, top right, same height and radius as other buttons. This is the one deliberate exception to standard 3. | `#pexit` and the shared close-button rule |
 | 10 | Hidden elements | `[hidden]` must always win over a button's `display` rule. | `button[hidden],.pill[hidden],select[hidden],input[hidden],.btn[hidden]{display:none!important}` |
-| 11 | Main page buttons | Add song = plus. Import = arrow into a box (tray). Play = right-pointing triangle, placed between previous and next (like a video recorder: skip-back, play, skip-forward; the skip buttons show only when a setlist is open). Share = box with an arrow going up. Edit = slanted pencil. Back = left arrow. Listen and find = the word Find with the list-music icon. Tune stays as it is (guitar emoji, agreed). There is one Play button only (the floating one was removed). | markup in `index.html` |
+| 11 | Main page buttons | Add song = plus. Import = arrow into a box (tray). Play = right-pointing triangle, placed between previous and next (like a video recorder: arrow-left-from-line, play, arrow-right-from-line; the skip buttons show only when a setlist is open). Share = box with an arrow going up. Edit = slanted pencil. Back = left arrow. Listen and find = the word Find with the list-music icon. Tune stays as it is (guitar emoji, agreed). There is one Play button only (the floating one was removed). | markup in `index.html` |
 
 ## Icons in use (all Lucide, ISC licence)
 
-plus, minus, import, share, pencil, play, skip-back, skip-forward, arrow-left, arrow-up, arrow-down, maximize, circle-question-mark (help), settings, list-music, chevron-down, locate, x.
+plus, minus, import, share, pencil, play, arrow-left-from-line, arrow-right-from-line, arrow-left, arrow-up, arrow-down, maximize, circle-question-mark (help), settings, list-music, chevron-down, chevrons-right-left, x.
 
 To add an icon: copy its `<path>` elements from the Lucide `icons/NAME.svg` file into a new `<symbol id="i-NAME" viewBox="0 0 24 24">` in the sprite. Lucide names change over time, so check the file exists. Credit: the ISC licence notice for Lucide is kept in `README.txt`.
 
