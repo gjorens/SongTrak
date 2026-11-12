@@ -9,8 +9,10 @@ SongTrak is a single-file web app for guitarists: chord charts and lyrics, setli
 - `songtrak-test-library.json`: test data (276 songs, 66 setlists) used by the Load test songs button. Original test songs only.
 - `README.txt`: how to host it.
 - `check.sh`, `.github/workflows/check.yml`: release check (see Conventions).
+- `DESIGN-STANDARDS.md`: the table of design standards, to hand to any new Claude conversation.
 
 ## Conventions
+- Design standards: read `DESIGN-STANDARDS.md` before changing any screen. One icon family (Lucide, inline sprite, `ic("name")`), one button height (44px), one button colour, one text box colour, one radius (10px), one outline, gap 8px, edge padding 12px, all as CSS variables in the `v3.124 design standards` block at the end of the `<style>`. New buttons and screens must use them. A hidden button needs `[hidden]` to win over `display` (rule in that block).
 - Show the version beside the app name (`<small id="ver">` in the header, form `v1.4 · 24 Oct e1`). Bump it and the `sw.js` cache name on every change, so the user can tell which copy their iPad is running.
 - Help guide: every feature change also updates the matching Help section (`<h4>` blocks in `index.html`), including its collapsed "More info…" part. Check this before opening the pull request.
 - Run `./check.sh` before every commit (a local git pre-commit hook and a GitHub Action on pull requests run it too). It fails if `sw.js` is empty or damaged (this happened twice, v3.100 and v3.102), if the cache name was not bumped when `index.html` changed, if the version string is missing, or if the script does not parse. After writing `sw.js`, check it is not empty. A fresh clone needs the hook: `printf '#!/bin/sh\nexec "$(git rev-parse --show-toplevel)/check.sh"\n' > .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit`.
@@ -77,3 +79,4 @@ Never push to `main` directly. Merge through the pull request, using a normal me
 - v3.121: My chains… starts with a sort line (A to Z / newest first, key `songtrak-chsort`); newest first lists your saved chains (by the time in their id) before the starters. No file format change.
 - v3.122: `chooseDlg` option `{exit:true}` (class `hasx` on `#chs`) shows the cancel button as the red top-right "✕ Exit"; used by My chains and its action list.
 - v3.123: choosing a web search or Listen link also copies "title artist" to the clipboard first (and shows it under the Find button), because on iPhone Ultimate Guitar redirects to the App Store and the search is lost. No storage or file format change.
+- v3.124: main page icons and design standards (see `DESIGN-STANDARDS.md`). Play is now a button between skip-back and skip-forward (`.vcr` group; `#slnav` is an empty hidden marker that JS toggles and CSS uses to show or hide `#pv`/`#nx`); the floating Play button `#fab` was removed; Add song and Import are icon-only (`#new`, `#imp`); Share and Edit are icon-only; Listen and find is `Find`. No storage or file format change.

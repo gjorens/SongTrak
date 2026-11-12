@@ -451,14 +451,49 @@ body.playing #pkp .vd button{background:#2b1d00;border-color:#2b1d00;color:#fff;
 #mixb button.spk,#lpp button.spk{display:inline-flex;align-items:center;justify-content:center;min-width:calc(56px*var(--ui,1));height:calc(44px*var(--ui,1));padding:0 10px;border-radius:10px}
 .spk.on{background:#d93a3a!important;border-color:#d93a3a!important;color:#fff!important}
 .spk:not(.on):not(:disabled){color:var(--ink)}
+/* v3.124 design standards: see DESIGN-STANDARDS.md. One place for radius, height, colours, outline and spacing. */
+:root{--r:10px;--gap:8px;--pad:12px;--ch:calc(44px*var(--ui,1));--ctl-bg:#f1f3fa;--ctl-line:#a9b1cd;--fld-bg:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ctl-bg:#202849;--ctl-line:#090c1b;--fld-bg:#0d1121}}
+:root[data-theme="dark"]{--ctl-bg:#202849;--ctl-line:#090c1b;--fld-bg:#0d1121}
+.ic{width:1.3em;height:1.3em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none;vertical-align:-.28em;pointer-events:none}
+.btn,.gear,.tabs button,#pbar button{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:var(--ch);padding:0 var(--pad);background:var(--ctl-bg);border:1px solid var(--ctl-line);border-radius:var(--r);color:var(--ink);font-size:calc(16px*var(--ui,1));line-height:1.2;box-shadow:none}
+.btn.ico,.gear{min-width:var(--ch);padding:0}
+.btn.main,#pbar button.go{background:var(--ctl-bg);border-color:var(--ctl-line);color:var(--chord);font-weight:700}
+.tabs button.on{background:var(--ctl-bg);box-shadow:inset 0 0 0 2px var(--chord);font-weight:700}
+.tools .btn,aside>.btn,#fbslot .btn{flex:0 0 auto}aside>.btn{align-self:flex-start}
+select,input[type=text],input[type=search],input[type=number],input:not([type]),textarea{background:var(--fld-bg);border:1px solid var(--ctl-line);border-radius:var(--r);color:var(--ink)}
+select,input[type=text],input[type=search],input[type=number],input:not([type]){min-height:var(--ch);padding:0 var(--pad)}
+textarea{padding:var(--pad)}
+.tools select,.bar select,.frow select{min-height:var(--ch);padding:0 8px;background:var(--fld-bg);border:1px solid var(--ctl-line);border-radius:var(--r)}.frow select{font-size:calc(13px*var(--ui,1));padding:0 6px}
+.sortgrp select{border-radius:0 var(--r) var(--r) 0}
+.sdir button{background:var(--ctl-bg);border:1px solid var(--ctl-line);color:var(--ink);font-size:0}.sdir button:first-child{border-radius:var(--r) 0 0 0}.sdir button:last-child{border-radius:0 0 0 var(--r)}.sdir .ic{width:15px;height:15px}.sdir button.on{background:var(--ctl-bg);color:var(--chord);box-shadow:inset 0 0 0 1px var(--chord)}
+.pill{display:inline-flex;align-items:center;gap:0;height:var(--ch);padding:0;background:var(--ctl-bg);border:1px solid var(--ctl-line);border-radius:var(--r);overflow:hidden;box-shadow:none}
+.pill button{display:inline-flex;align-items:center;justify-content:center;width:auto;min-width:var(--ch);height:100%;padding:0 4px;border:0;border-radius:0;background:transparent;color:var(--ink)}
+.pill>b,.pill>span:not(.ic){padding:0 var(--pad)}
+.vcr button+button{border-left:1px solid var(--ctl-line)}#slnav[hidden]~.vcr #pv,#slnav[hidden]~.vcr #nx{display:none}
+#play{color:var(--chordc);font-size:inherit;padding:0 4px}#play .ic{fill:currentColor}#new{color:var(--chord)}
+#fbslot{gap:var(--gap);margin-bottom:var(--pad)}
+aside{padding:var(--pad);gap:var(--gap);border-radius:var(--r)}
+main{padding:var(--pad)}
+.bar{gap:var(--gap);padding:var(--pad);margin-bottom:var(--pad);border-radius:var(--r)}
+.tools,.tabs,.frow,.krow,.row{gap:var(--gap)}
+.chart,.mg-col,.slbox,.vd,.fbanner,#smenu,#shmenu{border-radius:var(--r)}
+.song,.list.sets .sl{border-radius:var(--r)}
+.ov .box,#dlg .box{padding:var(--pad);gap:var(--gap);border-radius:var(--r)}
+#chs.hasx #chx,#setclose,#helpclose,#tnclose,#mixx,#fxx,#lpx,#cclose,#tpclose,#pexit{height:var(--ch);border-radius:var(--r)}
+button[hidden],.pill[hidden],select[hidden],input[hidden],.btn[hidden]{display:none!important}
+#fbslot #play{background:transparent;border:0;box-shadow:none;border-radius:0;width:auto;height:100%;padding:0 4px;color:var(--chordc)}
+#sortrow #locate{flex:0 0 auto}
+aside .tools .btn,.btn.ico{flex:0 0 auto}
+.frow select{padding:0 4px;font-size:calc(12px*var(--ui,1))}
 </style><script>try{var u_=localStorage.getItem("songtrak-ui");if(/^(1\.25|1\.5|1\.75)$/.test(u_))document.documentElement.style.setProperty("--ui",u_)}catch(e){}</script></head>
-<body><div class="fbanner" id="fbanner" role="status" hidden><span id="fbtxt"></span><button class="btn main" id="fbsave" type="button">Back up now</button></div><div id="fbtop"></div><div class="app">
+<body><svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14" /> <path d="M12 5v14" /></symbol><symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14" /></symbol><symbol id="i-import" viewBox="0 0 24 24"><path d="M12 3v12" /> <path d="m8 11 4 4 4-4" /> <path d="M8 5H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-4" /></symbol><symbol id="i-share" viewBox="0 0 24 24"><path d="M12 2v13" /> <path d="m16 6-4-4-4 4" /> <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" /></symbol><symbol id="i-pencil" viewBox="0 0 24 24"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /> <path d="m15 5 4 4" /></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z" /></symbol><symbol id="i-skip-back" viewBox="0 0 24 24"><path d="M17.971 4.285A2 2 0 0 1 21 6v12a2 2 0 0 1-3.029 1.715l-9.997-5.998a2 2 0 0 1-.003-3.432z" /> <path d="M3 20V4" /></symbol><symbol id="i-skip-forward" viewBox="0 0 24 24"><path d="M21 4v16" /> <path d="M6.029 4.285A2 2 0 0 0 3 6v12a2 2 0 0 0 3.029 1.715l9.997-5.998a2 2 0 0 0 .003-3.432z" /></symbol><symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7" /> <path d="M19 12H5" /></symbol><symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7" /> <path d="M12 19V5" /></symbol><symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 5v14" /> <path d="m19 12-7 7-7-7" /></symbol><symbol id="i-maximize" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3" /> <path d="M21 8V5a2 2 0 0 0-2-2h-3" /> <path d="M3 16v3a2 2 0 0 0 2 2h3" /> <path d="M16 21h3a2 2 0 0 0 2-2v-3" /></symbol><symbol id="i-circle-question-mark" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M9 9.5a3 2.5 0 016 0c0 2-2 2-3 3.5" /> <path d="M12 17h.01" /></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" /> <circle cx="12" cy="12" r="3" /></symbol><symbol id="i-list-music" viewBox="0 0 24 24"><path d="M16 5H3" /> <path d="M11 12H3" /> <path d="M11 19H3" /> <path d="M21 16V5" /> <circle cx="18" cy="16" r="3" /></symbol><symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" /></symbol><symbol id="i-locate" viewBox="0 0 24 24"><line x1="2" x2="5" y1="12" y2="12" /> <line x1="19" x2="22" y1="12" y2="12" /> <line x1="12" x2="12" y1="2" y2="5" /> <line x1="12" x2="12" y1="19" y2="22" /> <circle cx="12" cy="12" r="7" /></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18" /> <path d="m6 6 12 12" /></symbol></defs></svg><div class="fbanner" id="fbanner" role="status" hidden><span id="fbtxt"></span><button class="btn main" id="fbsave" type="button">Back up now</button></div><div id="fbtop"></div><div class="app">
 <aside><div id="lsplit" role="separator" aria-orientation="vertical" aria-label="Drag to change the width of the left panel. Double tap to reset." title="Drag to resize. Double tap to reset."></div>
- <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v3.123 · 11 Nov e1</small></h1>
- <div class="tabs gears"><button id="hnav" class="gear" aria-label="History: tap to go back one step, press and hold for the list" title="History: tap = back, hold = list">‹</button><button id="fsbtn" class="gear" aria-label="Full screen" title="Full screen" hidden>⛶</button><button id="helpbtn" class="gear" aria-label="Getting started" title="Getting started">?</button><button id="setbtn" class="gear" aria-label="Settings" title="Settings">⚙</button></div>
- <div class="tabs"><button id="tS" class="on" aria-haspopup="menu" aria-expanded="false">Songs ▾</button><button id="tL">Setlists</button></div>
+ <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v3.124 · 11 Nov e1</small></h1>
+ <div class="tabs gears"><button id="hnav" class="gear" aria-label="History: tap to go back one step, press and hold for the list" title="History: tap = back, hold = list"><svg class="ic" aria-hidden="true"><use href="#i-arrow-left"/></svg></button><button id="fsbtn" class="gear" aria-label="Full screen" title="Full screen" hidden><svg class="ic" aria-hidden="true"><use href="#i-maximize"/></svg></button><button id="helpbtn" class="gear" aria-label="Getting started" title="Getting started"><svg class="ic" aria-hidden="true"><use href="#i-circle-question-mark"/></svg></button><button id="setbtn" class="gear" aria-label="Settings" title="Settings"><svg class="ic" aria-hidden="true"><use href="#i-settings"/></svg></button></div>
+ <div class="tabs"><button id="tS" class="on" aria-haspopup="menu" aria-expanded="false">Songs <svg class="ic" aria-hidden="true"><use href="#i-chevron-down"/></svg></button><button id="tL">Setlists</button></div>
  <input type="search" id="q" placeholder="Search songs" aria-label="Search songs">
- <div class="tools" id="sortrow"><span class="sortgrp"><span class="sdir"><button type="button" id="sup" class="on" aria-label="Sort ascending" aria-pressed="true" title="Ascending: A to Z, oldest first">▲</button><button type="button" id="sdn" aria-label="Sort descending" aria-pressed="false" title="Descending: Z to A, newest first">▼</button></span><select id="sort" aria-label="Sort songs"><option value="title">Title</option><option value="artist">Artist</option><option value="added">Date added</option><option value="set" hidden disabled>Set order</option></select></span><button class="btn" id="locate" title="Scroll to the song you are viewing" aria-label="Scroll to current song">◎ Current</button></div>
+ <div class="tools" id="sortrow"><span class="sortgrp"><span class="sdir"><button type="button" id="sup" class="on" aria-label="Sort ascending" aria-pressed="true" title="Ascending: A to Z, oldest first"><svg class="ic" aria-hidden="true"><use href="#i-arrow-up"/></svg></button><button type="button" id="sdn" aria-label="Sort descending" aria-pressed="false" title="Descending: Z to A, newest first"><svg class="ic" aria-hidden="true"><use href="#i-arrow-down"/></svg></button></span><select id="sort" aria-label="Sort songs"><option value="title">Title</option><option value="artist">Artist</option><option value="added">Date added</option><option value="set" hidden disabled>Set order</option></select></span><button class="btn" id="locate" title="Scroll to the song you are viewing" aria-label="Scroll to current song"><svg class="ic" aria-hidden="true"><use href="#i-locate"/></svg> Current</button></div>
  <div class="frow" id="frow"><select id="fst" aria-label="Filter by style"></select><select id="fmd" aria-label="Filter by mood"></select><select id="fkw" aria-label="Filter by keyword"></select></div>
  <div id="fcue" hidden><span id="fcuet"></span><button class="btn" id="fcuex" type="button">Clear</button></div>
  <div class="tools" id="selrow"><button class="btn" id="selbtn" type="button">Select</button><button class="btn" id="seldone" type="button" hidden>✕ Exit select</button></div>
@@ -467,12 +502,12 @@ body.playing #pkp .vd button{background:#2b1d00;border-color:#2b1d00;color:#fff;
  <div class="tools" id="slrow" hidden><select id="slsel" aria-label="Setlist"></select><button class="btn" id="slnew">New</button><button class="btn" id="slmgr" type="button">Manage</button><button class="btn" id="slren">Rename</button><button class="btn" id="sldel">Delete</button></div>
  <div id="selbar" hidden><span id="selcnt"></span><button class="btn" id="selall" type="button">All shown</button><button class="btn" id="selnone" type="button">None</button><button class="btn" id="selexp" type="button">Export</button><button class="btn" id="seldel" type="button">Delete</button></div>
  <div class="lwrap"><div class="list" id="list"></div><div id="rail" aria-label="Jump to letter"></div></div>
- <div class="tools"><button class="btn main" id="new">Add song</button><button class="btn" id="imp">Import</button><input type="file" id="dir" webkitdirectory multiple hidden><input type="file" id="file" multiple accept=".pro,.cho,.crd,.chopro,.onsong,.txt,.text,.backup,.zip,.onsongarchive" hidden></div>
+ <div class="tools"><button class="btn ico" id="new" aria-label="Add song" title="Add song"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></button><button class="btn ico" id="imp" aria-label="Import" title="Import"><svg class="ic" aria-hidden="true"><use href="#i-import"/></svg></button><input type="file" id="dir" webkitdirectory multiple hidden><input type="file" id="file" multiple accept=".pro,.cho,.crd,.chopro,.onsong,.txt,.text,.backup,.zip,.onsongarchive" hidden></div>
  <button class="btn" id="cloudbtn">Backup and restore</button>
  <div class="status" id="sync">Saved on this device</div>
 </aside>
 <main>
- <div id="fbslot"><button class="btn main view-only" id="play">Play</button><button class="btn view-only" id="share" aria-haspopup="menu" aria-expanded="false">Share</button><button class="btn view-only" id="edit">Edit</button></div>
+ <div id="fbslot"><span id="slnav" hidden></span><span class="pill vcr view-only"><button type="button" id="pv" aria-label="Previous song in setlist" title="Previous song in setlist"><svg class="ic" aria-hidden="true"><use href="#i-skip-back"/></svg></button><button type="button" id="play" aria-label="Play" title="Play"><svg class="ic" aria-hidden="true"><use href="#i-play"/></svg></button><button type="button" id="nx" aria-label="Next song in setlist" title="Next song in setlist"><svg class="ic" aria-hidden="true"><use href="#i-skip-forward"/></svg></button></span><button class="btn ico view-only" id="share" aria-haspopup="menu" aria-expanded="false" aria-label="Share" title="Share"><svg class="ic" aria-hidden="true"><use href="#i-share"/></svg></button><button class="btn ico view-only" id="edit" aria-label="Edit" title="Edit"><svg class="ic" aria-hidden="true"><use href="#i-pencil"/></svg></button></div>
  <div id="mgtop"><button id="mgdone" type="button" aria-label="Exit Manage setlists and return to the song list">‹ Done</button><span>Manage setlists</span></div>
  <div id="mgr">
   <section class="mg-col mg-lists"><h3>Setlists</h3><div class="mg-scroll" id="mgL"></div><div class="row"><button class="btn" id="mgnew">New</button><button class="btn" id="mgcopy">Copy</button><button class="btn" id="mgshare" aria-haspopup="menu">Share ▾</button><button class="btn" id="mgren">Rename</button><button class="btn" id="mgdel">Delete</button></div></section>
@@ -480,15 +515,14 @@ body.playing #pkp .vd button{background:#2b1d00;border-color:#2b1d00;color:#fff;
   <section class="mg-col"><h3>Not in this setlist</h3><input type="search" id="mgq" placeholder="Search songs" aria-label="Search songs not in this setlist"><div class="frow"><select id="mgs" aria-label="Filter by style"></select><select id="mgm" aria-label="Filter by mood"></select><select id="mgk" aria-label="Filter by keyword"></select><button class="btn" id="mgclr" hidden title="Clear filters" aria-label="Clear filters">✕</button></div><div class="mgw"><div class="mg-scroll" id="mgOut" data-drop="out"></div><div id="mgrail" aria-label="Jump to letter"></div></div></section>
  </div>
  <div class="bar view-only">
-  <span class="pill" title="Transpose"><button id="dn" aria-label="Transpose down">−</button><b id="tr">Key</b><button id="up" aria-label="Transpose up">+</button></span>
+  <span class="pill" title="Transpose"><button id="dn" aria-label="Transpose down" title="Transpose down"><svg class="ic" aria-hidden="true"><use href="#i-minus"/></svg></button><b id="tr">Key</b><button id="up" aria-label="Transpose up" title="Transpose up"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></button></span>
   
   <span class="pill" title="History" hidden><button id="hb" aria-label="Back">‹</button><button id="hf" aria-label="Forward">›</button></span>
-  <span class="pill" title="Capo"><button id="cd" aria-label="Capo down">−</button><b id="capo">No capo</b><button id="cu" aria-label="Capo up">+</button></span>
-  <button class="btn" id="addslb" type="button" aria-haspopup="menu" aria-expanded="false">Add to setlist ▾</button><select id="addsl" aria-label="Add to setlist" hidden></select>
-  <span class="pill" id="slnav" hidden><button id="pv" aria-label="Previous song in setlist">⏮</button><button id="nx" aria-label="Next song in setlist">⏭</button></span>
+  <span class="pill" title="Capo"><button id="cd" aria-label="Capo down" title="Capo down"><svg class="ic" aria-hidden="true"><use href="#i-minus"/></svg></button><b id="capo">No capo</b><button id="cu" aria-label="Capo up" title="Capo up"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></button></span>
+  <button class="btn" id="addslb" type="button" aria-haspopup="menu" aria-expanded="false">Add to setlist <svg class="ic" aria-hidden="true"><use href="#i-chevron-down"/></svg></button><select id="addsl" aria-label="Add to setlist" hidden></select>
     <span class="grow"></span>
   <button class="btn" id="tune" type="button">🎸 Tune</button>
-  <button class="btn" id="listen" aria-haspopup="menu">♫ Listen &amp; find ▾</button>
+  <button class="btn" id="listen" aria-haspopup="menu" aria-label="Listen and find" title="Listen and find"><svg class="ic" aria-hidden="true"><use href="#i-list-music"/></svg> Find</button>
  </div>
  <div class="vd view-only" id="vd" hidden role="status"><span>Key or capo changed for this song.</span><button class="btn main" id="vsv" type="button">Save</button><button class="btn" id="vdc" type="button">Discard</button></div>
  <div class="chart" id="chart"></div>
@@ -524,7 +558,6 @@ body.playing #pkp .vd button{background:#2b1d00;border-color:#2b1d00;color:#fff;
   <div class="row edact"><button class="btn main" id="save">Save song</button><button class="btn" id="cancel">Cancel</button><button class="btn" id="del">Delete song</button></div>
  </div>
 </main></div>
-<button id="fab" aria-label="Play this song">▶ Play</button>
 <div id="dpanel" role="region" aria-label="Drum backing track" hidden>
  <div class="dr1"><button id="dgo" class="go" type="button">Start drums</button>
   <label class="dk">Pattern<select id="dpat" aria-label="Drum pattern"></select></label>
@@ -571,9 +604,9 @@ body.playing #pkp .vd button{background:#2b1d00;border-color:#2b1d00;color:#fff;
 </div></div>
 <div id="help" class="ov" role="dialog" aria-modal="true"><div class="box"><div class="tnh"><b>Getting started with SongTrak</b><button class="btn" id="helpclose" type="button">✕ Exit</button></div>
 <div class="hlp">
-<h4>1. View a song</h4><p>Tap a song in the list to see its chords above the lyrics. The Key and capo controls above the song are explained in section 3.</p><details class="hmore"><summary>More info…</summary><div class="hm"><p>The chart shows the section names, the chords above the words and the lyrics. Text size and colours are in Settings (the ⚙ button). To play along with auto-scroll, tap <b>Play</b>.</p></div></details>
+<h4>1. View a song</h4><p>Tap a song in the list to see its chords above the lyrics. The Key and capo controls above the song are explained in section 3. Buttons use pictures to save space: <b>+</b> adds a song, the tray with an arrow imports, the right-pointing triangle plays, the box with an up arrow shares, and the pencil edits. When a setlist is open, the skip buttons either side of Play move to the previous or next song. Press and hold a button, or point at it on a computer, to see its name.</p><details class="hmore"><summary>More info…</summary><div class="hm"><p>The chart shows the section names, the chords above the words and the lyrics. Text size and colours are in Settings (the ⚙ button). To play along with auto-scroll, tap <b>Play</b>.</p></div></details>
 
-<h4>2. Add a song</h4><p>Tap <b>Add song</b>, type or paste a chord sheet, and fill in the title and artist. Chords go in square brackets before the word, like <code>[G]Hello</code>, and section names start with <code>#</code>, like <code># Verse</code>. Set the key as described in section 3, then add Style, Mood and Keywords. Keywords you have used before appear in a drop-down. On a narrower screen, such as the iPad held upright, the editor fills the whole screen while you edit, with Save song and Cancel pinned at the bottom. Under the Sections and Chords buttons, the four arrow buttons move the cursor in the song text (touch and hold to repeat). Hold the Shift key on a keyboard while you tap an arrow, or turn on <b>Select</b>, to select text as the cursor moves.</p><details class="hmore"><summary>More info…</summary><div class="hm"><p>A song is plain text in a ChordPro-style format: a few <code>{key: value}</code> lines at the top (title, artist, key and so on), then the lyrics with chords in square brackets and section names starting with <code>#</code>. If you paste a chart from a chord website, where the chords sit on their own line above the words, or sections are marked like <code>[Verse 1]</code>, SongTrak converts it for you. Those websites usually do not copy the song name and artist, so type them in.</p></div></details>
+<h4>2. Add a song</h4><p>Tap the <b>+</b> button (Add song), type or paste a chord sheet, and fill in the title and artist. Chords go in square brackets before the word, like <code>[G]Hello</code>, and section names start with <code>#</code>, like <code># Verse</code>. Set the key as described in section 3, then add Style, Mood and Keywords. Keywords you have used before appear in a drop-down. On a narrower screen, such as the iPad held upright, the editor fills the whole screen while you edit, with Save song and Cancel pinned at the bottom. Under the Sections and Chords buttons, the four arrow buttons move the cursor in the song text (touch and hold to repeat). Hold the Shift key on a keyboard while you tap an arrow, or turn on <b>Select</b>, to select text as the cursor moves.</p><details class="hmore"><summary>More info…</summary><div class="hm"><p>A song is plain text in a ChordPro-style format: a few <code>{key: value}</code> lines at the top (title, artist, key and so on), then the lyrics with chords in square brackets and section names starting with <code>#</code>. If you paste a chart from a chord website, where the chords sit on their own line above the words, or sections are marked like <code>[Verse 1]</code>, SongTrak converts it for you. Those websites usually do not copy the song name and artist, so type them in.</p></div></details>
 <h4>3. Key, capo and chords</h4>
 <p><b>Finding the key.</b> While adding or editing a song, tap <b>Detect key</b> next to Original Key. SongTrak looks at all the chords in the song and asks which of the 24 possible keys (12 major and 12 minor) fits them best. A key fits when the song uses the chords that belong to it, for example G, Am, Bm, C, D, Em and F♯dim in G major, and when the song starts and ends on that key’s home chord. It shows its best guess and two other possibilities, and says “close call” when it is not sure. A song that changes key partway can fool it, so always check the result.</p>
 <p><b>Changing the key.</b> <b>Original Key</b> is the key of the recording. <b>My Key</b> is the key you want it to sound in. Pick My Key, and the app works out the capo for you, or, if you choose <b>Rewrite the chords</b>, rewrites the chords into My Key with no capo. Above a song you can also use the <b>Key</b> control to transpose (the number of half-tones is shown) and the <b>capo</b> − / + buttons. When you change either, a bar appears so you can <b>Save</b> or <b>Discard</b>. Original Key is never changed by My Key.</p>
@@ -776,7 +809,7 @@ async function initSync(){try{if(!window.claude||!claude.use)return;var db=await
   else if(d&&d.at>at){var j2=await dbRead(d);if(j2!==null&&my==dbSeq&&d.at>at)take(d,j2)}})}catch(e){}}
 var NF=["C","Db","D","Eb","E","F","Gb","G","Ab","A","Bb","B"];
 function tc(ch,n){n=((n%12)+12)%12;if(!n)return ch;var nm=useFlats?NF:N;return ch.replace(/[A-G][#b]?/g,function(m){var i=N.indexOf(FL[m]||m);return i<0?m:nm[(i+n)%12]})}
-function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function ic(n){return'<svg class="ic" aria-hidden="true"><use href="#i-'+n+'"/></svg>'}function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function byId(id){return songs.filter(function(s){return s.id==id})[0]}
 function addedOf(s){if(s.added)return s.added;var m=String(s.id||"").match(/^s(\d{13})/);return m?+m[1]:0}
 function fmtD(ms){try{return new Date(ms).toLocaleDateString(undefined,{year:"numeric",month:"short",day:"numeric"})}catch(e){return""}}
@@ -1460,14 +1493,14 @@ el("dmine").onclick=async function(){if(!pats.length){await ask("You have no sav
 el("dgrid").onclick=function(e){var b=e.target.closest(".dgc");if(!b)return;var r=b.dataset.r,i=+b.dataset.i,S=viewFill?frs[vfi]:rd,v=S[r][i];v=v==0?2:v==2?1:0;S[r][i]=v;b.dataset.v=v;if(viewFill)fedit=true;else{addEdit();el("dpat").value="edit"}toSong()};
 document.addEventListener("visibilitychange",function(){if(!document.hidden&&on&&ctx&&ctx.state!="running")ctx.resume()});
 })();
-$("fab").onclick=function(){$("play").click()};
+
 /* ---- app settings ---- */
 try{$("theme").value=localStorage.getItem("cc-theme")||"auto"}catch(e){}
 $("theme").onchange=function(){var v=this.value;document.documentElement.dataset.theme=v;try{localStorage.setItem("cc-theme",v)}catch(e){}applyCols()};
 (function(){var d=document,de=d.documentElement,rq=de.requestFullscreen||de.webkitRequestFullscreen,ex=d.exitFullscreen||d.webkitExitFullscreen,isFs=function(){return!!(d.fullscreenElement||d.webkitFullscreenElement)},st=window.navigator.standalone||(window.matchMedia&&matchMedia("(display-mode: standalone)").matches);
  if(!rq||st)return;$("fsbtn").hidden=false;
  $("fsbtn").onclick=async function(){try{if(isFs())await ex.call(d);else await rq.call(de)}catch(x){ask("Full screen isn't allowed in this view. For a true full-screen app on iPad, open the app in Safari, tap Share, choose Add to Home Screen, and launch it from the new icon.",{ok:"OK",noCancel:true})}};
- var up=function(){$("fsbtn").textContent=isFs()?"\u2715":"\u26F6";$("fsbtn").title=isFs()?"Exit full screen":"Full screen"};d.addEventListener("fullscreenchange",up);d.addEventListener("webkitfullscreenchange",up)})();
+ var up=function(){$("fsbtn").innerHTML=ic(isFs()?"x":"maximize");$("fsbtn").title=isFs()?"Exit full screen":"Full screen"};d.addEventListener("fullscreenchange",up);d.addEventListener("webkitfullscreenchange",up)})();
 
 /* drum settings in song files: p|bpm|swing|human|countin|sync|rows (rows only for an edited beat, k:...;s:...) */
 function b64e(t){try{return btoa(unescape(encodeURIComponent(t)))}catch(e){return""}}
@@ -1955,7 +1988,7 @@ $("hb").onclick=async function(){if(await leaveOk())go(-1)};$("hf").onclick=asyn
 $("pv").onclick=async function(){if(await leaveOk())step(-1)};$("nx").onclick=async function(){if(await leaveOk())step(1)};
 window.addEventListener("beforeunload",function(e){if(vdirty){e.preventDefault();e.returnValue=""}});
 
-function updTS(){var b=$("tS");b.textContent="Songs \u25be"}
+function updTS(){var b=$("tS");b.innerHTML="Songs "+ic("chevron-down")}
 function closeSM(){$("smenu").hidden=true;$("tS").setAttribute("aria-expanded","false")}
 $("tS").onclick=async function(e){e.stopPropagation();var m=$("smenu");if(!m.hidden){closeSM();return}
  if(tab!="S"||mgrOn){if(!await leaveOk())return;tab="S";slOpen=false;setMgr(false);renderList();return}
@@ -2328,7 +2361,7 @@ window.__nav={ev:function(){return ev},hc:function(){return hc},back:back};
 (function(){var b=$("addslb"),m=$("slmenu");
  function nm(a,c){return String(a.name).localeCompare(String(c.name),undefined,{sensitivity:"base",numeric:true})}
  function has(l){return cur&&l.ids.indexOf(cur.id)>-1}
- function lab(){var n=cur?lists.filter(has).length:0;b.textContent="Add to setlist"+(n?" ("+n+")":"")+" ▾"}
+ function lab(){var n=cur?lists.filter(has).length:0;b.innerHTML="Add to setlist"+(n?" ("+n+")":"")+" "+ic("chevron-down")}
  function build(keep){if(!cur){close();return}var top=m.scrollTop,fl=keep,on=lists.filter(has).sort(nm),off=lists.filter(function(l){return!has(l)}).sort(nm),h='<div class="hd">Setlists for “'+esc(cur.title)+'”</div>';
   function row(l,c){return'<label class="'+(c?"on":"")+'"><input type="checkbox" data-l="'+esc(l.id)+'"'+(c?" checked":"")+"> "+esc(l.name)+"<small>"+l.ids.length+"</small></label>"}
   if(!lists.length)h+='<div class="hd">No setlists yet. Create one in the Setlists view.</div>';

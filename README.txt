@@ -13,3 +13,8 @@ Differences from the Claude-hosted version:
 Licence: Copyright (c) 2026 Gerry Jorens. All rights reserved. See the LICENSE file.
 
 Trying the app with sample songs: open Backup and restore and tap "Add sample songs". It loads songtrak-test-library.json (276 songs and 66 setlists, all original test songs) from the same place as the app. This replaces all songs in the app, so use it on a trial copy. The file is in this repository next to index.html, so it must be uploaded with the app files.
+
+Icons
+-----
+The button icons are from Lucide (https://lucide.dev), used under the ISC licence:
+Copyright (c) 2026 Lucide Icons and Contributors. Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies. The software is provided "as is" without warranty of any kind.
