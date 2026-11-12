@@ -44,3 +44,5 @@ To add an icon: copy its `<path>` elements from the Lucide `icons/NAME.svg` file
 - History button (`#hnav`) uses a custom pocket-watch icon (`pocket-watch`, drawn in Lucide style: circle, crown, ring, hands; not part of Lucide). Sort arrows `#sup`/`#sdn` icons are 26px (x ui scale).
 - Previous/next song buttons (`#pv`/`#nx`) always show beside Play: they step through the open setlist, or the songs listed on screen.
 - An icon catalogue page (all Lucide icons, in-use ones marked) can be rebuilt from the Lucide `icons` folder.
+
+- v3.131: header row is back (chevron-left), history (pocket-watch), forward (chevron-right), then full screen, help, settings: all `.gear`, equal width and height.
