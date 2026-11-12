@@ -85,3 +85,4 @@ Never push to `main` directly. Merge through the pull request, using a normal me
 
 - v3.126: previous/next song icons are `arrow-left-from-line` / `arrow-right-from-line`, the Current button is `chevrons-right-left` (button id stays `#locate`). The Play button sits inside the `.vcr` pill so the three buttons share one outline with dividers. No storage or file format change.
 - v3.126: Play button is 88px wide (twice the others) with dividers on both sides.
+- v3.127: the history button `#hnav` uses touch events for tap and hold on touch screens (iOS cancelled the pointer events during a long press); mouse still uses pointer events. No storage or file format change.
