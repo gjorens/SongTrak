@@ -82,3 +82,6 @@ Never push to `main` directly. Merge through the pull request, using a normal me
 - v3.124: main page icons and design standards (see `DESIGN-STANDARDS.md`). Play is now a button between skip-back and skip-forward (`.vcr` group; `#slnav` is an empty hidden marker that JS toggles and CSS uses to show or hide `#pv`/`#nx`); the floating Play button `#fab` was removed; Add song and Import are icon-only (`#new`, `#imp`); Share and Edit are icon-only; Listen and find is `Find`. No storage or file format change.
 
 - v3.125: Help dialog cannot scroll sideways (`overflow-x:hidden`, `touch-action:pan-y`); `#pv`/`#nx` always show when a song is open and step through the open setlist or else the listed songs (`step()`); `#hnav` icon is the custom `pocket-watch` sprite symbol, its children ignore pointer events (long-press = list); sort arrows larger. No storage or file format change.
+
+- v3.126: previous/next song icons are `arrow-left-from-line` / `arrow-right-from-line`, the Current button is `chevrons-right-left` (button id stays `#locate`). The Play button sits inside the `.vcr` pill so the three buttons share one outline with dividers. No storage or file format change.
+- v3.126: Play button is 88px wide (twice the others) with dividers on both sides.
