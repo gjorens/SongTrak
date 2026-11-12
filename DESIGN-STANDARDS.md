@@ -24,6 +24,8 @@ plus, minus, import, share, pencil, play, arrow-left-from-line, arrow-right-from
 
 To add an icon: copy its `<path>` elements from the Lucide `icons/NAME.svg` file into a new `<symbol id="i-NAME" viewBox="0 0 24 24">` in the sprite. Lucide names change over time, so check the file exists. Credit: the ISC licence notice for Lucide is kept in `README.txt`.
 
+- v3.142: Play bar converted (icons for skip, A-, A+, speed, drums Start/Stop, Loops, Tap in; 44px buttons, `--r`). Key drawer banner is fixed-height and grey until a change.
+
 ## Not yet converted (next passes)
 
 - The song editor and its menus (text glyphs such as ▾, the search emoji).
