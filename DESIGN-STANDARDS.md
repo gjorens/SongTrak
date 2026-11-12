@@ -38,3 +38,9 @@ To add an icon: copy its `<path>` elements from the Lucide `icons/NAME.svg` file
 2. Take colours, radius, gap and padding from the variables; do not write new hard-coded values.
 3. Replace text glyphs and emoji with an `ic()` icon; give icon-only buttons an `aria-label` and a `title`.
 4. Check the screen at iPad width, iPhone width (390 px), and in light and dark mode.
+
+
+## v3.125 additions
+- History button (`#hnav`) uses a custom pocket-watch icon (`pocket-watch`, drawn in Lucide style: circle, crown, ring, hands; not part of Lucide). Sort arrows `#sup`/`#sdn` icons are 26px (x ui scale).
+- Previous/next song buttons (`#pv`/`#nx`) always show beside Play: they step through the open setlist, or the songs listed on screen.
+- An icon catalogue page (all Lucide icons, in-use ones marked) can be rebuilt from the Lucide `icons` folder.
