@@ -327,7 +327,7 @@ body #fbanner.fbanner button{min-height:0;height:calc(36px*var(--ui,1));margin:0
 .tpc{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.tpc .btn{height:calc(46px*var(--ui,1));font-size:calc(17px*var(--ui,1))}#tpgo{background:var(--chord);color:#fff;border-color:transparent;font-weight:800;flex:1 1 auto}#tpgo.on{background:#c62828}.tpl{display:flex;gap:6px;align-items:center;font-size:calc(16px*var(--ui,1))}
 #dtapin{font-weight:700}
 #dgrid{width:max-content;min-width:100%}.dgr>span:first-child{position:sticky;left:0;z-index:2;background:var(--panel);padding-right:6px}
-#dlv{margin:4px 0}#dlvg{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:6px 14px;padding:6px 0}.lvr{display:grid;grid-template-columns:calc(86px*var(--ui,1)) 1fr calc(46px*var(--ui,1));align-items:center;gap:8px;font-size:calc(14px*var(--ui,1))}.lvr input{width:100%;height:calc(30px*var(--ui,1))}.lvr b{text-align:right;font-weight:700}#dlvr{height:calc(40px*var(--ui,1))}
+#dlv{margin:4px 0}#dlvg{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:6px 14px;padding:6px 0}.lvr.hl{background:var(--accent,#2f7df6);background:color-mix(in srgb,var(--accent,#2f7df6) 28%,transparent);outline:2px solid var(--accent,#2f7df6);border-radius:var(--r,10px)}.lvr{display:grid;grid-template-columns:calc(86px*var(--ui,1)) 1fr calc(46px*var(--ui,1));align-items:center;gap:8px;font-size:calc(14px*var(--ui,1))}.lvr input{width:100%;height:calc(30px*var(--ui,1))}.lvr b{text-align:right;font-weight:700}#dlvr{height:calc(40px*var(--ui,1))}
 #selhint{padding:6px 8px;margin:4px 0;border-radius:8px;background:color-mix(in srgb,#c62828 14%,transparent);border:1px solid #c62828;font-size:calc(14px*var(--ui,1));line-height:1.35}#selhint[hidden]{display:none}
 #seldone{height:calc(46px*var(--ui,1));padding:0 16px;font-size:calc(19px*var(--ui,1));font-weight:800;background:#c62828;border:1px solid #8e1a1a;border-radius:10px;color:#fff;white-space:nowrap;flex:1}
 #selbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:4px 0}
@@ -588,7 +588,7 @@ input.rng::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:
 <symbol id="i-pause" viewBox="0 0 24 24"><rect x="14" y="3" width="5" height="18" rx="1" /><rect x="5" y="3" width="5" height="18" rx="1" /></symbol>
 <symbol id="i-play" viewBox="0 0 24 24"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z" /></symbol><symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7" /> <path d="M19 12H5" /></symbol><symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7" /> <path d="M12 19V5" /></symbol><symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 5v14" /> <path d="m19 12-7 7-7-7" /></symbol><symbol id="i-maximize" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3" /> <path d="M21 8V5a2 2 0 0 0-2-2h-3" /> <path d="M3 16v3a2 2 0 0 0 2 2h3" /> <path d="M16 21h3a2 2 0 0 0 2-2v-3" /></symbol><symbol id="i-circle-question-mark" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M9 9.5a3 2.5 0 016 0c0 2-2 2-3 3.5" /> <path d="M12 17h.01" /></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" /> <circle cx="12" cy="12" r="3" /></symbol><symbol id="i-list-music" viewBox="0 0 24 24"><path d="M16 5H3" /> <path d="M11 12H3" /> <path d="M11 19H3" /> <path d="M21 16V5" /> <circle cx="18" cy="16" r="3" /></symbol><symbol id="i-undo-2" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5" /> <path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11" /></symbol><symbol id="i-redo-2" viewBox="0 0 24 24"><path d="m15 14 5-5-5-5" /> <path d="M20 9H9.5A5.5 5.5 0 0 0 4 14.5A5.5 5.5 0 0 0 9.5 20H13" /></symbol><symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" /></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18" /> <path d="m6 6 12 12" /></symbol></defs></svg><div class="fbanner" id="fbanner" role="status" hidden><span id="fbtxt"></span><button class="btn main" id="fbsave" type="button">Back up now</button></div><div id="fbtop"></div><div class="app">
 <aside><div id="lsplit" role="separator" aria-orientation="vertical" aria-label="Drag to change the width of the left panel. Double tap to reset." title="Drag to resize. Double tap to reset."></div>
- <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v3.170 · 13 Nov e1</small></h1>
+ <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v3.171 · 13 Nov e1</small></h1>
  <div class="tabs gears"><button id="hback" class="gear" aria-label="Back one step" title="Back"><svg class="ic" aria-hidden="true"><use href="#i-chevron-left"/></svg></button><button id="hnav" class="gear" aria-label="History list" title="History list"><svg class="ic" aria-hidden="true"><use href="#i-pocket-watch"/></svg></button><button id="hfwd" class="gear" aria-label="Forward one step" title="Forward"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></button><button id="fsbtn" class="gear" aria-label="Full screen" title="Full screen" hidden><svg class="ic" aria-hidden="true"><use href="#i-maximize"/></svg></button><button id="helpbtn" class="gear" aria-label="Getting started" title="Getting started"><svg class="ic" aria-hidden="true"><use href="#i-circle-question-mark"/></svg></button><button id="setbtn" class="gear" aria-label="Settings" title="Settings"><svg class="ic" aria-hidden="true"><use href="#i-settings"/></svg></button></div>
  <div class="tabs"><button id="tS" class="on" aria-haspopup="menu" aria-expanded="false">Songs <svg class="ic" aria-hidden="true"><use href="#i-chevron-down"/></svg></button><button id="tL">Setlists</button></div>
  <input type="search" id="q" placeholder="Search songs" aria-label="Search songs">
@@ -919,6 +919,7 @@ input.rng::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:
 <ul>
 <li>The <b>Output</b> meter under the buttons shows how loud the drums are (green is fine, red at the end means clipping). It falls to nothing when the drums stop. The same meter is on the Mixer's Master output.</li>
 <li><b>Sound levels</b> (above the grid) has a slider for each drum sound. Turn up any you cannot hear (let go of a slider to hear it) and turn down others.</li>
+<li><b>Reset levels</b> checks the levels for you: it plays each sound once (its slider lights up) and notes the Output meter peak, then plays each again while moving its slider to an even level, and copies a report to the clipboard. Stop it any time with the same button. Send the report to Claude to adjust the built-in levels.</li>
 <li><b>Small-speaker kick</b> adds a higher thump so the kick is audible on a phone or iPad speaker.</li>
 <li>Tick <b>Save these levels with this song</b> to give a song its own levels. Otherwise one set of levels is used for every song on this device.</li>
 </ul>
@@ -2170,7 +2171,49 @@ lvBuild();
 el("dlvg").addEventListener("input",function(e){var i=e.target;if(!i.dataset.r)return;LV[i.dataset.r]=+i.value;i.nextElementSibling.textContent=i.value+"%"});
 el("dlvg").addEventListener("change",function(e){var i=e.target;if(!i.dataset.r)return;LV[i.dataset.r]=+i.value;lvSave();if(audio()){if(ctx.state=="suspended")ctx.resume();hit(i.dataset.r,ctx.currentTime+.02,1,false)}});
 el("dks").onchange=function(){KS=this.checked?1:0;lvSave();if(audio()){if(ctx.state=="suspended")ctx.resume();hit("k",ctx.currentTime+.02,1,false)}};
-el("dlvr").onclick=function(){LV={};KS=0;lvSave();lvBuild()};
+/* v3.171 level calibration */
+var CAL={run:0,cancel:0},CALT={k:-10,s:-10,h:-16,o:-16,r:-14,c:-14,a:-14,d:-16,t:-12,u:-12,p:-14,w:-16,y:-20,b:-18},CALG={a:1900,d:1600,o:1400};
+function calSl(r){return el("dlvg").querySelector('input[data-r="'+r+'"]')}
+function calHl(r){var o=el("dlvg").querySelector(".lvr.hl");if(o)o.classList.remove("hl");if(r){var i=calSl(r);if(i){i.parentNode.classList.add("hl");try{i.parentNode.scrollIntoView({block:"nearest"})}catch(e){}}}}
+function calSet(r,p){var i=calSl(r);LV[r]=p;if(i){i.value=p;i.nextElementSibling.textContent=p+"%"}}
+function calSleep(ms){return new Promise(function(f){setTimeout(f,ms)})}
+function calPeak(ms){return new Promise(function(f){var fl=!!dan.getFloatTimeDomainData,b=fl?new Float32Array(dan.fftSize):new Uint8Array(dan.fftSize),pk=0,t0=performance.now(),iv=setInterval(function(){var i,a;if(fl){dan.getFloatTimeDomainData(b);for(i=0;i<b.length;i++){a=Math.abs(b[i]);if(a>pk)pk=a}}else{dan.getByteTimeDomainData(b);for(i=0;i<b.length;i++){a=Math.abs(b[i]-128)/128;if(a>pk)pk=a}}if(performance.now()-t0>=ms){clearInterval(iv);f(pk)}},8)})}
+function calDb(p){return p>0.00003?Math.round(20*Math.log(p)/Math.LN10*10)/10:-90}
+async function calPlay(r){hit(r,ctx.currentTime+.03,1,false);var p=await calPeak(480);await calSleep(CALG[r]||650);return calDb(p)}
+async function calMove(r,to){var i=calSl(r),f=LV[r]!=null?LV[r]:100,n=10,k;for(k=1;k<=n;k++){if(CAL.cancel)return;calSet(r,Math.round(f+(to-f)*k/n));await calSleep(40)}}
+async function lvCal(){
+ var b=el("dlvr"),st=el("dlst"),rep1=[],R,i,res=[];
+ if(CAL.run){CAL.cancel=1;return}
+ if(on)stop();
+ if(!audio())return;if(ctx.state=="suspended")ctx.resume();
+ CAL.run=1;CAL.cancel=0;b.textContent="Stop";
+ var dv=el("dvol").value,ks=KS;
+ LV={};KS=0;lvSave();lvBuild();el("dks").checked=false;
+ try{
+  for(i=0;i<ROWS.length&&!CAL.cancel;i++){R=ROWS[i];calHl(R[0]);st.textContent="Listening (1 of 2): "+R[1]+" ("+(i+1)+"/"+ROWS.length+")";var d0=await calPlay(R[0]);rep1.push(d0);st.textContent=R[1]+" peaks at "+d0+" dB";await calSleep(250)}
+  for(i=0;i<ROWS.length&&!CAL.cancel;i++){R=ROWS[i];var r=R[0],tg=CALT[r]!=null?CALT[r]:-14,m=rep1[i],pc=100,fin=m,status="ok",tr;calHl(r);
+   for(tr=0;tr<3&&!CAL.cancel;tr++){
+    if(fin<=-80){status="silent";break}
+    var np=Math.max(0,Math.min(200,Math.round(pc*Math.pow(10,(tg-fin)/20)/5)*5));
+    if(np===pc&&Math.abs(fin-tg)>1.5){status=np>=200?"limit (max)":np<=0?"limit (min)":"ok";break}
+    st.textContent="Adjusting (2 of 2): "+R[1]+" to "+np+"% (aim "+tg+" dB)";await calMove(r,np);pc=np;if(CAL.cancel)break;
+    fin=await calPlay(r);st.textContent=R[1]+" now peaks at "+fin+" dB";
+    if(Math.abs(fin-tg)<=1.5)break;
+    if(tr==2)status=pc>=200?"limit (max)":pc<=0?"limit (min)":"close";
+   }
+   res.push({r:r,n:R[1],d0:m,p:pc,d1:fin,tg:tg,s:status});await calSleep(150)}
+ }catch(e){st.textContent="Level check stopped: "+e.message}
+ calHl(null);CAL.run=0;b.textContent="Reset levels";
+ var stopped=CAL.cancel;CAL.cancel=0;
+ if(stopped){lvSave();lvBuild();st.textContent="Stopped. Levels so far are kept.";return}
+ lvSave();lvBuild();
+ var t="SONGTRAK-LEVELS\nSongTrak "+((document.getElementById("ver")||{}).textContent||"")+"\nDate: "+new Date().toISOString().slice(0,16).replace("T"," ")+" UTC\nDrum Volume slider: "+dv+"  Small-speaker kick: "+(ks?"on":"off")+"\nBuilt-in boost (DEF) = current baseline boost. Peak = dBFS at the Output meter, one hit at 100%.\nSound | DEF | peak at 100% | final % | final peak | target | status | suggested baseline (DEF x final%)\n";
+ res.forEach(function(x){var df=DEF[x.r]||1;t+=x.n+" ("+x.r+") | "+df+" | "+x.d0+" | "+x.p+"% | "+x.d1+" | "+x.tg+" | "+x.s+" | "+(Math.round(df*x.p)/100)+"\n"});
+ var ok=false;try{await navigator.clipboard.writeText(t);ok=true}catch(e){}
+ st.textContent=ok?"Done. The report is copied. Paste it into your message to Claude.":"Done. Copy the report from the box.";
+ if(!ok)await ask("Level report (copy it)",{text:t,ok:"Close",noCancel:true});
+}
+el("dlvr").onclick=lvCal;
 el("dlsong").onchange=function(){if(!cur)return;if(this.checked){cur.dl={l:JSON.parse(JSON.stringify(LV)),ks:KS}}else{delete cur.dl;LV=JSON.parse(JSON.stringify(devLV));KS=devKS}dlSig=cur.id+"|"+(cur.dl?1:0);try{save()}catch(e){}lvBuild()};
 el("dtapin").onclick=tiOpen;el("tpclose").onclick=tiClose;
 el("tpgo").onclick=function(){TI.run?tiStop():tiStart()};
