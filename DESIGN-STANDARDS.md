@@ -17,6 +17,7 @@ Agreed with Gerry on 11 Nov 2026 (v3.124). Give this file to any new Claude conv
 | 9 | Exit buttons | Red fill, white "✕ Exit" text, top right, same height and radius as other buttons. This is the one deliberate exception to standard 3. | `#pexit` and the shared close-button rule |
 | 10 | Hidden elements | `[hidden]` must always win over a button's `display` rule. | `button[hidden],.pill[hidden],select[hidden],input[hidden],.btn[hidden]{display:none!important}` |
 | 11 | Main page buttons | Add song = plus. Import = arrow into a box (tray). Play = right-pointing triangle, placed between previous and next (like a video recorder: arrow-left-from-line, play, arrow-right-from-line; the skip buttons show only when a setlist is open). Share = box with an arrow going up. Edit = slanted pencil. Back = left arrow. Listen and find = the word Find with the list-music icon. Tune stays as it is (guitar emoji, agreed). There is one Play button only (the floating one was removed). | markup in `index.html` |
+| 12 | Sliders | Use the class `rng` on every `<input type="range">`: 44 px high touch area (`--ch`), a thin 8 px track with a visible outline, and a large 32 px round thumb in the accent colour (`--chord`) with a 3 px outline in the text colour (`--ink`) and a soft shadow, so it is easy to see and grab in light and dark mode. Never leave the browser's default thin slider. Dialogs must not block touch drags on sliders (the touchmove guard skips `input[type=range]`). Sliders are the one round shape allowed by standard 5. | `input.rng` rules in the `v3.149` block at the end of the `<style>` |
 
 ## Icons in use (all Lucide, ISC licence)
 
@@ -31,7 +32,7 @@ To add an icon: copy its `<path>` elements from the Lucide `icons/NAME.svg` file
 - The song editor and its menus (text glyphs such as ▾, the search emoji).
 - The Play bar glyph buttons (skip, A−, A+, speed −/+) and the Play drawers' special controls.
 - Setlist manager, Settings, Backup and restore, Help headings.
-- Specialty controls that keep their own look on purpose: drum grid cells, sliders, the coloured Play tabs, tuner string buttons, list rows (green songs, purple setlists).
+- Existing sliders other than the tuner (Mixer, Loops, Pedals, drum sound levels, tempo) still use older looks and should get `class="rng"` in a later pass. Specialty controls that keep their own look on purpose: drum grid cells, the coloured Play tabs, tuner string buttons, list rows (green songs, purple setlists).
 - The Tune button still uses an emoji.
 
 ## How to apply to a new screen
