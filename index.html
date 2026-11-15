@@ -206,8 +206,8 @@ body.playing #pkp{display:flex}#pkp.open{transform:none}#pkp[hidden]{display:non
 /* v1.9 play controls */
 html,body,button,select,input,label{touch-action:manipulation}
 #pexit{height:calc(46px*var(--ui,1));min-width:calc(76px*var(--ui,1));padding:0 16px;font-size:calc(19px*var(--ui,1));font-weight:800;background:#c62828;border-color:#8e1a1a;color:#fff;backdrop-filter:none;-webkit-backdrop-filter:none}
-#chs.hasx #chx,#setclose,#helpclose,#tnclose,#mixx,#fxx,#lpx,#cclose,#tpclose{height:calc(46px*var(--ui,1));min-width:calc(76px*var(--ui,1));padding:0 16px;font-size:calc(19px*var(--ui,1));font-weight:800;background:#c62828;border:1px solid #8e1a1a;border-radius:10px;color:#fff;cursor:pointer;white-space:nowrap;flex-shrink:0;line-height:1}
-@media(max-width:520px){#chs.hasx #chx,#setclose,#helpclose,#tnclose,#mixx,#fxx,#lpx,#cclose,#tpclose{min-width:0;padding:0 12px;font-size:calc(17px*var(--ui,1))}#sets .tnh,#help .tnh,#cloud .tnh{font-size:calc(22px*var(--ui,1))}}
+#chs.hasx #chx,#jamx,#setclose,#helpclose,#tnclose,#mixx,#fxx,#lpx,#cclose,#tpclose{height:calc(46px*var(--ui,1));min-width:calc(76px*var(--ui,1));padding:0 16px;font-size:calc(19px*var(--ui,1));font-weight:800;background:#c62828;border:1px solid #8e1a1a;border-radius:10px;color:#fff;cursor:pointer;white-space:nowrap;flex-shrink:0;line-height:1}
+@media(max-width:520px){#chs.hasx #chx,#jamx,#setclose,#helpclose,#tnclose,#mixx,#fxx,#lpx,#cclose,#tpclose{min-width:0;padding:0 12px;font-size:calc(17px*var(--ui,1))}#sets .tnh,#help .tnh,#cloud .tnh{font-size:calc(22px*var(--ui,1))}}
 #chs.hasx .box{position:relative}#chs.hasx #cht{padding-right:calc(96px*var(--ui,1));min-height:calc(46px*var(--ui,1))}#chs.hasx #chx{position:absolute;top:14px;right:14px}
 #pbar .pright{display:inline-flex;align-items:center;gap:12px;margin-left:auto}#pbar .ptx{display:inline-flex;align-items:center;gap:8px;padding:4px 10px;border:1px solid var(--line);border-radius:14px;background:color-mix(in srgb,var(--bg) 60%,transparent)}#pbar .ptx button{min-width:calc(86px*var(--ui,1))}#pbar #pdq{min-width:calc(104px*var(--ui,1))}#pbar .ptx button[hidden]{display:none}#pbar .pgrp{display:inline-flex;align-items:center;gap:10px;margin-left:0}
 #pbar #pgo{width:calc(161px*var(--ui,1));padding:0 6px}
@@ -480,7 +480,7 @@ main{padding:var(--pad)}
 .chart,.mg-col,.slbox,.vd,.fbanner,#smenu,#shmenu{border-radius:var(--r)}
 .song,.list.sets .sl{border-radius:var(--r)}
 .ov .box,#dlg .box{padding:var(--pad);gap:var(--gap);border-radius:var(--r)}
-#chs.hasx #chx,#setclose,#helpclose,#tnclose,#mixx,#fxx,#lpx,#cclose,#tpclose,#pexit{height:var(--ch);border-radius:var(--r)}
+#chs.hasx #chx,#jamx,#setclose,#helpclose,#tnclose,#mixx,#fxx,#lpx,#cclose,#tpclose,#pexit{height:var(--ch);border-radius:var(--r)}
 button[hidden],.pill[hidden],select[hidden],input[hidden],.btn[hidden]{display:none!important}
 #fbslot #play{background:transparent;border:0;box-shadow:none;border-radius:0;width:auto;height:100%;padding:0 4px;color:var(--chordc)}
 #sortrow #locate{flex:0 0 auto}
@@ -591,6 +591,12 @@ input.rng::-webkit-slider-runnable-track{height:8px;border-radius:4px;background
 input.rng::-moz-range-track{height:8px;border-radius:4px;background:var(--ctl-line);border:1px solid var(--mute)}
 input.rng::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:32px;height:32px;margin-top:-13px;border-radius:50%;background:var(--chord);border:3px solid var(--ink);box-shadow:0 2px 6px rgba(0,0,0,.4)}
 input.rng::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:var(--chord);border:3px solid var(--ink);box-shadow:0 2px 6px rgba(0,0,0,.4)}
+/* v3.185 Jam session */
+#jam .tnh{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:calc(22px*var(--ui,1));margin-bottom:6px}#jam .chkl small{display:block;color:var(--mute)}
+#jam textarea{width:100%;box-sizing:border-box;min-height:calc(88px*var(--ui,1));padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:calc(13px*var(--ui,1))/1.35 ui-monospace,Menlo,monospace;word-break:break-all}
+#jam fieldset{margin:8px 0}#jam .row{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}#jam .row .btn{flex:1 1 auto}#jam [hidden]{display:none!important}
+.jrow{display:flex;gap:8px;align-items:baseline;padding:6px 2px;font-size:calc(16px*var(--ui,1));border-bottom:1px solid var(--line)}.jrow small{color:var(--mute)}.jrow.gone{opacity:.55}
+#jamtoast{position:fixed;left:50%;top:calc(8px + env(safe-area-inset-top,0px));transform:translateX(-50%);max-width:min(560px,92vw);z-index:100000;padding:10px 14px;border-radius:10px;background:#1f3f9a;color:#fff;font-size:calc(15px*var(--ui,1));box-shadow:0 4px 14px rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .25s}#jamtoast.on{opacity:1}
 </style><script>try{var u_=localStorage.getItem("songtrak-ui");if(/^(1\.25|1\.5|1\.75)$/.test(u_))document.documentElement.style.setProperty("--ui",u_)}catch(e){}</script></head>
 <body><svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="i-arrow-left-from-line" viewBox="0 0 24 24"><path d="m9 6-6 6 6 6" /> <path d="M3 12h14" /> <path d="M21 19V5" /></symbol><symbol id="i-arrow-right-from-line" viewBox="0 0 24 24"><path d="M3 5v14" /> <path d="M21 12H7" /> <path d="m15 18 6-6-6-6" /></symbol><symbol id="i-chevrons-right-left" viewBox="0 0 24 24"><path d="m20 17-5-5 5-5" /> <path d="m4 17 5-5-5-5" /></symbol><symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" /></symbol><symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6" /></symbol><symbol id="i-pocket-watch" viewBox="0 0 24 24"><circle cx="12" cy="14" r="8" /> <path d="M9.5 2h5" /> <path d="M12 2v4" /> <path d="M12 10v4l2.5 1.5" /> <path d="m19 7 1.5-1.5" /></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14" /> <path d="M12 5v14" /></symbol><symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14" /></symbol><symbol id="i-import" viewBox="0 0 24 24"><path d="M12 3v12" /> <path d="m8 11 4 4 4-4" /> <path d="M8 5H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-4" /></symbol><symbol id="i-share" viewBox="0 0 24 24"><path d="M12 2v13" /> <path d="m16 6-4-4-4 4" /> <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" /></symbol><symbol id="i-pencil" viewBox="0 0 24 24"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /> <path d="m15 5 4 4" /></symbol><symbol id="i-drum" viewBox="0 0 24 24"><path d="m2 2 8 8"/><path d="m22 2-8 8"/><ellipse cx="12" cy="9" rx="10" ry="5"/><path d="M7 13.4v7.9"/><path d="M12 14v8"/><path d="M17 13.4v7.9"/><path d="M2 9v8a10 5 0 0 0 20 0V9"/></symbol>
 <symbol id="i-square" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/></symbol>
@@ -608,7 +614,7 @@ input.rng::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:
 <symbol id="i-pause" viewBox="0 0 24 24"><rect x="14" y="3" width="5" height="18" rx="1" /><rect x="5" y="3" width="5" height="18" rx="1" /></symbol>
 <symbol id="i-play" viewBox="0 0 24 24"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z" /></symbol><symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7" /> <path d="M19 12H5" /></symbol><symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7" /> <path d="M12 19V5" /></symbol><symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 5v14" /> <path d="m19 12-7 7-7-7" /></symbol><symbol id="i-maximize" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3" /> <path d="M21 8V5a2 2 0 0 0-2-2h-3" /> <path d="M3 16v3a2 2 0 0 0 2 2h3" /> <path d="M16 21h3a2 2 0 0 0 2-2v-3" /></symbol><symbol id="i-circle-question-mark" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M9 9.5a3 2.5 0 016 0c0 2-2 2-3 3.5" /> <path d="M12 17h.01" /></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" /> <circle cx="12" cy="12" r="3" /></symbol><symbol id="i-list-music" viewBox="0 0 24 24"><path d="M16 5H3" /> <path d="M11 12H3" /> <path d="M11 19H3" /> <path d="M21 16V5" /> <circle cx="18" cy="16" r="3" /></symbol><symbol id="i-undo-2" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5" /> <path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11" /></symbol><symbol id="i-redo-2" viewBox="0 0 24 24"><path d="m15 14 5-5-5-5" /> <path d="M20 9H9.5A5.5 5.5 0 0 0 4 14.5A5.5 5.5 0 0 0 9.5 20H13" /></symbol><symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" /></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18" /> <path d="m6 6 12 12" /></symbol></defs></svg><div class="fbanner" id="fbanner" role="status" hidden><span id="fbtxt"></span><button class="btn main" id="fbsave" type="button">Back up now</button></div><div id="fbtop"></div><div class="app">
 <aside><div id="lsplit" role="separator" aria-orientation="vertical" aria-label="Drag to change the width of the left panel. Double tap to reset." title="Drag to resize. Double tap to reset."></div>
- <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v3.184 · 14 Nov e1</small></h1>
+ <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v3.185 · 15 Nov e1</small></h1>
  <div class="tabs gears"><button id="hback" class="gear" aria-label="Back one step" title="Back"><svg class="ic" aria-hidden="true"><use href="#i-chevron-left"/></svg></button><button id="hnav" class="gear" aria-label="History list" title="History list"><svg class="ic" aria-hidden="true"><use href="#i-pocket-watch"/></svg></button><button id="hfwd" class="gear" aria-label="Forward one step" title="Forward"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></button><button id="fsbtn" class="gear" aria-label="Full screen" title="Full screen" hidden><svg class="ic" aria-hidden="true"><use href="#i-maximize"/></svg></button><button id="helpbtn" class="gear" aria-label="Getting started" title="Getting started"><svg class="ic" aria-hidden="true"><use href="#i-circle-question-mark"/></svg></button><button id="setbtn" class="gear" aria-label="Settings" title="Settings"><svg class="ic" aria-hidden="true"><use href="#i-settings"/></svg></button></div>
  <div class="tabs"><button id="tS" class="on" aria-haspopup="menu" aria-expanded="false">Songs <svg class="ic" aria-hidden="true"><use href="#i-chevron-down"/></svg></button><button id="tL">Setlists</button></div>
  <input type="search" id="q" placeholder="Search songs" aria-label="Search songs">
@@ -728,6 +734,7 @@ input.rng::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:
 <label class="kt"><input type="checkbox" id="swp"> Swipe left to open Play, swipe right to leave it</label><label class="kt">When Play opens, show: <select id="opentab" aria-label="Tab to open when Play starts"><option value="">No tab</option><option value="drums">Drums</option><option value="loops">Loops</option><option value="mix">Mixer</option><option value="fx">Pedals</option><option value="tuner">Tuner</option><option value="key">Key</option></select></label><label class="kt">Fold the tabs away on a phone or portrait tablet: <select id="tabfold" aria-label="Fold the Play tabs away on small screens"><option value="2">2 seconds after the last drawer closes</option><option value="5">5 seconds after the last drawer closes</option><option value="0">Never</option></select></label></fieldset>
 <fieldset class="slbox setg"><legend>You</legend>
 <label>Your name <input type="text" id="uname" class="sz" autocomplete="name" placeholder="Used as the artist on songs you generate" aria-label="Your name"></label></fieldset>
+<fieldset class="slbox setg"><legend>Jam session (prototype)</legend><p class="status">Play along with other devices that run SongTrak. One player holds the lead: their song, scrolling and Play screen are shown on the others, and the drum Start goes to the player who has drums. Nothing is saved on the other devices.</p><button class="btn" id="jamopen" type="button">Jam session…</button></fieldset>
 <fieldset class="slbox setg"><legend>Report a problem</legend><p class="status">Copies a picture of the app screen (or, where the browser does not allow that, a text description of it) so you can paste it into a message.</p><div><button class="btn" id="scrcopy" type="button">Copy app screen to clipboard</button></div></fieldset>
 <p class="status">These settings apply to the whole app on this device, not to a single song.</p>
 </div></div>
@@ -1361,6 +1368,36 @@ body.playing.tabs-collapsed #dthandle{opacity:1;visibility:visible;pointer-event
 <li>Recover songs keeps a log of repairs (the latest 100), up to three automatic backups, and any damaged copy that could not be read.</li>
 <li>Damaged copies are never deleted automatically.</li>
 </ul></div></details>
+<h4>Jam session (prototype)</h4>
+<h5>Start</h5>
+<ul>
+<li>Open <b>Settings</b>, then <b>Jam session…</b>. Type your name.</li>
+<li>Tick <b>I can play drums</b> only if this device is connected to an amp or speaker. Tap <b>Check my drums</b> once to wake the sound.</li>
+<li>One player taps <b>Start a jam</b> and holds the lead.</li>
+</ul>
+<h5>Add players</h5>
+<ul>
+<li>The leader taps <b>Add a player…</b> and sends the code to the new player (Messages works well).</li>
+<li>The new player taps <b>Join a jam…</b>, pastes the code, taps <b>Make reply</b> and sends the reply code back.</li>
+<li>The leader pastes the reply and taps <b>Connect</b>. Everyone then links up with everyone else by themselves.</li>
+<li>Use the same Wi-Fi, or a phone hotspot. Some venue Wi-Fi blocks devices from talking to each other.</li>
+</ul>
+<h5>While you play</h5>
+<ul>
+<li>The leader’s song, scrolling and Play screen appear on the other devices. Nothing is saved there.</li>
+<li><b>Start</b> and <b>Stop</b> for the drums, on any device, go to the drummer’s device.</li>
+<li><b>Pass the lead on</b> hands the lead to the next player in the list. <b>Set the drummer…</b> changes who plays the drums.</li>
+<li>If a player drops out, the leader sees a notice. If the leader drops out, the next player takes the lead.</li>
+</ul>
+<details class="hmore"><summary>More info…</summary><div class="hm">
+<h5>Notes</h5>
+<ul>
+<li>This is a first version for trying out. The devices link directly to each other, with no server.</li>
+<li>Each device links to at most 8 others. Messages are passed on, so a bigger group still hears the leader.</li>
+<li>If the page is put to sleep or you leave the app, the link may drop. Open Jam session… to see who is connected.</li>
+<li>Use the same version of SongTrak on every device.</li>
+<li>Your name and the drums tick are kept on this device only.</li>
+</ul></div></details>
 <h4>Tips</h4>
 <ul>
 <li>Edit a song to fix chords at any time.</li>
@@ -1441,6 +1478,21 @@ body.playing.tabs-collapsed #dthandle{opacity:1;visibility:visible;pointer-event
  <input id="rtxt" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Type RESET to confirm">
  <p class="status" id="rmsg" role="status"></p>
  <div class="row"><button class="btn main" id="rgo" type="button">Reset now</button><button class="btn" id="rno" type="button">Cancel</button></div>
+</div></div>
+<div id="jam" class="ov" role="dialog" aria-modal="true"><div class="box">
+ <div class="tnh"><b>Jam session (prototype)</b><button class="btn" id="jamx" type="button">✕ Exit</button></div>
+ <p class="status" id="jamst" role="status">Not in a jam.</p><div id="jamlist"></div><p class="status" id="jamnote" role="status"></p>
+ <fieldset class="slbox setg"><legend>You</legend>
+ <label>Your name <input type="text" id="jamname" class="sz" maxlength="24" autocomplete="off" aria-label="Your name in the jam"></label>
+ <label class="chkl"><input type="checkbox" id="jamdr"><span><b>I can play drums</b><small>This device is connected to an amp or speaker that can play the drums for everyone.</small></span></label>
+ <button class="btn" id="jamchk" type="button">Check my drums</button></fieldset>
+ <fieldset class="slbox setg"><legend>Jam</legend>
+ <div class="row"><button class="btn main" id="jamstart" type="button">Start a jam</button><button class="btn" id="jamjoin" type="button">Join a jam…</button><button class="btn main" id="jamadd" type="button" hidden>Add a player…</button></div>
+ <div class="row"><button class="btn" id="jampass" type="button" hidden>Pass the lead on</button><button class="btn" id="jamdrum" type="button" hidden>Set the drummer…</button><button class="btn" id="jamleave" type="button" hidden>Leave the jam</button></div></fieldset>
+ <fieldset class="slbox setg" id="jampair" hidden><legend id="jamplg">Pairing</legend>
+ <p class="status" id="jamp1"></p><textarea id="jamout" readonly rows="4" aria-label="Code to send"></textarea><button class="btn" id="jamcopy" type="button">Copy code</button>
+ <p class="status" id="jamp2"></p><textarea id="jamin" rows="4" placeholder="Paste a code here" aria-label="Code received"></textarea><button class="btn main" id="jamgo" type="button">Connect</button>
+ <p class="status" id="jampmsg" role="status"></p></fieldset>
 </div></div>
 <div id="smenu" role="menu" hidden></div><div id="shmenu" role="menu" hidden></div>
 <div id="chs" class="ov" role="dialog" aria-modal="true"><div class="box"><b id="cht"></b><p class="status" id="chn"></p><label class="chkl" id="chk" hidden><input type="checkbox" id="chkb"><span id="chkt"></span></label><div id="chb" class="chb"></div><button class="btn" id="chx" type="button">Cancel</button></div></div>
@@ -3260,7 +3312,7 @@ var KEYS={lib:["songtrak-nav","songtrak-lastfile","songtrak-filemode"],
  fx:["songtrak-fx","songtrak-pedal"],
  mix:["songtrak-mix","songtrak-drumvol","songtrak-drumlv","songtrak-tapin"],
  loops:["songtrak-loops","songtrak-loopout","songtrak-loopin","songtrak-looplat"],
- set:["songtrak-ui","songtrak-tabs","songtrak-taborder","songtrak-opentab","songtrak-tabfold","songtrak-noswipe","songtrak-cchords","songtrak-nolooper","songtrak-tnin","songtrak-tnsens","songtrak-lw","songtrak-mgcols","songtrak-chsort","songtrak-starnames","songtrak-inch","songtrak-expmeta","songtrak-lcl","songtrak-lcd","songtrak-ccl","songtrak-ccd","cc-theme","cc-shmeta","cc-mkm","cc-lf","cc-lc","cc-cc","cc-ind","cc-fs","cc-flats","cc-dev","cc-cs","cc-a4"],
+ set:["songtrak-ui","songtrak-tabs","songtrak-taborder","songtrak-opentab","songtrak-tabfold","songtrak-noswipe","songtrak-jam","songtrak-cchords","songtrak-nolooper","songtrak-tnin","songtrak-tnsens","songtrak-lw","songtrak-mgcols","songtrak-chsort","songtrak-starnames","songtrak-inch","songtrak-expmeta","songtrak-lcl","songtrak-lcd","songtrak-ccl","songtrak-ccd","cc-theme","cc-shmeta","cc-mkm","cc-lf","cc-lc","cc-cc","cc-ind","cc-fs","cc-flats","cc-dev","cc-cs","cc-a4"],
  bak:["songtrak-bak","songtrak-corrupt","songtrak-health","songtrak-trash"]};
 function picked(){var o={};q("input[data-r]").forEach(function(c){if(c.checked)o[c.dataset.r]=1});return o}
 var TICK="Tick at least one item.";function upd(){var n=Object.keys(picked()).length,ok=n>0&&$$("rtxt").value.trim().toUpperCase()=="RESET",m=$$("rmsg");$$("rgo").disabled=!ok;if(!n)m.textContent=TICK;else if(m.textContent==TICK)m.textContent=""}
@@ -3389,4 +3441,127 @@ document.addEventListener("touchend",function(e){var s=t0;t0=null;if(!s||!e.chan
  if(!s.pl){if(dx>-Math.max(72,W*0.224))return;document.getElementById("play").click();if(!still())anim("play-in",320)}
  else{if(dx<Math.max(128,W*0.36))return;if(still()){stopPlay();return}B.classList.add("play-out");setTimeout(function(){B.classList.remove("play-out");stopPlay();anim("play-back",320);window.scrollTo(0,window.scrollY)},200)}},{passive:true});
 })();
+/* v3.185 Jam link (prototype): WebRTC data channels, copy/paste pairing, self-forming mesh, token holder = leader */
+(function(){var $=function(i){return document.getElementById(i)},K="songtrak-jam",D=$("jam");if(!D)return;
+var VER=(($("ver")||{}).textContent||"").split(" ")[0];
+var P={n:"",d:0};try{var _p=JSON.parse(localStorage.getItem(K)||"{}");if(_p&&typeof _p=="object"){P.n=String(_p.n||"").slice(0,24);P.d=_p.d?1:0}}catch(e){}
+function saveP(){try{localStorage.setItem(K,JSON.stringify(P))}catch(e){}}
+function rid(){return Math.random().toString(36).slice(2,8)}
+var MAXL=8,GONE=12000;
+var J={on:false,me:rid(),leader:null,drummer:null,roster:[],links:{},pend:{},seen:{},seenN:0,alive:{},drOn:false,q:0,song:null,sig:"",play:0,pos:-1,inv:null,jn:null,pm:""};
+var DS=window.__drStart,DX=window.__drStop,applying=false;
+function nm(){return(P.n||$("jamname").value||"Player").trim()||"Player"}
+function me(){return{id:J.me,name:nm(),d:P.d}}
+function mem(id){for(var i=0;i<J.roster.length;i++)if(J.roster[i].id==id)return J.roster[i];return null}
+function idx(id){for(var i=0;i<J.roster.length;i++)if(J.roster[i].id==id)return i;return -1}
+function nameOf(id){var m=mem(id);return m?m.name:"A player"}
+var toastT=null;function toast(t){var e=$("jamtoast");if(!e){e=document.createElement("div");e.id="jamtoast";e.setAttribute("role","status");document.body.appendChild(e)}e.textContent=t;e.classList.add("on");clearTimeout(toastT);toastT=setTimeout(function(){e.classList.remove("on")},9000);var n=$("jamnote");if(n)n.textContent=t}
+function enc(o){return"SONGTRAK-JAM "+btoa(unescape(encodeURIComponent(JSON.stringify(o))))}
+function dec(s){s=String(s||"").replace(/^[\s\S]*?SONGTRAK-JAM\s+/,"").replace(/\s+/g,"");return JSON.parse(decodeURIComponent(escape(atob(s))))}
+function gathered(pc){return new Promise(function(r){if(pc.iceGatheringState=="complete")return r();var t=setTimeout(r,3500);pc.addEventListener("icegatheringstatechange",function(){if(pc.iceGatheringState=="complete"){clearTimeout(t);r()}})})}
+/* ---- links ---- */
+function newLink(){var L={pc:new RTCPeerConnection({iceServers:[]}),dc:null,id:null,t:Date.now()};
+ L.pc.ondatachannel=function(e){L.dc=e.channel;wire(L)};
+ L.pc.onconnectionstatechange=function(){var s=L.pc.connectionState;if(s=="failed"||s=="closed")dropL(L)};return L}
+function wire(L){var dc=L.dc,hi=function(){if(L.hi)return;L.hi=1;tx(L,{t:"hi",id:J.me,name:nm(),d:P.d,v:VER})};dc.onopen=hi;if(dc.readyState=="open")hi();
+ dc.onmessage=function(e){var m;try{m=JSON.parse(e.data)}catch(x){return}onMsg(L,m)};dc.onclose=function(){dropL(L)}}
+function dropL(L){if(L.id&&J.links[L.id]===L){delete J.links[L.id]}for(var k in J.pend)if(J.pend[k]===L)delete J.pend[k];try{L.pc.close()}catch(e){}render()}
+function tx(L,m){try{if(L.dc&&L.dc.readyState=="open")L.dc.send(JSON.stringify(m))}catch(e){}}
+function fwd(m,ex){for(var k in J.links){var L=J.links[k];if(L!==ex)tx(L,m)}}
+function seen(i){if(J.seen[i])return true;J.seen[i]=1;if(++J.seenN>600){J.seen={};J.seenN=0}return false}
+function send(m){m.i=rid();m.f=J.me;m.h=7;seen(m.i);fwd(m,null)}
+function nlinks(){return Object.keys(J.links).length}
+/* ---- messages ---- */
+function onMsg(L,m){
+ if(m.t=="hi"){L.id=m.id;J.links[m.id]=L;for(var k in J.pend)if(J.pend[k]===L)delete J.pend[k];J.alive[m.id]=Date.now();
+  if(J.inv===L||J.jn===L){if(J.inv===L)J.inv=null;else J.jn=null;$("jampair").hidden=true;toast("Connected to "+m.name+".")}
+  if(m.v&&VER&&m.v!=VER)toast(m.name+" is running "+m.v+" and you are running "+VER+". Update both for the best results.");
+  if(J.on&&!mem(m.id)){var jm={id:m.id,name:m.name,d:m.d?1:0};if(J.leader==J.me)addMember(jm);else send({t:"join",m:jm})}render();return}
+ if(!m.i||seen(m.i))return;
+ var mine=m.to&&m.to==J.me;
+ if(m.to&&!mine||!m.to){if(--m.h>0)fwd(m,L)}
+ if(m.to&&!mine)return;
+ switch(m.t){
+ case"alive":J.alive[m.f]=Date.now();if(m.f==J.drummer){J.drOn=!!m.dr;render()}break;
+ case"join":if(J.on&&J.leader==J.me)addMember(m.m);break;
+ case"bye":if(J.on&&J.leader==J.me)dropMember(m.f,true);break;
+ case"roster":if(m.q>J.q||!J.on){J.q=m.q;J.on=true;J.leader=m.leader;J.drummer=m.drummer;J.roster=m.list;var n=Date.now();J.roster.forEach(function(x){if(!J.alive[x.id])J.alive[x.id]=n});if(m.note)toast(m.note);ensureMesh();render()}break;
+ case"sig":sigIn(m);break;
+ case"token":becomeLeader(m.f);break;
+ case"song":if(J.leader!=J.me)applySong(m);break;
+ case"mode":if(J.leader!=J.me)applyMode(m.p);break;
+ case"pos":if(J.leader!=J.me)applyPos(m.p);break;
+ case"drum":drumDo(m.a);break}}
+/* ---- leader duties ---- */
+function bcast(note){J.q++;send({t:"roster",q:J.q,leader:J.leader,drummer:J.drummer,list:J.roster,note:note||""});render()}
+function fixDrummer(){var d=mem(J.drummer);if(d&&!d.g&&d.d)return false;var n=null;J.roster.forEach(function(x){if(!n&&x.d&&!x.g)n=x});var was=J.drummer;J.drummer=n?n.id:null;return was!=J.drummer}
+function addMember(x){if(!x||!x.id||J.roster.length>=50)return;var m=mem(x.id),note="";
+ if(m){m.name=x.name;m.d=x.d?1:0;if(m.g){delete m.g;note=m.name+" is back."}}
+ else{var o=null;J.roster.forEach(function(r){if(r.g&&r.name==x.name&&!o)o=r});
+  if(o){var old=o.id;o.id=x.id;o.d=x.d?1:0;delete o.g;if(J.drummer==old)J.drummer=x.id;if(J.leader==old)J.leader=x.id;note=x.name+" is back."}
+  else{J.roster.push({id:x.id,name:x.name,d:x.d?1:0});note=x.name+" joined."}}
+ J.alive[x.id]=Date.now();var ch=fixDrummer();if(ch&&mem(J.drummer))note+=" "+nameOf(J.drummer)+" is the drummer.";bcast(note)}
+function dropMember(id,bye){var i=idx(id);if(i<0)return;var n=J.roster[i].name;J.roster.splice(i,1);fixDrummer();bcast(n+(bye?" left the jam.":" was removed."))}
+function becomeLeader(from){if(!J.on||J.leader==J.me)return;J.leader=J.me;J.sig="";J.play=-1;bcast(nm()+" now holds the lead."+(from?"":""))}
+function nextAlive(after){var n=J.roster.length,i=idx(after);for(var k=1;k<=n;k++){var m=J.roster[(i+k)%n];if(m&&!m.g&&m.id!=after&&!J.gone[m.id])return m}return null}
+J.gone={};
+function check(){if(!J.on)return;var now=Date.now();
+ J.roster.forEach(function(m){if(m.id==J.me){J.gone[m.id]=0;return}J.gone[m.id]=(now-(J.alive[m.id]||now))>GONE});
+ if(J.leader==J.me){var ch=false,note="";J.roster.forEach(function(m){if(m.id==J.me)return;if(J.gone[m.id]&&!m.g){m.g=1;ch=true;note+=m.name+" seems to have dropped out (maybe by mistake). "}else if(!J.gone[m.id]&&m.g){delete m.g;ch=true;note+=m.name+" is back. "}});
+  if(fixDrummer()){ch=true;note+=J.drummer?nameOf(J.drummer)+" is now the drummer. ":"No drummer is available. "}
+  if(ch){toast(note.trim());bcast(note.trim())}}
+ else if(J.gone[J.leader]){var nx=nextAlive(J.leader);if(nx&&nx.id==J.me){var old=nameOf(J.leader);var lm=mem(J.leader);if(lm)lm.g=1;J.leader=J.me;J.sig="";J.play=-1;var f=fixDrummer();bcast(old+" dropped out. "+nm()+" now holds the lead.");toast(old+" dropped out. You now hold the lead.")}}
+ var dr=(window.__drOn&&window.__drOn())?1:0;send({t:"alive",dr:dr});J.alive[J.me]=now;
+ if(J.drummer==J.me&&J.drOn!=!!dr){J.drOn=!!dr;render()}}
+/* ---- mesh via relayed signalling ---- */
+function ensureMesh(){if(!J.on)return;var mi=idx(J.me);J.roster.forEach(function(m,i){if(m.id==J.me||m.g||J.links[m.id]||J.pend[m.id]||mi<0||i<mi)return;if(i<=mi)return;if(nlinks()+Object.keys(J.pend).length>=MAXL)return;relayOffer(m.id)})}
+async function relayOffer(id){try{var L=newLink();L.dc=L.pc.createDataChannel("j");wire(L);J.pend[id]=L;await L.pc.setLocalDescription(await L.pc.createOffer());await gathered(L.pc);send({t:"sig",to:id,k:"o",s:L.pc.localDescription.sdp});setTimeout(function(){if(J.pend[id]===L&&!L.id){delete J.pend[id];try{L.pc.close()}catch(e){}}},20000)}catch(e){delete J.pend[id]}}
+async function sigIn(m){try{if(m.k=="o"){if(J.links[m.f]||J.pend[m.f])return;var L=newLink();J.pend[m.f]=L;await L.pc.setRemoteDescription({type:"offer",sdp:m.s});await L.pc.setLocalDescription(await L.pc.createAnswer());await gathered(L.pc);send({t:"sig",to:m.f,k:"a",s:L.pc.localDescription.sdp});setTimeout(function(){if(J.pend[m.f]===L&&!L.id){delete J.pend[m.f];try{L.pc.close()}catch(e){}}},20000)}
+ else if(m.k=="a"){var L2=J.pend[m.f];if(L2&&L2.pc.signalingState=="have-local-offer")await L2.pc.setRemoteDescription({type:"answer",sdp:m.s})}}catch(e){}}
+/* ---- following the leader ---- */
+function snap(s){var o={};for(var k in s){if(k=="id"||k=="fx"||k=="dl"||k=="stars"||k=="added")continue;o[k]=s[k]}return o}
+function applySong(m){var o=m.s;o.id="jam:"+m.sid;J.song=o;var p=m.p;applying=true;try{pick(o.id,true)}catch(e){}applying=false;if(p!==undefined)applyMode(p)}
+var _by=byId;byId=function(id){if(J.song&&id===J.song.id)return J.song;return _by(id)};
+function applyMode(p){applying=true;try{var pl=document.body.classList.contains("playing");if(p&&!pl&&cur){$("play").click()}else if(!p&&pl&&window.stopPlay)stopPlay()}catch(e){}applying=false}
+function applyPos(f){if(!document.body.classList.contains("playing"))return;var h=document.documentElement.scrollHeight-innerHeight;if(h>0)window.scrollTo(0,Math.max(0,Math.min(1,f))*h)}
+function lead(){if(!J.on||J.leader!=J.me)return;
+ if(cur){var o=snap(cur),s=JSON.stringify(o);if(s!=J.sig&&s.length<200000){J.sig=s;send({t:"song",sid:String(cur.id).replace(/^jam:/,""),s:o,p:document.body.classList.contains("playing")?1:0});J.play=document.body.classList.contains("playing")?1:0}}
+ var pl=document.body.classList.contains("playing")?1:0;if(pl!=J.play){J.play=pl;send({t:"mode",p:pl})}
+ var h=document.documentElement.scrollHeight-innerHeight,f=h>0?Math.round(scrollY/h*10000)/10000:0;if(Math.abs(f-J.pos)>.002){J.pos=f;send({t:"pos",p:f})}}
+/* ---- drums ---- */
+function drumDo(a){if(J.drummer!=J.me)return;var on=window.__drOn&&window.__drOn();if(a=="start"&&!on)$("pdq").click();else if(a=="stop"&&on)$("pdq").click();else if(a=="fade"&&on)$("pdf").click()}
+function far(){return J.on&&J.drummer&&J.drummer!=J.me&&mem(J.drummer)&&!mem(J.drummer).g}
+function ask1(e,a){if(!far())return;e.stopImmediatePropagation();e.preventDefault();send({t:"drum",to:J.drummer,a:a});toast("Sent to "+nameOf(J.drummer)+": "+a+" drums.")}
+$("pdq").addEventListener("click",function(e){ask1(e,J.drOn?"stop":"start")},true);$("pdf").addEventListener("click",function(e){ask1(e,"fade")},true);
+if(DS)window.__drStart=function(){if(far()){send({t:"drum",to:J.drummer,a:"start"});return}return DS.apply(this,arguments)};
+if(DX)window.__drStop=function(){if(far()){send({t:"drum",to:J.drummer,a:"stop"});return}return DX.apply(this,arguments)};
+function unlock(){try{var C=window.AudioContext||window.webkitAudioContext,c=new C();c.resume();var b=c.createBuffer(1,1,22050),s=c.createBufferSource();s.buffer=b;s.connect(c.destination);s.start(0);setTimeout(function(){try{c.close()}catch(e){}},600)}catch(e){}}
+/* ---- screen ---- */
+function render(){var st=$("jamst"),L=$("jamlist");if(!st)return;
+ if(!J.on){st.textContent="Not in a jam. Start one, or join a jam that someone else started.";L.innerHTML=""}
+ else{var nl=nlinks();st.textContent="In a jam: "+J.roster.length+(J.roster.length==1?" player":" players")+". Lead: "+nameOf(J.leader)+". Drums: "+(J.drummer?nameOf(J.drummer)+(J.drOn?" (playing)":""):"nobody can play drums yet")+"."+(J.roster.length>1&&!nl?" No connection to the others right now.":"");
+  L.innerHTML=J.roster.map(function(m){var t=[];if(m.id==J.me)t.push("you");if(m.id==J.leader)t.push("lead");if(m.id==J.drummer)t.push("drummer");else if(m.d)t.push("can play drums");if(m.g)t.push("dropped out");return'<div class="jrow'+(m.g?" gone":"")+'"><b>'+esc(m.name)+"</b> <small>"+t.join(" · ")+"</small></div>"}).join("")}
+ var lead_=J.on&&J.leader==J.me;$("jamstart").hidden=J.on;$("jamjoin").hidden=J.on;$("jamadd").hidden=!J.on;$("jampass").hidden=!(lead_&&J.roster.length>1);$("jamdrum").hidden=!lead_;$("jamleave").hidden=!J.on}
+function pairUI(mode){J.pm=mode;$("jampair").hidden=false;$("jamout").value="";$("jamin").value="";$("jampmsg").textContent="";
+ if(mode=="add"){$("jamplg").textContent="Add a player";$("jamp1").textContent="1. Making a code… then send it to the new player (for example in Messages).";$("jamp2").textContent="2. Paste their reply code here, then tap Connect.";$("jamgo").textContent="Connect";$("jamin").hidden=false;$("jamp2").hidden=false;$("jamgo").hidden=false;$("jamout").hidden=false;$("jamcopy").hidden=false}
+ else{$("jamplg").textContent="Join a jam";$("jamp1").textContent="1. Paste the code you were sent, then tap Make reply.";$("jamp2").textContent="2. Send the reply code back. You are connected when it has been pasted on their device.";$("jamgo").textContent="Make reply";$("jamin").hidden=false;$("jamp2").hidden=true;$("jamout").hidden=true;$("jamcopy").hidden=true;$("jamgo").hidden=false}}
+async function invite(){if(!window.RTCPeerConnection){$("jamst").textContent="This browser cannot make a direct link.";return}pairUI("add");try{var L=newLink();L.dc=L.pc.createDataChannel("j");wire(L);J.inv=L;await L.pc.setLocalDescription(await L.pc.createOffer());await gathered(L.pc);$("jamout").value=enc({k:"o",s:L.pc.localDescription.sdp,v:VER});$("jamp1").textContent="1. Send this code to the new player (for example in Messages)."}catch(e){$("jampmsg").textContent="Could not make a code: "+e.message}}
+$("jamgo").onclick=async function(){var raw=$("jamin").value;if(!raw.trim()){$("jampmsg").textContent="Paste a code first.";return}var c;try{c=dec(raw)}catch(e){$("jampmsg").textContent="That does not look like a SongTrak jam code.";return}
+ try{if(J.pm=="add"){if(c.k!="a")throw Error("That is not a reply code.");if(!J.inv)throw Error("Tap Add a player again to make a new code.");$("jampmsg").textContent="Connecting…";await J.inv.pc.setRemoteDescription({type:"answer",sdp:c.s})}
+ else{if(c.k!="o")throw Error("That is not an invitation code.");var L=newLink();J.jn=L;await L.pc.setRemoteDescription({type:"offer",sdp:c.s});await L.pc.setLocalDescription(await L.pc.createAnswer());$("jampmsg").textContent="Making the reply…";await gathered(L.pc);$("jamout").hidden=false;$("jamcopy").hidden=false;$("jamp2").hidden=false;$("jamout").value=enc({k:"a",s:L.pc.localDescription.sdp,v:VER});$("jampmsg").textContent="Waiting for the leader to paste your reply…"}}catch(e){$("jampmsg").textContent=e.message}};
+$("jamcopy").onclick=function(){var t=$("jamout");t.select();var ok=false;try{ok=document.execCommand("copy")}catch(e){}try{if(navigator.clipboard)navigator.clipboard.writeText(t.value).then(function(){},function(){})}catch(e){}$("jampmsg").textContent=ok||navigator.clipboard?"Copied.":"Select the code and copy it."};
+$("jamstart").onclick=function(){J.on=true;J.leader=J.me;J.roster=[me()];J.q=1;J.drummer=null;fixDrummer();J.sig="";J.play=-1;J.alive[J.me]=Date.now();toast("Jam started. You hold the lead.");render()};
+$("jamjoin").onclick=function(){pairUI("join")};$("jamadd").onclick=invite;
+$("jampass").onclick=function(){var n=nextAlive(J.me);if(!n)return;send({t:"token",to:n.id});J.leader=n.id;render();toast("Lead passed to "+n.name+".")};
+$("jamdrum").onclick=async function(){var ch=J.roster.filter(function(m){return m.d&&!m.g}).map(function(m){return{label:m.name+(m.id==J.drummer?"  (now)":""),v:m.id,cur:m.id==J.drummer}});if(!ch.length){toast("Nobody has ticked I can play drums yet.");return}var r=await chooseDlg("Who plays the drums?",ch,"Start and stop from any device goes to this player.");if(!r)return;J.drummer=r;bcast(nameOf(r)+" is now the drummer.")};
+$("jamleave").onclick=function(){if(J.on){send({t:"bye"})}setTimeout(function(){for(var k in J.links){try{J.links[k].pc.close()}catch(e){}}J.links={};J.pend={};J.on=false;J.leader=J.drummer=null;J.roster=[];J.drOn=false;if(cur&&String(cur.id).indexOf("jam:")==0){cur=null;J.song=null;try{if(window.stopPlay)stopPlay();draw()}catch(e){}}J.song=null;render()},150)};
+$("jamname").value=P.n||(window.uname||"")||"";$("jamdr").checked=!!P.d;
+$("jamname").oninput=function(){P.n=this.value.slice(0,24);saveP();if(J.on)ann()};
+$("jamdr").onchange=function(){P.d=this.checked?1:0;saveP();if(this.checked)unlock();if(J.on)ann()};
+function ann(){var m=mem(J.me);if(m){m.name=nm();m.d=P.d;if(J.leader==J.me){fixDrummer();bcast("")}else send({t:"join",m:me()})}}
+$("jamchk").onclick=function(){unlock();try{if(DS&&!(window.__drOn&&window.__drOn())){DS();setTimeout(function(){if(DX)DX()},1200);toast("Playing the drums for a moment. If you heard nothing, check the volume and the amp.")}}catch(e){}};
+$("jamopen").onclick=function(){$("sets").classList.remove("on");render();D.classList.add("on")};
+$("jamx").onclick=function(){D.classList.remove("on")};D.onclick=function(e){if(e.target==D)D.classList.remove("on")};
+setInterval(function(){try{lead();if(J.on&&J.drummer==J.me){var d=(window.__drOn&&window.__drOn())?1:0;if(d!=J.lastDr){J.lastDr=d;J.drOn=!!d;send({t:"alive",dr:d});render()}}}catch(e){}},300);setInterval(function(){try{check();ensureMesh()}catch(e){}},3000);
+window.__jam=J;render()})();
 </script></body></html>
