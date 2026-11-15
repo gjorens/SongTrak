@@ -592,6 +592,8 @@ input.rng::-moz-range-track{height:8px;border-radius:4px;background:var(--ctl-li
 input.rng::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:32px;height:32px;margin-top:-13px;border-radius:50%;background:var(--chord);border:3px solid var(--ink);box-shadow:0 2px 6px rgba(0,0,0,.4)}
 input.rng::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:var(--chord);border:3px solid var(--ink);box-shadow:0 2px 6px rgba(0,0,0,.4)}
 /* v3.185 Jam session */
+#jamfol{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:9000;max-width:min(520px,92vw);padding:8px 14px;border-radius:10px;font-size:calc(15px*var(--ui,1));font-weight:700;background:#1f3f9a;border:1px solid #14296a;color:#fff;box-shadow:0 3px 12px rgba(0,0,0,.35);height:auto;min-height:calc(40px*var(--ui,1));line-height:1.25}#jamfol.own{background:#b45309;border-color:#7c3a06}#jamfol[hidden]{display:none!important}@media(max-width:520px){#jamfol{bottom:calc(132px + env(safe-area-inset-bottom,0px))}}
+#jamcodev{font:800 calc(34px*var(--ui,1))/1.2 ui-monospace,Menlo,monospace;letter-spacing:.08em;text-align:center;padding:10px 0;user-select:all;-webkit-user-select:all}#jam details summary{cursor:pointer;padding:6px 0}
 #jam .tnh{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:calc(22px*var(--ui,1));margin-bottom:6px}#jam .chkl small{display:block;color:var(--mute)}
 #jam textarea{width:100%;box-sizing:border-box;min-height:calc(88px*var(--ui,1));padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:calc(13px*var(--ui,1))/1.35 ui-monospace,Menlo,monospace;word-break:break-all}
 #jam fieldset{margin:8px 0}#jam .row{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}#jam .row .btn{flex:1 1 auto}#jam [hidden]{display:none!important}
@@ -614,7 +616,7 @@ input.rng::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:
 <symbol id="i-pause" viewBox="0 0 24 24"><rect x="14" y="3" width="5" height="18" rx="1" /><rect x="5" y="3" width="5" height="18" rx="1" /></symbol>
 <symbol id="i-play" viewBox="0 0 24 24"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z" /></symbol><symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7" /> <path d="M19 12H5" /></symbol><symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7" /> <path d="M12 19V5" /></symbol><symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 5v14" /> <path d="m19 12-7 7-7-7" /></symbol><symbol id="i-maximize" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3" /> <path d="M21 8V5a2 2 0 0 0-2-2h-3" /> <path d="M3 16v3a2 2 0 0 0 2 2h3" /> <path d="M16 21h3a2 2 0 0 0 2-2v-3" /></symbol><symbol id="i-circle-question-mark" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M9 9.5a3 2.5 0 016 0c0 2-2 2-3 3.5" /> <path d="M12 17h.01" /></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" /> <circle cx="12" cy="12" r="3" /></symbol><symbol id="i-list-music" viewBox="0 0 24 24"><path d="M16 5H3" /> <path d="M11 12H3" /> <path d="M11 19H3" /> <path d="M21 16V5" /> <circle cx="18" cy="16" r="3" /></symbol><symbol id="i-undo-2" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5" /> <path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11" /></symbol><symbol id="i-redo-2" viewBox="0 0 24 24"><path d="m15 14 5-5-5-5" /> <path d="M20 9H9.5A5.5 5.5 0 0 0 4 14.5A5.5 5.5 0 0 0 9.5 20H13" /></symbol><symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" /></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18" /> <path d="m6 6 12 12" /></symbol></defs></svg><div class="fbanner" id="fbanner" role="status" hidden><span id="fbtxt"></span><button class="btn main" id="fbsave" type="button">Back up now</button></div><div id="fbtop"></div><div class="app">
 <aside><div id="lsplit" role="separator" aria-orientation="vertical" aria-label="Drag to change the width of the left panel. Double tap to reset." title="Drag to resize. Double tap to reset."></div>
- <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v3.185 · 15 Nov e1</small></h1>
+ <h1><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2.2c5.4 0 8.8 2.7 8.8 6.8 0 5.9-5.2 11.7-8.8 12.8C8.4 20.7 3.2 14.900 3.2 9 3.2 4.900 6.600 2.200 12 2.200z" fill="var(--chordc)"/><path d="M8.600 9.800l2.200 3.200 2.200-3.200 2.200 3.200" fill="none" stroke="#fff" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>SongTrak<small class="ver" id="ver" title="App version">v3.186 · 15 Nov e1</small></h1>
  <div class="tabs gears"><button id="hback" class="gear" aria-label="Back one step" title="Back"><svg class="ic" aria-hidden="true"><use href="#i-chevron-left"/></svg></button><button id="hnav" class="gear" aria-label="History list" title="History list"><svg class="ic" aria-hidden="true"><use href="#i-pocket-watch"/></svg></button><button id="hfwd" class="gear" aria-label="Forward one step" title="Forward"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></button><button id="fsbtn" class="gear" aria-label="Full screen" title="Full screen" hidden><svg class="ic" aria-hidden="true"><use href="#i-maximize"/></svg></button><button id="helpbtn" class="gear" aria-label="Getting started" title="Getting started"><svg class="ic" aria-hidden="true"><use href="#i-circle-question-mark"/></svg></button><button id="setbtn" class="gear" aria-label="Settings" title="Settings"><svg class="ic" aria-hidden="true"><use href="#i-settings"/></svg></button></div>
  <div class="tabs"><button id="tS" class="on" aria-haspopup="menu" aria-expanded="false">Songs <svg class="ic" aria-hidden="true"><use href="#i-chevron-down"/></svg></button><button id="tL">Setlists</button></div>
  <input type="search" id="q" placeholder="Search songs" aria-label="Search songs">
@@ -1373,28 +1375,31 @@ body.playing.tabs-collapsed #dthandle{opacity:1;visibility:visible;pointer-event
 <ul>
 <li>Open <b>Settings</b>, then <b>Jam session…</b>. Type your name.</li>
 <li>Tick <b>I can play drums</b> only if this device is connected to an amp or speaker. Tap <b>Check my drums</b> once to wake the sound.</li>
-<li>One player taps <b>Start a jam</b> and holds the lead.</li>
+<li>One player taps <b>Start a jam</b>. A code such as <b>K7M2-9QXP</b> appears.</li>
 </ul>
-<h5>Add players</h5>
+<h5>Join</h5>
 <ul>
-<li>The leader taps <b>Add a player…</b> and sends the code to the new player (Messages works well).</li>
-<li>The new player taps <b>Join a jam…</b>, pastes the code, taps <b>Make reply</b> and sends the reply code back.</li>
-<li>The leader pastes the reply and taps <b>Connect</b>. Everyone then links up with everyone else by themselves.</li>
-<li>Use the same Wi-Fi, or a phone hotspot. Some venue Wi-Fi blocks devices from talking to each other.</li>
+<li>The leader taps <b>Send invite…</b> and sends the message. Tapping the link opens SongTrak and joins.</li>
+<li>Or type the code under <b>Join with an invitation code</b> and tap <b>Join</b>.</li>
+<li>Joining needs the internet for a few seconds. A phone hotspot is enough. After that the devices talk directly to each other.</li>
+<li>No internet at all? Open <b>No internet? Pair by copying codes</b> and swap two short codes.</li>
 </ul>
 <h5>While you play</h5>
 <ul>
 <li>The leader’s song, scrolling and Play screen appear on the other devices. Nothing is saved there.</li>
+<li>The blue button above the Play bar says <b>Following</b>. Tap it to go your own way, for example to get your own song ready. It turns orange. Tap it again to catch up.</li>
 <li><b>Start</b> and <b>Stop</b> for the drums, on any device, go to the drummer’s device.</li>
-<li><b>Pass the lead on</b> hands the lead to the next player in the list. <b>Set the drummer…</b> changes who plays the drums.</li>
-<li>If a player drops out, the leader sees a notice. If the leader drops out, the next player takes the lead.</li>
+<li><b>Pass the lead on</b> hands the lead to the next player in the list. The song on the new leader’s screen is what everyone then follows. <b>Set the drummer…</b> changes who plays the drums.</li>
+<li>If a player drops out, the leader sees a notice. If the leader drops out, the next player takes over.</li>
+<li>A dropped device tries to reconnect by itself. <b>Reconnect</b> does it at once. The screen stays awake while you are in a jam.</li>
 </ul>
 <details class="hmore"><summary>More info…</summary><div class="hm">
 <h5>Notes</h5>
 <ul>
-<li>This is a first version for trying out. The devices link directly to each other, with no server.</li>
+<li>This is a first version for trying out. Only the connection set-up goes through a free public service (ntfy.sh). Songs, scrolling and drums go straight between the devices.</li>
+<li>Anyone who knows the code could ask to join, so share it only with your group.</li>
 <li>Each device links to at most 8 others. Messages are passed on, so a bigger group still hears the leader.</li>
-<li>If the page is put to sleep or you leave the app, the link may drop. Open Jam session… to see who is connected.</li>
+<li>If the page is put to sleep or you leave the app, the link may drop.</li>
 <li>Use the same version of SongTrak on every device.</li>
 <li>Your name and the drums tick are kept on this device only.</li>
 </ul></div></details>
@@ -1487,13 +1492,19 @@ body.playing.tabs-collapsed #dthandle{opacity:1;visibility:visible;pointer-event
  <label class="chkl"><input type="checkbox" id="jamdr"><span><b>I can play drums</b><small>This device is connected to an amp or speaker that can play the drums for everyone.</small></span></label>
  <button class="btn" id="jamchk" type="button">Check my drums</button></fieldset>
  <fieldset class="slbox setg"><legend>Jam</legend>
- <div class="row"><button class="btn main" id="jamstart" type="button">Start a jam</button><button class="btn" id="jamjoin" type="button">Join a jam…</button><button class="btn main" id="jamadd" type="button" hidden>Add a player…</button></div>
- <div class="row"><button class="btn" id="jampass" type="button" hidden>Pass the lead on</button><button class="btn" id="jamdrum" type="button" hidden>Set the drummer…</button><button class="btn" id="jamleave" type="button" hidden>Leave the jam</button></div></fieldset>
+ <div class="row"><button class="btn main" id="jamstart" type="button">Start a jam</button></div>
+ <div id="jamjrow"><label>Join with an invitation code <input type="text" id="jamcode" class="sz" maxlength="12" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="K7M2-9QXP" aria-label="Invitation code"></label><div class="row"><button class="btn main" id="jamgo2" type="button">Join</button></div></div>
+ <div id="jaminv" hidden><p class="status">Invitation code. Send it to the other players, or tap Send invite.</p><div id="jamcodev" aria-live="polite"></div><div class="row"><button class="btn main" id="jamsend" type="button">Send invite…</button><button class="btn" id="jamcopyc" type="button">Copy code</button></div></div>
+ <p class="status" id="jamrs" role="status"></p>
+ <div class="row"><button class="btn main" id="jamrec" type="button" hidden>Reconnect</button><button class="btn" id="jampass" type="button" hidden>Pass the lead on</button><button class="btn" id="jamdrum" type="button" hidden>Set the drummer…</button><button class="btn" id="jamleave" type="button" hidden>Leave the jam</button></div></fieldset>
+ <details class="slbox setg" id="jammanual"><summary><b>No internet? Pair by copying codes</b></summary>
+ <div class="row"><button class="btn" id="jamadd" type="button">Add a player…</button><button class="btn" id="jamjoin" type="button">Join by code pasted…</button></div>
  <fieldset class="slbox setg" id="jampair" hidden><legend id="jamplg">Pairing</legend>
  <p class="status" id="jamp1"></p><textarea id="jamout" readonly rows="4" aria-label="Code to send"></textarea><button class="btn" id="jamcopy" type="button">Copy code</button>
  <p class="status" id="jamp2"></p><textarea id="jamin" rows="4" placeholder="Paste a code here" aria-label="Code received"></textarea><button class="btn main" id="jamgo" type="button">Connect</button>
- <p class="status" id="jampmsg" role="status"></p></fieldset>
+ <p class="status" id="jampmsg" role="status"></p></fieldset></details>
 </div></div>
+<button id="jamfol" class="btn" type="button" hidden></button>
 <div id="smenu" role="menu" hidden></div><div id="shmenu" role="menu" hidden></div>
 <div id="chs" class="ov" role="dialog" aria-modal="true"><div class="box"><b id="cht"></b><p class="status" id="chn"></p><label class="chkl" id="chk" hidden><input type="checkbox" id="chkb"><span id="chkt"></span></label><div id="chb" class="chb"></div><button class="btn" id="chx" type="button">Cancel</button></div></div>
 <div id="dlg" role="dialog" aria-modal="true"><div class="box"><b id="dt"></b><input id="di" aria-label="Name"><textarea id="dx" readonly hidden></textarea><div class="row"><button class="btn main" id="dok">OK</button><button class="btn" id="dalt" hidden></button><button class="btn" id="dno">Cancel</button></div></div></div>
@@ -3485,15 +3496,15 @@ function onMsg(L,m){
  case"alive":J.alive[m.f]=Date.now();if(m.f==J.drummer){J.drOn=!!m.dr;render()}break;
  case"join":if(J.on&&J.leader==J.me)addMember(m.m);break;
  case"bye":if(J.on&&J.leader==J.me)dropMember(m.f,true);break;
- case"roster":if(m.q>J.q||!J.on){J.q=m.q;J.on=true;J.leader=m.leader;J.drummer=m.drummer;J.roster=m.list;var n=Date.now();J.roster.forEach(function(x){if(!J.alive[x.id])J.alive[x.id]=n});if(m.note)toast(m.note);ensureMesh();render()}break;
+ case"roster":if(m.q>J.q||!J.on){J.q=m.q;J.on=true;J.leader=m.leader;J.drummer=m.drummer;J.roster=m.list;if(m.code&&m.code!=R.code){J.code=m.code;openRoom(m.code)}var n=Date.now();J.roster.forEach(function(x){if(!J.alive[x.id])J.alive[x.id]=n});if(m.note)toast(m.note);ensureMesh();render()}break;
  case"sig":sigIn(m);break;
  case"token":becomeLeader(m.f);break;
- case"song":if(J.leader!=J.me)applySong(m);break;
- case"mode":if(J.leader!=J.me)applyMode(m.p);break;
- case"pos":if(J.leader!=J.me)applyPos(m.p);break;
+ case"song":if(J.leader!=J.me){if(J.follow)applySong(m);else{J.held=m;J.heldMode=undefined;J.heldPos=undefined;render()}}break;
+ case"mode":if(J.leader!=J.me){if(J.follow)applyMode(m.p);else{J.heldMode=m.p;render()}}break;
+ case"pos":if(J.leader!=J.me){if(J.follow)applyPos(m.p);else J.heldPos=m.p}break;
  case"drum":drumDo(m.a);break}}
 /* ---- leader duties ---- */
-function bcast(note){J.q++;send({t:"roster",q:J.q,leader:J.leader,drummer:J.drummer,list:J.roster,note:note||""});render()}
+function bcast(note){J.q++;send({t:"roster",q:J.q,leader:J.leader,drummer:J.drummer,list:J.roster,code:J.code||"",note:note||""});render()}
 function fixDrummer(){var d=mem(J.drummer);if(d&&!d.g&&d.d)return false;var n=null;J.roster.forEach(function(x){if(!n&&x.d&&!x.g)n=x});var was=J.drummer;J.drummer=n?n.id:null;return was!=J.drummer}
 function addMember(x){if(!x||!x.id||J.roster.length>=50)return;var m=mem(x.id),note="";
  if(m){m.name=x.name;m.d=x.d?1:0;if(m.g){delete m.g;note=m.name+" is back."}}
@@ -3504,17 +3515,18 @@ function addMember(x){if(!x||!x.id||J.roster.length>=50)return;var m=mem(x.id),n
 function dropMember(id,bye){var i=idx(id);if(i<0)return;var n=J.roster[i].name;J.roster.splice(i,1);fixDrummer();bcast(n+(bye?" left the jam.":" was removed."))}
 function becomeLeader(from){if(!J.on||J.leader==J.me)return;J.leader=J.me;J.sig="";J.play=-1;bcast(nm()+" now holds the lead."+(from?"":""))}
 function nextAlive(after){var n=J.roster.length,i=idx(after);for(var k=1;k<=n;k++){var m=J.roster[(i+k)%n];if(m&&!m.g&&m.id!=after&&!J.gone[m.id])return m}return null}
-J.gone={};
+J.gone={};J.retry={};J.follow=true;J.held=null;J.heldMode=undefined;J.heldPos=undefined;
 function check(){if(!J.on)return;var now=Date.now();
  J.roster.forEach(function(m){if(m.id==J.me){J.gone[m.id]=0;return}J.gone[m.id]=(now-(J.alive[m.id]||now))>GONE});
  if(J.leader==J.me){var ch=false,note="";J.roster.forEach(function(m){if(m.id==J.me)return;if(J.gone[m.id]&&!m.g){m.g=1;ch=true;note+=m.name+" seems to have dropped out (maybe by mistake). "}else if(!J.gone[m.id]&&m.g){delete m.g;ch=true;note+=m.name+" is back. "}});
   if(fixDrummer()){ch=true;note+=J.drummer?nameOf(J.drummer)+" is now the drummer. ":"No drummer is available. "}
   if(ch){toast(note.trim());bcast(note.trim())}}
  else if(J.gone[J.leader]){var nx=nextAlive(J.leader);if(nx&&nx.id==J.me){var old=nameOf(J.leader);var lm=mem(J.leader);if(lm)lm.g=1;J.leader=J.me;J.sig="";J.play=-1;var f=fixDrummer();bcast(old+" dropped out. "+nm()+" now holds the lead.");toast(old+" dropped out. You now hold the lead.")}}
+ if(J.roster.length>1&&!nlinks()){if(!J.lost){J.lost=now;toast("You are disconnected from the jam. Trying to reconnect…")}if(J.code&&now-(J.lastRej||0)>20000&&document.visibilityState=="visible"){J.lastRej=now;joinRoom(J.code)}}else J.lost=0;wake();
  var dr=(window.__drOn&&window.__drOn())?1:0;send({t:"alive",dr:dr});J.alive[J.me]=now;
  if(J.drummer==J.me&&J.drOn!=!!dr){J.drOn=!!dr;render()}}
 /* ---- mesh via relayed signalling ---- */
-function ensureMesh(){if(!J.on)return;var mi=idx(J.me);J.roster.forEach(function(m,i){if(m.id==J.me||m.g||J.links[m.id]||J.pend[m.id]||mi<0||i<mi)return;if(i<=mi)return;if(nlinks()+Object.keys(J.pend).length>=MAXL)return;relayOffer(m.id)})}
+function ensureMesh(){if(!J.on)return;var mi=idx(J.me);J.roster.forEach(function(m,i){if(m.id==J.me||J.links[m.id]||J.pend[m.id]||mi<0||i<mi)return;if(m.g){if(Date.now()-(J.retry[m.id]||0)<30000)return;J.retry[m.id]=Date.now()}if(i<=mi)return;if(nlinks()+Object.keys(J.pend).length>=MAXL)return;relayOffer(m.id)})}
 async function relayOffer(id){try{var L=newLink();L.dc=L.pc.createDataChannel("j");wire(L);J.pend[id]=L;await L.pc.setLocalDescription(await L.pc.createOffer());await gathered(L.pc);send({t:"sig",to:id,k:"o",s:L.pc.localDescription.sdp});setTimeout(function(){if(J.pend[id]===L&&!L.id){delete J.pend[id];try{L.pc.close()}catch(e){}}},20000)}catch(e){delete J.pend[id]}}
 async function sigIn(m){try{if(m.k=="o"){if(J.links[m.f]||J.pend[m.f])return;var L=newLink();J.pend[m.f]=L;await L.pc.setRemoteDescription({type:"offer",sdp:m.s});await L.pc.setLocalDescription(await L.pc.createAnswer());await gathered(L.pc);send({t:"sig",to:m.f,k:"a",s:L.pc.localDescription.sdp});setTimeout(function(){if(J.pend[m.f]===L&&!L.id){delete J.pend[m.f];try{L.pc.close()}catch(e){}}},20000)}
  else if(m.k=="a"){var L2=J.pend[m.f];if(L2&&L2.pc.signalingState=="have-local-offer")await L2.pc.setRemoteDescription({type:"answer",sdp:m.s})}}catch(e){}}
@@ -3523,11 +3535,12 @@ function snap(s){var o={};for(var k in s){if(k=="id"||k=="fx"||k=="dl"||k=="star
 function applySong(m){var o=m.s;o.id="jam:"+m.sid;J.song=o;var p=m.p;applying=true;try{pick(o.id,true)}catch(e){}applying=false;if(p!==undefined)applyMode(p)}
 var _by=byId;byId=function(id){if(J.song&&id===J.song.id)return J.song;return _by(id)};
 function applyMode(p){applying=true;try{var pl=document.body.classList.contains("playing");if(p&&!pl&&cur){$("play").click()}else if(!p&&pl&&window.stopPlay)stopPlay()}catch(e){}applying=false}
-function applyPos(f){if(!document.body.classList.contains("playing"))return;var h=document.documentElement.scrollHeight-innerHeight;if(h>0)window.scrollTo(0,Math.max(0,Math.min(1,f))*h)}
+function applyPos(f){if(!document.body.classList.contains("playing"))return;SM.t=f;if(!SM.raf)SM.raf=requestAnimationFrame(smooth)}
 function lead(){if(!J.on||J.leader!=J.me)return;
  if(cur){var o=snap(cur),s=JSON.stringify(o);if(s!=J.sig&&s.length<200000){J.sig=s;send({t:"song",sid:String(cur.id).replace(/^jam:/,""),s:o,p:document.body.classList.contains("playing")?1:0});J.play=document.body.classList.contains("playing")?1:0}}
  var pl=document.body.classList.contains("playing")?1:0;if(pl!=J.play){J.play=pl;send({t:"mode",p:pl})}
- var h=document.documentElement.scrollHeight-innerHeight,f=h>0?Math.round(scrollY/h*10000)/10000:0;if(Math.abs(f-J.pos)>.002){J.pos=f;send({t:"pos",p:f})}}
+ }
+function leadPos(){if(!J.on||J.leader!=J.me||!Object.keys(J.links).length)return;var h=document.documentElement.scrollHeight-innerHeight,f=h>0?Math.round(scrollY/h*10000)/10000:0;if(Math.abs(f-J.pos)>.0005){J.pos=f;send({t:"pos",p:f})}}
 /* ---- drums ---- */
 function drumDo(a){if(J.drummer!=J.me)return;var on=window.__drOn&&window.__drOn();if(a=="start"&&!on)$("pdq").click();else if(a=="stop"&&on)$("pdq").click();else if(a=="fade"&&on)$("pdf").click()}
 function far(){return J.on&&J.drummer&&J.drummer!=J.me&&mem(J.drummer)&&!mem(J.drummer).g}
@@ -3536,25 +3549,60 @@ $("pdq").addEventListener("click",function(e){ask1(e,J.drOn?"stop":"start")},tru
 if(DS)window.__drStart=function(){if(far()){send({t:"drum",to:J.drummer,a:"start"});return}return DS.apply(this,arguments)};
 if(DX)window.__drStop=function(){if(far()){send({t:"drum",to:J.drummer,a:"stop"});return}return DX.apply(this,arguments)};
 function unlock(){try{var C=window.AudioContext||window.webkitAudioContext,c=new C();c.resume();var b=c.createBuffer(1,1,22050),s=c.createBufferSource();s.buffer=b;s.connect(c.destination);s.start(0);setTimeout(function(){try{c.close()}catch(e){}},600)}catch(e){}}
+/* ---- invitation code through a small public relay (ntfy.sh): only the connection set-up goes through it ---- */
+function pack(sd){var g=function(re){var m=sd.match(re);return m?m[1]:""},c=[];sd.split(/\r?\n/).forEach(function(l){var m=l.match(/^a=candidate:\S+ \d+ udp \d+ (\S+) (\d+) typ host/i);if(m&&!/^fe80/i.test(m[1]))c.push(m[1]+" "+m[2])});
+ return{u:g(/a=ice-ufrag:(\S+)/),p:g(/a=ice-pwd:(\S+)/),f:g(/a=fingerprint:sha-256 (\S+)/).replace(/:/g,""),s:g(/a=setup:(\S+)/),c:c.slice(0,4)}}
+function unpack(o){var fp=o.f.match(/../g).join(":"),a=["v=0","o=- 1 2 IN IP4 127.0.0.1","s=-","t=0 0","a=group:BUNDLE 0","a=msid-semantic: WMS","m=application 9 UDP/DTLS/SCTP webrtc-datachannel","c=IN IP4 0.0.0.0","a=ice-ufrag:"+o.u,"a=ice-pwd:"+o.p,"a=ice-options:trickle","a=fingerprint:sha-256 "+fp,"a=setup:"+o.s,"a=mid:0","a=sctp-port:5000","a=max-message-size:262144"];
+ o.c.forEach(function(x,i){var q=x.split(" ");a.push("a=candidate:"+(i+1)+" 1 udp "+(2113937151-i)+" "+q[0]+" "+q[1]+" typ host")});return a.join("\r\n")+"\r\n"}
+var RELAY=window.__jamRelay||"https://ntfy.sh/",R={code:"",es:null,seen:{},out:{},inL:null,ht:null},AL="abcdefghjkmnpqrstuvwxyz23456789";
+function newCode(){var a=new Uint8Array(8),x="";crypto.getRandomValues(a);for(var i=0;i<8;i++)x+=AL[a[i]%AL.length];return x}
+function normCode(x){return String(x||"").toLowerCase().replace(/[^a-z0-9]/g,"")}
+function showCode(c){c=c.toUpperCase();return c.slice(0,4)+"-"+c.slice(4)}
+function rmsg(t){var e=$("jamrs");if(e)e.textContent=t||""}
+function rpub(m){m.i=rid();m.f=J.me;return fetch(RELAY+"songtrak-jam-"+R.code,{method:"POST",body:JSON.stringify(m)}).then(function(r){if(!r.ok)throw Error("relay "+r.status)})}
+function openRoom(code){if(R.code==code&&R.es)return;closeRoom();R.code=code;J.code=code;var es=new EventSource(RELAY+"songtrak-jam-"+code+"/sse");R.es=es;
+ es.onmessage=function(e){var d,m;try{d=JSON.parse(e.data);if(d.event&&d.event!="message")return;m=JSON.parse(d.message)}catch(x){return}if(!m||!m.i||R.seen[m.i]||m.f==J.me)return;R.seen[m.i]=1;if(d.time&&Date.now()/1000-d.time>90)return;roomMsg(m)}}
+function closeRoom(){if(R.es){R.es.close();R.es=null}clearInterval(R.ht);R.code=""}
+function roomMsg(m){
+ if(m.t=="rhello"){if(J.on&&J.leader==J.me&&!J.links[m.f]&&!(R.out[m.f]&&Date.now()-R.out[m.f].t<25000))roomOffer(m)}
+ else if(m.t=="roffer"&&m.to==J.me)roomAnswer(m);
+ else if(m.t=="ranswer"&&m.to==J.me){var L=R.out[m.f];if(L&&L.pc.signalingState=="have-local-offer")L.pc.setRemoteDescription({type:"answer",sdp:unpack(m.x)}).catch(function(){})}}
+async function roomOffer(m){try{var L=newLink();L.dc=L.pc.createDataChannel("j");wire(L);R.out[m.f]=L;await L.pc.setLocalDescription(await L.pc.createOffer());await gathered(L.pc);await rpub({t:"roffer",to:m.f,x:pack(L.pc.localDescription.sdp),v:VER});setTimeout(function(){if(!L.id&&R.out[m.f]===L){delete R.out[m.f];try{L.pc.close()}catch(e){}}},25000)}catch(e){toast("Could not answer "+(m.name||"a player")+": "+e.message)}}
+async function roomAnswer(m){try{if(R.inL&&!R.inL.id&&Date.now()-R.inL.t<25000)return;var L=newLink();R.inL=L;await L.pc.setRemoteDescription({type:"offer",sdp:unpack(m.x)});await L.pc.setLocalDescription(await L.pc.createAnswer());await gathered(L.pc);await rpub({t:"ranswer",to:m.f,x:pack(L.pc.localDescription.sdp)})}catch(e){rmsg("Could not connect: "+e.message)}}
+function joinRoom(code){code=normCode(code);if(code.length!=8){rmsg("The code has 8 letters and numbers, like K7M2-9QXP.");return}if(!window.RTCPeerConnection){rmsg("This browser cannot make a direct link.");return}
+ openRoom(code);var n=0;clearInterval(R.ht);
+ var hello=function(){if(nlinks()>0){clearInterval(R.ht);rmsg("");return}if(n++>10){clearInterval(R.ht);rmsg("Nobody answered. Check the code, and that the leader has the jam open.");return}
+  rpub({t:"rhello",name:nm(),d:P.d,v:VER}).catch(function(){clearInterval(R.ht);rmsg("Could not reach the invitation service. Check the internet connection, or use Pair by copying codes below.")})};
+ rmsg("Asking to join…");hello();R.ht=setInterval(hello,4000)}
+function inviteLink(){return location.origin+location.pathname+"#jam="+J.code}
+/* ---- smooth scrolling, screen awake ---- */
+var SM={t:0,c:-1,raf:0};
+function smooth(){SM.raf=0;if(!document.body.classList.contains("playing"))return;var h=document.documentElement.scrollHeight-innerHeight;if(h<=0)return;var ty=Math.max(0,Math.min(1,SM.t))*h,y=window.scrollY;if(SM.c<0||Math.abs(SM.c-y)>3)SM.c=y;var d=ty-SM.c;if(Math.abs(d)<.5){SM.c=ty;window.scrollTo(0,ty);return}SM.c+=d*.2;window.scrollTo(0,SM.c);SM.raf=requestAnimationFrame(smooth)}
+var wl=null;function wake(){if(J.on&&!wl&&navigator.wakeLock&&document.visibilityState=="visible"){try{navigator.wakeLock.request("screen").then(function(l){wl=l;l.addEventListener("release",function(){wl=null})}).catch(function(){})}catch(e){}}else if(!J.on&&wl){try{wl.release()}catch(e){}wl=null}}
+document.addEventListener("visibilitychange",function(){if(document.visibilityState=="visible"){wake();if(J.on&&J.code&&J.roster.length>1&&!nlinks())joinRoom(J.code)}});
 /* ---- screen ---- */
 function render(){var st=$("jamst"),L=$("jamlist");if(!st)return;
  if(!J.on){st.textContent="Not in a jam. Start one, or join a jam that someone else started.";L.innerHTML=""}
  else{var nl=nlinks();st.textContent="In a jam: "+J.roster.length+(J.roster.length==1?" player":" players")+". Lead: "+nameOf(J.leader)+". Drums: "+(J.drummer?nameOf(J.drummer)+(J.drOn?" (playing)":""):"nobody can play drums yet")+"."+(J.roster.length>1&&!nl?" No connection to the others right now.":"");
   L.innerHTML=J.roster.map(function(m){var t=[];if(m.id==J.me)t.push("you");if(m.id==J.leader)t.push("lead");if(m.id==J.drummer)t.push("drummer");else if(m.d)t.push("can play drums");if(m.g)t.push("dropped out");return'<div class="jrow'+(m.g?" gone":"")+'"><b>'+esc(m.name)+"</b> <small>"+t.join(" · ")+"</small></div>"}).join("")}
- var lead_=J.on&&J.leader==J.me;$("jamstart").hidden=J.on;$("jamjoin").hidden=J.on;$("jamadd").hidden=!J.on;$("jampass").hidden=!(lead_&&J.roster.length>1);$("jamdrum").hidden=!lead_;$("jamleave").hidden=!J.on}
+ var lead_=J.on&&J.leader==J.me;$("jamstart").hidden=J.on;$("jamjoin").hidden=J.on;$("jamadd").hidden=!J.on;$("jamjrow").hidden=J.on;$("jaminv").hidden=!(J.on&&J.code);if(J.on&&J.code)$("jamcodev").textContent=showCode(J.code);$("jamrec").hidden=!(J.on&&J.roster.length>1&&!nlinks()&&J.code);var fp=$("jamfol"),fo=J.on&&J.leader!=J.me&&J.roster.length>1;fp.hidden=!fo;if(fo){var beh=!J.follow&&(J.held||J.heldMode!==undefined);fp.textContent=J.follow?"Following "+nameOf(J.leader)+". Tap to go your own way.":(beh?"On your own. "+nameOf(J.leader)+" has moved on. Tap to catch up.":"On your own. Tap to follow "+nameOf(J.leader)+".");fp.classList.toggle("own",!J.follow)}wake();$("jampass").hidden=!(lead_&&J.roster.length>1);$("jamdrum").hidden=!lead_;$("jamleave").hidden=!J.on}
 function pairUI(mode){J.pm=mode;$("jampair").hidden=false;$("jamout").value="";$("jamin").value="";$("jampmsg").textContent="";
  if(mode=="add"){$("jamplg").textContent="Add a player";$("jamp1").textContent="1. Making a code… then send it to the new player (for example in Messages).";$("jamp2").textContent="2. Paste their reply code here, then tap Connect.";$("jamgo").textContent="Connect";$("jamin").hidden=false;$("jamp2").hidden=false;$("jamgo").hidden=false;$("jamout").hidden=false;$("jamcopy").hidden=false}
  else{$("jamplg").textContent="Join a jam";$("jamp1").textContent="1. Paste the code you were sent, then tap Make reply.";$("jamp2").textContent="2. Send the reply code back. You are connected when it has been pasted on their device.";$("jamgo").textContent="Make reply";$("jamin").hidden=false;$("jamp2").hidden=true;$("jamout").hidden=true;$("jamcopy").hidden=true;$("jamgo").hidden=false}}
-async function invite(){if(!window.RTCPeerConnection){$("jamst").textContent="This browser cannot make a direct link.";return}pairUI("add");try{var L=newLink();L.dc=L.pc.createDataChannel("j");wire(L);J.inv=L;await L.pc.setLocalDescription(await L.pc.createOffer());await gathered(L.pc);$("jamout").value=enc({k:"o",s:L.pc.localDescription.sdp,v:VER});$("jamp1").textContent="1. Send this code to the new player (for example in Messages)."}catch(e){$("jampmsg").textContent="Could not make a code: "+e.message}}
+async function invite(){if(!window.RTCPeerConnection){$("jamst").textContent="This browser cannot make a direct link.";return}pairUI("add");try{var L=newLink();L.dc=L.pc.createDataChannel("j");wire(L);J.inv=L;await L.pc.setLocalDescription(await L.pc.createOffer());await gathered(L.pc);$("jamout").value=enc({k:"o",x:pack(L.pc.localDescription.sdp),v:VER});$("jamp1").textContent="1. Send this code to the new player (for example in Messages)."}catch(e){$("jampmsg").textContent="Could not make a code: "+e.message}}
 $("jamgo").onclick=async function(){var raw=$("jamin").value;if(!raw.trim()){$("jampmsg").textContent="Paste a code first.";return}var c;try{c=dec(raw)}catch(e){$("jampmsg").textContent="That does not look like a SongTrak jam code.";return}
- try{if(J.pm=="add"){if(c.k!="a")throw Error("That is not a reply code.");if(!J.inv)throw Error("Tap Add a player again to make a new code.");$("jampmsg").textContent="Connecting…";await J.inv.pc.setRemoteDescription({type:"answer",sdp:c.s})}
- else{if(c.k!="o")throw Error("That is not an invitation code.");var L=newLink();J.jn=L;await L.pc.setRemoteDescription({type:"offer",sdp:c.s});await L.pc.setLocalDescription(await L.pc.createAnswer());$("jampmsg").textContent="Making the reply…";await gathered(L.pc);$("jamout").hidden=false;$("jamcopy").hidden=false;$("jamp2").hidden=false;$("jamout").value=enc({k:"a",s:L.pc.localDescription.sdp,v:VER});$("jampmsg").textContent="Waiting for the leader to paste your reply…"}}catch(e){$("jampmsg").textContent=e.message}};
+ try{if(J.pm=="add"){if(c.k!="a")throw Error("That is not a reply code.");if(!J.inv)throw Error("Tap Add a player again to make a new code.");$("jampmsg").textContent="Connecting…";await J.inv.pc.setRemoteDescription({type:"answer",sdp:unpack(c.x)})}
+ else{if(c.k!="o")throw Error("That is not an invitation code.");var L=newLink();J.jn=L;await L.pc.setRemoteDescription({type:"offer",sdp:unpack(c.x)});await L.pc.setLocalDescription(await L.pc.createAnswer());$("jampmsg").textContent="Making the reply…";await gathered(L.pc);$("jamout").hidden=false;$("jamcopy").hidden=false;$("jamp2").hidden=false;$("jamout").value=enc({k:"a",x:pack(L.pc.localDescription.sdp),v:VER});$("jampmsg").textContent="Waiting for the leader to paste your reply…"}}catch(e){$("jampmsg").textContent=e.message}};
 $("jamcopy").onclick=function(){var t=$("jamout");t.select();var ok=false;try{ok=document.execCommand("copy")}catch(e){}try{if(navigator.clipboard)navigator.clipboard.writeText(t.value).then(function(){},function(){})}catch(e){}$("jampmsg").textContent=ok||navigator.clipboard?"Copied.":"Select the code and copy it."};
-$("jamstart").onclick=function(){J.on=true;J.leader=J.me;J.roster=[me()];J.q=1;J.drummer=null;fixDrummer();J.sig="";J.play=-1;J.alive[J.me]=Date.now();toast("Jam started. You hold the lead.");render()};
-$("jamjoin").onclick=function(){pairUI("join")};$("jamadd").onclick=invite;
+$("jamstart").onclick=function(){J.on=true;J.leader=J.me;J.roster=[me()];J.q=1;J.drummer=null;fixDrummer();J.sig="";J.play=-1;J.alive[J.me]=Date.now();J.code=newCode();openRoom(J.code);toast("Jam started. Send the invitation code to the other players.");render()};
+$("jamjoin").onclick=function(){pairUI("join")};$("jamgo2").onclick=function(){joinRoom($("jamcode").value)};$("jamrec").onclick=function(){joinRoom(J.code)};$("jamfol").onclick=function(){J.follow=!J.follow;if(J.follow){var h=J.held,hm=J.heldMode,hp=J.heldPos;J.held=null;J.heldMode=undefined;J.heldPos=undefined;if(h)applySong(h);if(hm!==undefined)applyMode(hm);if(hp!==undefined)setTimeout(function(){applyPos(hp)},300)}render()};
+$("jamsend").onclick=function(){var t="Join my SongTrak jam. Code: "+showCode(J.code),u=inviteLink();if(navigator.share){navigator.share({title:"SongTrak jam",text:t,url:u}).catch(function(){})}else{cpy(t+"\n"+u)}};$("jamcopyc").onclick=function(){cpy(showCode(J.code))};
+function cpy(t){var ok=false;try{if(navigator.clipboard)navigator.clipboard.writeText(t).then(function(){rmsg("Copied.")},function(){rmsg("Copy it by hand: "+t)});else rmsg("Copy it by hand: "+t)}catch(e){rmsg("Copy it by hand: "+t)}}
+var hm=/[#&]jam=([A-Za-z0-9-]+)/.exec(location.hash||"");if(hm&&!J.on){try{history.replaceState(null,"",location.pathname+location.search)}catch(e){}setTimeout(function(){$("jamcode").value=showCode(normCode(hm[1]));$("jamopen").onclick();joinRoom(hm[1]);if(!P.n)$("jamname").focus()},400)}
+$("jamadd").onclick=invite;
 $("jampass").onclick=function(){var n=nextAlive(J.me);if(!n)return;send({t:"token",to:n.id});J.leader=n.id;render();toast("Lead passed to "+n.name+".")};
 $("jamdrum").onclick=async function(){var ch=J.roster.filter(function(m){return m.d&&!m.g}).map(function(m){return{label:m.name+(m.id==J.drummer?"  (now)":""),v:m.id,cur:m.id==J.drummer}});if(!ch.length){toast("Nobody has ticked I can play drums yet.");return}var r=await chooseDlg("Who plays the drums?",ch,"Start and stop from any device goes to this player.");if(!r)return;J.drummer=r;bcast(nameOf(r)+" is now the drummer.")};
-$("jamleave").onclick=function(){if(J.on){send({t:"bye"})}setTimeout(function(){for(var k in J.links){try{J.links[k].pc.close()}catch(e){}}J.links={};J.pend={};J.on=false;J.leader=J.drummer=null;J.roster=[];J.drOn=false;if(cur&&String(cur.id).indexOf("jam:")==0){cur=null;J.song=null;try{if(window.stopPlay)stopPlay();draw()}catch(e){}}J.song=null;render()},150)};
+$("jamleave").onclick=function(){if(J.on){send({t:"bye"})}setTimeout(function(){for(var k in J.links){try{J.links[k].pc.close()}catch(e){}}J.links={};J.pend={};J.on=false;J.leader=J.drummer=null;J.roster=[];J.drOn=false;J.follow=true;J.held=null;closeRoom();J.code="";rmsg("");if(cur&&String(cur.id).indexOf("jam:")==0){cur=null;J.song=null;try{if(window.stopPlay)stopPlay();draw()}catch(e){}}J.song=null;render()},150)};
 $("jamname").value=P.n||(window.uname||"")||"";$("jamdr").checked=!!P.d;
 $("jamname").oninput=function(){P.n=this.value.slice(0,24);saveP();if(J.on)ann()};
 $("jamdr").onchange=function(){P.d=this.checked?1:0;saveP();if(this.checked)unlock();if(J.on)ann()};
@@ -3562,6 +3610,6 @@ function ann(){var m=mem(J.me);if(m){m.name=nm();m.d=P.d;if(J.leader==J.me){fixD
 $("jamchk").onclick=function(){unlock();try{if(DS&&!(window.__drOn&&window.__drOn())){DS();setTimeout(function(){if(DX)DX()},1200);toast("Playing the drums for a moment. If you heard nothing, check the volume and the amp.")}}catch(e){}};
 $("jamopen").onclick=function(){$("sets").classList.remove("on");render();D.classList.add("on")};
 $("jamx").onclick=function(){D.classList.remove("on")};D.onclick=function(e){if(e.target==D)D.classList.remove("on")};
-setInterval(function(){try{lead();if(J.on&&J.drummer==J.me){var d=(window.__drOn&&window.__drOn())?1:0;if(d!=J.lastDr){J.lastDr=d;J.drOn=!!d;send({t:"alive",dr:d});render()}}}catch(e){}},300);setInterval(function(){try{check();ensureMesh()}catch(e){}},3000);
+setInterval(function(){try{leadPos()}catch(e){}},100);setInterval(function(){try{lead();if(J.on&&J.drummer==J.me){var d=(window.__drOn&&window.__drOn())?1:0;if(d!=J.lastDr){J.lastDr=d;J.drOn=!!d;send({t:"alive",dr:d});render()}}}catch(e){}},300);setInterval(function(){try{check();ensureMesh()}catch(e){}},3000);
 window.__jam=J;render()})();
 </script></body></html>
