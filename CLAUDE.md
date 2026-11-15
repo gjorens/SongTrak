@@ -8,7 +8,7 @@ SongTrak is a single-file web app for guitarists: chord charts and lyrics, setli
 - `manifest.webmanifest`, `icon-*.png`: install on Home Screen.
 - `songtrak-test-library.json`: test data (276 songs, 66 setlists) used by the Load test songs button. Original test songs only.
 - `README.txt`: how to host it.
-- `ug-bookmarklet.html`: standalone page with two Safari bookmarklets (Add to SongTrak batch, Copy SongTrak batch) that collect Ultimate Guitar chord pages into one `{new_song}` text file for Import (batch kept in the localStorage key `songtrakBatch` on the Ultimate Guitar origin; reads `.js-store` JSON, falls back to the first `pre`). Not part of the app; no version bump needed.
+- `ug-bookmarklet.html`: standalone page with three Safari bookmarklets (Add to SongTrak batch, Copy SongTrak batch, Auto-add from My tabs: on the My tabs list it asks for a start row and count, then fetches each tab page, same origin, 1.5 to 3 s apart, into the same batch; if the tab pages are on another origin it opens the first with the URLs in the `#stq=` hash and is clicked again there) that collect Ultimate Guitar chord pages into one `{new_song}` text file for Import (batch kept in the localStorage key `songtrakBatch` on the Ultimate Guitar origin; reads `.js-store` JSON, falls back to the first `pre`). Not part of the app; no version bump needed.
 - `check.sh`, `.github/workflows/check.yml`: release check (see Conventions).
 - `DESIGN-STANDARDS.md`: the table of design standards, to hand to any new Claude conversation.
 
