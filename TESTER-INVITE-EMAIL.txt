@@ -1,0 +1,35 @@
+Hi [Name],
+
+I've built a free app called SongTrak for keeping guitar chord charts and lyrics, and I'd love your help trying it out. It takes about 10 minutes. There is nothing to buy and no account to create.
+
+The link: [PASTE YOUR LINK HERE]
+
+STEP 1: Open the link
+On an iPad or iPhone, open the link in Safari (the blue compass icon). It needs to be Safari, not another browser. On an Android phone or tablet, use Chrome. On a computer, any browser is fine.
+
+STEP 2: Put it on your home screen (optional, but it makes it feel like a real app)
+- iPad or iPhone: tap the Share button (a square with an arrow pointing up), scroll down, tap "Add to Home Screen", then tap "Add".
+- Android: tap the three dots at the top right, then "Install app" or "Add to Home screen".
+After that, open SongTrak from its icon.
+
+STEP 3: Look around
+- Tap the "?" button at the top left. It opens a short guide, with numbered sections you can scroll through.
+- Tap any song in the list to see its chords and lyrics.
+- Tap "Add song" and try pasting in a song with its chords. Most chord sites let you copy the text.
+
+STEP 4: Try Play mode
+- Open a song and tap "Play". The screen gets larger and easier to read on a music stand.
+- Tap "Start scroll" and the song scrolls by itself. The "+" and "-" next to Speed change how fast.
+- Tap "Start" next to the drum icon for a backing beat. Turn the volume up first. On an iPad, make sure the silent switch is off.
+
+STEP 5: Tell me what you think
+What I most want to know is anything that confused you, anything that didn't work, and anything you expected to find but couldn't. Even "I didn't know what that button did" is useful. If you can, send me a screenshot. Please also tell me the version number shown beside the name SongTrak at the top of the screen, for example "v3.37", so I know which copy you were using.
+
+A few things to know
+- Your songs stay on your own device. Nobody else, including me, can see them.
+- It's still being tested, so please keep another copy of any songs that matter to you.
+- You can use it without an internet connection once it has loaded once.
+
+Thank you so much for helping!
+
+[Your name]
