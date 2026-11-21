@@ -51,3 +51,6 @@ To add an icon: copy its `<path>` elements from the Lucide `icons/NAME.svg` file
 - An icon catalogue page (all Lucide icons, in-use ones marked) can be rebuilt from the Lucide `icons` folder.
 
 - v3.131: header row is back (chevron-left), history (pocket-watch), forward (chevron-right), then full screen, help, settings: all `.gear`, equal width and height.
+
+## Standard 15: no silent overrides
+- If the app decides not to do what the user asked, or to do something different from what they asked or expect (skip, replace, keep the old copy, bring back older data), it asks first and says plainly what it found and what each choice does. Silent safety nets are fine only when they change nothing the user can see or already chose. (Added v3.259 after a restore was silently undone.)
