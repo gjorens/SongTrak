@@ -657,6 +657,10 @@ aside .lwrap{border:3px solid var(--tc-green);background:var(--panel);border-rad
 #ftabs #tS.on,#ftabs #tL.on{background:var(--panel);border-bottom-color:var(--panel);z-index:2;font-weight:800;min-height:calc(42px*var(--ui,1));box-shadow:none}
 #fmenu{position:fixed;z-index:70;display:flex;flex-direction:column;gap:6px;padding:8px;min-width:170px;background:var(--panel);border:2px solid var(--tc-green);border-radius:var(--r);box-shadow:0 8px 24px rgba(0,0,0,.3)}
 #fmenu[hidden]{display:none}#fmenu .btn{justify-content:flex-start;width:100%}
+
+/* v3.306 Backup, Restore and Log files are three windows from the File menu */
+#botbar{display:none!important}
+#cloud[data-m=b] [data-g]:not([data-g=b]),#cloud[data-m=r] [data-g]:not([data-g=r]),#cloud[data-m=l] [data-g]:not([data-g=l]){display:none!important}
 </style><script>try{window.__fresh=!localStorage.getItem("cc2")&&localStorage.getItem("cc2help")==null&&!Object.keys(localStorage).some(function(k){return k.indexOf("songtrak-")==0})}catch(e){}</script><script>try{var u_=localStorage.getItem("songtrak-ui");if(/^(1\.25|1\.5|1\.75)$/.test(u_))document.documentElement.style.setProperty("--ui",u_)}catch(e){}</script></head>
 <body><svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="i-arrow-left-from-line" viewBox="0 0 24 24"><path d="m9 6-6 6 6 6" /> <path d="M3 12h14" /> <path d="M21 19V5" /></symbol><symbol id="i-arrow-right-from-line" viewBox="0 0 24 24"><path d="M3 5v14" /> <path d="M21 12H7" /> <path d="m15 18 6-6-6-6" /></symbol><symbol id="i-chevrons-right-left" viewBox="0 0 24 24"><path d="m20 17-5-5 5-5" /> <path d="m4 17 5-5-5-5" /></symbol><symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" /></symbol><symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6" /></symbol><symbol id="i-pocket-watch" viewBox="0 0 24 24"><circle cx="12" cy="14" r="8" /> <path d="M9.5 2h5" /> <path d="M12 2v4" /> <path d="M12 10v4l2.5 1.5" /> <path d="m19 7 1.5-1.5" /></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14" /> <path d="M12 5v14" /></symbol><symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14" /></symbol><symbol id="i-import" viewBox="0 0 24 24"><path d="M12 3v12" /> <path d="m8 11 4 4 4-4" /> <path d="M8 5H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-4" /></symbol><symbol id="i-share" viewBox="0 0 24 24"><path d="M12 2v13" /> <path d="m16 6-4-4-4 4" /> <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" /></symbol><symbol id="i-pencil" viewBox="0 0 24 24"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /> <path d="m15 5 4 4" /></symbol><symbol id="i-drum" viewBox="0 0 24 24"><path d="m2 2 8 8"/><path d="m22 2-8 8"/><ellipse cx="12" cy="9" rx="10" ry="5"/><path d="M7 13.4v7.9"/><path d="M12 14v8"/><path d="M17 13.4v7.9"/><path d="M2 9v8a10 5 0 0 0 20 0V9"/></symbol>
 <symbol id="i-square" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/></symbol>
@@ -674,7 +678,7 @@ aside .lwrap{border:3px solid var(--tc-green);background:var(--panel);border-rad
 <symbol id="i-pause" viewBox="0 0 24 24"><rect x="14" y="3" width="5" height="18" rx="1" /><rect x="5" y="3" width="5" height="18" rx="1" /></symbol>
 <symbol id="i-folder" viewBox="0 0 24 24"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" /></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z" /></symbol><symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7" /> <path d="M19 12H5" /></symbol><symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7" /> <path d="M12 19V5" /></symbol><symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 5v14" /> <path d="m19 12-7 7-7-7" /></symbol><symbol id="i-maximize" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3" /> <path d="M21 8V5a2 2 0 0 0-2-2h-3" /> <path d="M3 16v3a2 2 0 0 0 2 2h3" /> <path d="M16 21h3a2 2 0 0 0 2-2v-3" /></symbol><symbol id="i-circle-question-mark" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M9 9.5a3 2.5 0 016 0c0 2-2 2-3 3.5" /> <path d="M12 17h.01" /></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" /> <circle cx="12" cy="12" r="3" /></symbol><symbol id="i-list-music" viewBox="0 0 24 24"><path d="M16 5H3" /> <path d="M11 12H3" /> <path d="M11 19H3" /> <path d="M21 16V5" /> <circle cx="18" cy="16" r="3" /></symbol><symbol id="i-undo-2" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5" /> <path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11" /></symbol><symbol id="i-redo-2" viewBox="0 0 24 24"><path d="m15 14 5-5-5-5" /> <path d="M20 9H9.5A5.5 5.5 0 0 0 4 14.5A5.5 5.5 0 0 0 9.5 20H13" /></symbol><symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" /></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18" /> <path d="m6 6 12 12" /></symbol></defs></svg><div class="fbanner" id="fbanner" role="status" hidden><span id="fbtxt"></span><button class="btn main" id="fbsave" type="button">Back up now</button></div><div id="fbtop"></div><div class="app">
 <aside><div id="lsplit" role="separator" aria-orientation="vertical" aria-label="Drag to change the width of the left panel. Double tap to reset." title="Drag to resize. Double tap to reset."></div>
- <h1><svg viewBox="0 0 512 512" width="30" height="30" aria-hidden="true"><defs><linearGradient id="lg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff5a4f"/><stop offset=".55" stop-color="#ff8a3d"/><stop offset="1" stop-color="#ffb52e"/></linearGradient></defs><rect width="512" height="512" rx="104" fill="url(#lg1)"/><g transform="translate(256 256) scale(1.1) translate(-285 -262)" stroke-linejoin="round" stroke-width="16"><path d="M457.5 153.3 453.0 148.1C438.8 172.2 437.1 174.0 424.7 174.0L402.9 173.3L335.0 170.5C274.6 170.5 229.8 203.3 229.8 247.5C229.8 258.5 232.2 268.2 238.4 280.2L264.3 263.3C257.7 246.4 256.3 241.2 256.3 231.6C256.3 212.3 265.3 197.4 282.2 189.5C290.8 185.4 303.6 183.6 321.9 183.6C329.1 183.6 336.0 184.0 353.3 185.4L325.3 297.8C312.9 348.5 306.4 357.2 277.0 358.5L264.9 372.0C348.1 372.0 353.3 371.3 381.2 355.8L381.9 353.0C366.7 355.1 344.6 356.5 326.0 356.5L310.1 355.8C336.7 333.4 345.3 320.9 351.2 294.7L378.1 186.7C423.3 190.5 423.6 190.5 430.5 190.5C446.8 190.5 449.2 187.4 457.5 153.3Z" fill="#fff4de" stroke="#fff4de"/><path d="M278.5 312.1C278.5 296.8 272.5 288.9 244.8 267.1C217.4 245.8 212.9 239.4 212.9 223.2C212.9 198.9 231.2 177.9 253.4 177.9C269.1 177.9 274.8 184.6 278.9 208.6L303.6 191.0C301.4 170.4 290.1 160.2 270.2 160.2C231.6 160.2 187.8 203.0 187.8 240.1C187.8 257.0 195.6 269.4 217.4 286.2C242.9 306.5 249.6 316.6 249.6 333.9C249.6 363.1 221.5 389.0 188.9 389.0C172.8 389.0 156.2 381.9 146.1 370.6C138.2 362.0 135.2 354.1 132.2 337.6L126.2 341.8L109.8 380.8C122.9 398.4 140.5 406.6 164.9 406.6C222.2 406.6 278.5 359.8 278.5 312.1Z" fill="#10263a" stroke="#10263a" opacity=".9"/></g></svg>SongTrak<small class="ver" id="ver" title="App version">v3.305 · 27 Nov e1</small></h1>
+ <h1><svg viewBox="0 0 512 512" width="30" height="30" aria-hidden="true"><defs><linearGradient id="lg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff5a4f"/><stop offset=".55" stop-color="#ff8a3d"/><stop offset="1" stop-color="#ffb52e"/></linearGradient></defs><rect width="512" height="512" rx="104" fill="url(#lg1)"/><g transform="translate(256 256) scale(1.1) translate(-285 -262)" stroke-linejoin="round" stroke-width="16"><path d="M457.5 153.3 453.0 148.1C438.8 172.2 437.1 174.0 424.7 174.0L402.9 173.3L335.0 170.5C274.6 170.5 229.8 203.3 229.8 247.5C229.8 258.5 232.2 268.2 238.4 280.2L264.3 263.3C257.7 246.4 256.3 241.2 256.3 231.6C256.3 212.3 265.3 197.4 282.2 189.5C290.8 185.4 303.6 183.6 321.9 183.6C329.1 183.6 336.0 184.0 353.3 185.4L325.3 297.8C312.9 348.5 306.4 357.2 277.0 358.5L264.9 372.0C348.1 372.0 353.3 371.3 381.2 355.8L381.9 353.0C366.7 355.1 344.6 356.5 326.0 356.5L310.1 355.8C336.7 333.4 345.3 320.9 351.2 294.7L378.1 186.7C423.3 190.5 423.6 190.5 430.5 190.5C446.8 190.5 449.2 187.4 457.5 153.3Z" fill="#fff4de" stroke="#fff4de"/><path d="M278.5 312.1C278.5 296.8 272.5 288.9 244.8 267.1C217.4 245.8 212.9 239.4 212.9 223.2C212.9 198.9 231.2 177.9 253.4 177.9C269.1 177.9 274.8 184.6 278.9 208.6L303.6 191.0C301.4 170.4 290.1 160.2 270.2 160.2C231.6 160.2 187.8 203.0 187.8 240.1C187.8 257.0 195.6 269.4 217.4 286.2C242.9 306.5 249.6 316.6 249.6 333.9C249.6 363.1 221.5 389.0 188.9 389.0C172.8 389.0 156.2 381.9 146.1 370.6C138.2 362.0 135.2 354.1 132.2 337.6L126.2 341.8L109.8 380.8C122.9 398.4 140.5 406.6 164.9 406.6C222.2 406.6 278.5 359.8 278.5 312.1Z" fill="#10263a" stroke="#10263a" opacity=".9"/></g></svg>SongTrak<small class="ver" id="ver" title="App version">v3.306 · 27 Nov e1</small></h1>
  <div class="tabs gears"><button id="hback" class="gear" aria-label="Back one step" title="Back"><svg class="ic" aria-hidden="true"><use href="#i-chevron-left"/></svg></button><button id="hnav" class="gear" aria-label="History list" title="History list"><svg class="ic" aria-hidden="true"><use href="#i-pocket-watch"/></svg></button><button id="hfwd" class="gear" aria-label="Forward one step" title="Forward"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></button><button id="fsbtn" class="gear" aria-label="Full screen" title="Full screen" hidden><svg class="ic" aria-hidden="true"><use href="#i-maximize"/></svg></button><button id="helpbtn" class="gear" aria-label="Getting started" title="Getting started"><svg class="ic" aria-hidden="true"><use href="#i-circle-question-mark"/></svg></button><button id="setbtn" class="gear" aria-label="Settings" title="Settings"><svg class="ic" aria-hidden="true"><use href="#i-settings"/></svg></button></div>
  <div id="qrow"><input type="search" id="q" placeholder="Search songs" aria-label="Search songs"><button class="btn" id="qfind" type="button" aria-haspopup="menu" aria-label="Find the search text" title="Find the search text"><svg class="ic" aria-hidden="true"><use href="#i-list-music"/></svg> Find</button></div>
  <div class="tools" id="sortrow"><span class="sortgrp"><span class="sdir"><button type="button" id="sup" class="on" aria-label="Sort ascending" aria-pressed="true" title="Ascending: A to Z, oldest first"><svg class="ic" aria-hidden="true"><use href="#i-arrow-up"/></svg></button><button type="button" id="sdn" aria-label="Sort descending" aria-pressed="false" title="Descending: Z to A, newest first"><svg class="ic" aria-hidden="true"><use href="#i-arrow-down"/></svg></button></span><select id="sort" aria-label="Sort songs"><option value="title">Title</option><option value="artist">Artist</option><option value="added">Date added</option><option value="set" hidden disabled>Set order</option></select></span></div>
@@ -688,7 +692,7 @@ aside .lwrap{border:3px solid var(--tc-green);background:var(--panel);border-rad
   <div class="tabs" id="ftabs"><button id="tS" class="on" aria-haspopup="menu" aria-expanded="false">Songs <svg class="ic" aria-hidden="true"><use href="#i-chevron-down"/></svg></button><button id="tL">Setlists</button></div>
  <div class="lwrap"><div class="list" id="list"></div><div id="rail" aria-label="Jump to letter"></div></div>
  <div id="botbar"><div class="tools"><button class="btn ico" id="new" aria-label="Add song" title="Add song" hidden><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></button><input type="file" id="dir" webkitdirectory multiple hidden><input type="file" id="file" multiple accept=".pro,.cho,.crd,.chopro,.onsong,.txt,.text,.backup,.zip,.onsongarchive" hidden></div>
- <button class="btn" id="cloudbtn">Backup and restore</button></div>
+ <button class="btn" id="cloudbtn" hidden>Backup and restore</button></div>
  <div class="status" id="sync"></div>
 </aside>
 <main>
@@ -862,8 +866,8 @@ aside .lwrap{border:3px solid var(--tc-green);background:var(--panel);border-rad
 <ul>
 <li>Your songs are kept inside the app on this device.</li>
 <li>The app also keeps a second, hidden copy of your songs on this device. With a very large library the browser's regular storage can be too small; the app then keeps the library in that second copy, tells you, and carries on. Save a backup file now and then either way.</li>
-<li>Tap <b>Backup and restore</b>, then <b>Save backup file</b>, now and then to keep a safe copy.</li>
-<li><b>File</b> (folder icon) and <b>Import</b> sit at the top left of the song page, left of the previous-song button. <b>File</b> opens a small menu: <b>Backup</b>, <b>Restore</b> and <b>Log files</b> each open Backup and restore at that part. <b>Backup and restore</b> also stays at the bottom of the Songs list. Add a song with the <b>+</b> on the song page.</li>
+<li>Tap <b>File</b>, then <b>Backup</b>, then <b>Save backup file</b>, now and then to keep a safe copy.</li>
+<li><b>File</b> (folder icon) and <b>Import</b> sit at the top left of the song page, left of the previous-song button. <b>File</b> opens a small menu: <b>Backup</b>, <b>Restore</b> and <b>Log files</b> each open their own window. The old Backup and restore button is gone. Add a song with the <b>+</b> on the song page.</li>
 <li>The <b>Songs</b> and <b>Setlists</b> tabs sit on top of the list like file folder tabs. Tap <b>Songs</b> again for its setlist menu.</li>
 <li>On an iPad or iPhone choose a folder such as iCloud Drive when the list appears.</li>
 <li>A yellow bar at the top reminds you when you have changes that are not backed up yet.</li>
@@ -885,7 +889,7 @@ aside .lwrap{border:3px solid var(--tc-green);background:var(--panel);border-rad
 </ul>
 <h5>Activity log and storage check</h5>
 <ul>
-<li>In <b>Backup and restore</b>, the <b>Activity log</b> lists, with the time, every file action (saving, opening, pasting, dropping, importing, settings), every time your songs were replaced, storage trouble and each question the app asked you with your answer.</li>
+<li>Under <b>File</b> &gt; <b>Log files</b>, the <b>Activity log</b> lists, with the time, every file action (saving, opening, pasting, dropping, importing, settings), every time your songs were replaced, storage trouble and each question the app asked you with your answer.</li>
 <li>Song text is not recorded. Song titles appear only in file and delete lines.</li>
 <li><b>View log</b>, <b>Copy log</b> and <b>Save log file</b> let you read it or send it to whoever is helping you. The newest 2000 lines are kept, on this device only.</li>
 <li><b>Check storage</b> shows how big your library, safety copy, backups and log are, and how much room the browser allows.</li>
@@ -932,7 +936,7 @@ aside .lwrap{border:3px solid var(--tc-green);background:var(--panel);border-rad
 </ul>
 <h5>Recover songs</h5>
 <ul>
-<li><b>Recover songs</b> (in Backup and restore) keeps a log of repairs, up to three automatic backups of your library, and any damaged copy that could not be read, so nothing is lost silently.</li>
+<li><b>Recover songs</b> (under File &gt; Restore) keeps a log of repairs, up to three automatic backups of your library, and any damaged copy that could not be read, so nothing is lost silently.</li>
 </ul>
 <details class="hmore"><summary>More info…</summary><div class="hm"><ul>
 <li>Your songs are stored in SongTrak’s own storage on this device, not in iCloud and not on a server.</li>
@@ -1200,7 +1204,7 @@ aside .lwrap{border:3px solid var(--tc-green);background:var(--panel);border-rad
 <li>In the Songs list, <b>swipe a song left</b> to show a red <b>Delete</b> button, tap it and confirm.</li>
 <li><b>Swipe a song right</b> to show the four star buttons (gold, blue, red, green). Tap one to switch that star on or off; the buttons stay open so you can set several. Swipe back or tap the song to close them.</li>
 <li>A black <b>Undo</b> bar appears at the bottom of the screen for 30 seconds.</li>
-<li>Deleted songs are also kept: open <b>Backup and restore</b>, then <b>Recover songs</b>, then <b>Backups…</b> to restore one.</li>
+<li>Deleted songs are also kept: tap <b>File</b>, then <b>Restore</b>, then <b>Recover songs</b>, then <b>Backups…</b> to restore one.</li>
 </ul>
 <h5>Removing a song from a setlist</h5>
 <ul>
@@ -1220,7 +1224,7 @@ aside .lwrap{border:3px solid var(--tc-green);background:var(--panel);border-rad
 </ul>
 <h5>Start again from nothing</h5>
 <ul>
-<li>Open <b>Backup and restore</b>, then <b>Reset…</b>.</li>
+<li>Tap <b>File</b>, then <b>Restore</b>, then <b>Reset…</b>.</li>
 <li>Tick what to clear (or tap <b>Select all</b>), type <b>RESET</b> and tap <b>Reset now</b>.</li>
 <li>A backup file of your songs, setlists and drum patterns is saved first. If you cancel that save, nothing is cleared.</li>
 <li>Pedalboards, mixer, loops and settings are not in the backup file, so they cannot be brought back.</li>
@@ -1821,7 +1825,7 @@ body.dr:not(.playing) #dtabs{right:0}
 </ul>
 <h5>Sync between devices</h5>
 <ul>
-<li>In <b>Backup and restore</b>, <b>Automatic backup to a folder</b> keeps a backup file up to date in a folder that your cloud service (iCloud Drive, Dropbox, Google Drive or OneDrive) already shares.</li>
+<li>Tap <b>File</b>, then <b>Backup</b>. <b>Automatic backup to a folder</b> keeps a backup file up to date in a folder that your cloud service (iCloud Drive, Dropbox, Google Drive or OneDrive) already shares.</li>
 <li>On each device, choose the same folder.</li>
 <li>If two devices change the same thing, the latest change wins.</li>
 </ul>
@@ -1959,7 +1963,7 @@ body.dr:not(.playing) #dtabs{right:0}
 <div class="sbox purple" data-h="Controls"><details class="lpd"><summary>Foot pedal and keyboard</summary><p class="status" id="lpmidi"></p><div id="lpmap"></div></details></div>
 <div class="row"><button class="btn main" id="lpplay" type="button">▶ Play loops</button><button class="btn" id="lpfade" type="button">Fade out</button><button class="btn" id="lpclr" type="button">Clear all</button></div>
 <p class="status">Rec replaces a track. Dub adds a new layer on top of what is already recorded. Undo steps back one recording. All tracks stay in step because they share one loop length. If the loops sound late or early, adjust Latency.</p></div></div>
-<div id="fmenu" hidden role="menu" aria-label="File"><button class="btn" type="button" role="menuitem" data-h="Back up">Backup</button><button class="btn" type="button" role="menuitem" data-h="Restore">Restore</button><button class="btn" type="button" role="menuitem" data-h="Activity log">Log files</button></div>
+<div id="fmenu" hidden role="menu" aria-label="File"><button class="btn" type="button" role="menuitem" data-m="b">Backup</button><button class="btn" type="button" role="menuitem" data-m="r">Restore</button><button class="btn" type="button" role="menuitem" data-m="l">Log files</button></div>
 <div id="slmenu" hidden role="menu" aria-label="Setlists for this song"></div>
 <div id="hmenu" hidden role="menu" aria-label="History"></div>
 <div id="railtip" hidden aria-hidden="true"></div>
@@ -1972,33 +1976,33 @@ body.dr:not(.playing) #dtabs{right:0}
 <div id="cloud" class="ov" role="dialog" aria-modal="true"><div class="box"><div class="tnh"><b>Backup and restore</b><button class="btn" id="cclose" type="button">✕ Exit</button></div>
 <p class="status" id="chint"></p>
 <p class="status cstat" id="cst" role="status" aria-live="polite"></p>
-<h5 class="bh">This device</h5>
-<button class="btn act" id="cdev" type="button"><b id="cdevt">Name this device</b><small>The name goes into settings files, so you can tell which device a file came from. Tap to rename.</small></button>
-<h5 class="bh">Back up</h5>
-<button class="btn act" id="csave" type="button"><b>Save backup file</b><small id="csavesub"></small></button>
-<button class="btn act" id="ccopy" type="button"><b>Copy songs as text</b><small>Copies your songs as text. Paste them into a message, email or note to yourself, open it on your other device, copy the text there, then tap Paste songs from text. Apple devices on the same Apple ID can also paste directly (Universal Clipboard).</small></button>
-<button class="btn act" id="csetsave" type="button"><b>Save settings file</b><small>Pedal chains, Mixer and drum levels, and your display and Play settings. Not your songs (use Save backup file for those) and not recorded loops.</small></button>
-<button class="btn act" id="csetcopy" type="button"><b>Copy settings as text</b><small>Same as the settings file, as text. Paste it with Paste songs from text on another device.</small></button>
-<h5 class="bh">Restore</h5>
-<button class="btn act" id="csetload" type="button"><b>Open settings file</b><small>Choose a settings file you saved earlier. You can restore everything, or only the pedal chains, Mixer and drum levels.</small></button>
-<button class="btn act" id="cload" type="button"><b>Open backup file</b><small>Replaces the songs in the app with a backup file you saved earlier. You are asked to confirm first.</small></button>
-<button class="btn act" id="cpaste" type="button"><b>Paste songs from text</b><small>Use text you copied with &ldquo;Copy songs as text&rdquo; or &ldquo;Copy settings as text&rdquo;.</small></button>
-<button class="btn act" id="cany" type="button"><b>Backup file greyed out?</b><small>Choose any file. Use this if your device greys out the backup file in its list.</small></button>
-<h5 class="bh">Recover</h5>
-<button class="btn act" id="chealth" type="button"><b>Recover songs</b><small>Bring back songs you deleted, or go back to an automatic backup. Also shows a record of any problems found.</small></button>
-<div id="cfolder" class="box0"><h5 class="bh">Automatic backup to a folder</h5><p class="status">Choose a folder that your cloud service already keeps up to date, such as iCloud Drive, Dropbox, Google Drive or OneDrive. The app keeps a backup file there for you. On each computer, choose the same folder.</p>
+<h5 data-g="b" class="bh">This device</h5>
+<button data-g="b" class="btn act" id="cdev" type="button"><b id="cdevt">Name this device</b><small>The name goes into settings files, so you can tell which device a file came from. Tap to rename.</small></button>
+<h5 data-g="b" class="bh">Back up</h5>
+<button data-g="b" class="btn act" id="csave" type="button"><b>Save backup file</b><small id="csavesub"></small></button>
+<button data-g="b" class="btn act" id="ccopy" type="button"><b>Copy songs as text</b><small>Copies your songs as text. Paste them into a message, email or note to yourself, open it on your other device, copy the text there, then tap Paste songs from text. Apple devices on the same Apple ID can also paste directly (Universal Clipboard).</small></button>
+<button data-g="b" class="btn act" id="csetsave" type="button"><b>Save settings file</b><small>Pedal chains, Mixer and drum levels, and your display and Play settings. Not your songs (use Save backup file for those) and not recorded loops.</small></button>
+<button data-g="b" class="btn act" id="csetcopy" type="button"><b>Copy settings as text</b><small>Same as the settings file, as text. Paste it with Paste songs from text on another device.</small></button>
+<h5 data-g="r" class="bh">Restore</h5>
+<button data-g="r" class="btn act" id="csetload" type="button"><b>Open settings file</b><small>Choose a settings file you saved earlier. You can restore everything, or only the pedal chains, Mixer and drum levels.</small></button>
+<button data-g="r" class="btn act" id="cload" type="button"><b>Open backup file</b><small>Replaces the songs in the app with a backup file you saved earlier. You are asked to confirm first.</small></button>
+<button data-g="r" class="btn act" id="cpaste" type="button"><b>Paste songs from text</b><small>Use text you copied with &ldquo;Copy songs as text&rdquo; or &ldquo;Copy settings as text&rdquo;.</small></button>
+<button data-g="r" class="btn act" id="cany" type="button"><b>Backup file greyed out?</b><small>Choose any file. Use this if your device greys out the backup file in its list.</small></button>
+<h5 data-g="r" class="bh">Recover</h5>
+<button data-g="r" class="btn act" id="chealth" type="button"><b>Recover songs</b><small>Bring back songs you deleted, or go back to an automatic backup. Also shows a record of any problems found.</small></button>
+<div data-g="b" id="cfolder" class="box0"><h5 class="bh">Automatic backup to a folder</h5><p class="status">Choose a folder that your cloud service already keeps up to date, such as iCloud Drive, Dropbox, Google Drive or OneDrive. The app keeps a backup file there for you. On each computer, choose the same folder.</p>
 <div class="row"><button class="btn main" id="cpick" type="button">Choose folder</button><button class="btn" id="cnow" type="button">Back up now</button><button class="btn" id="coff" type="button">Stop</button></div></div>
-<h5 class="bh">Activity log</h5>
-<p class="status">A timestamped line for every file action, every replacement of your songs, storage trouble and each question the app asked you. Song text is never recorded. Kept on this device only; the newest 2000 lines.</p>
-<button class="btn act" id="clogv" type="button"><b>View log</b><small>Shows the log. Newest lines are at the bottom.</small></button>
-<button class="btn act" id="clogc" type="button"><b>Copy log</b><small>Copies the log as text, to paste into a message.</small></button>
-<button class="btn act" id="clogs" type="button"><b>Save log file</b><small>Saves the log as a text file.</small></button>
-<button class="btn act" id="cstor" type="button"><b>Check storage</b><small>Shows how big your library, backups and log are, and how much room this device allows.</small></button>
-<h5 class="bh">Start fresh</h5>
-<button class="btn act" id="crst" type="button"><b>Reset…</b><small>Clear songs, setlists, drum patterns, pedalboards, loops and settings, then start again, for example before importing a large OnSong backup. You choose what to clear and a backup file is saved first.</small></button>
-<h5 class="bh">Try the app</h5>
-<button class="btn act" id="ctest" type="button"><b>Add sample songs</b><small>Replaces all your songs with a set of sample songs and setlists, just for trying the app. You are asked to confirm first.</small></button>
-<p class="status">You can also drag a backup file onto this page from the Files app in Split View.</p>
+<h5 data-g="l" class="bh">Activity log</h5>
+<p data-g="l" class="status">A timestamped line for every file action, every replacement of your songs, storage trouble and each question the app asked you. Song text is never recorded. Kept on this device only; the newest 2000 lines.</p>
+<button data-g="l" class="btn act" id="clogv" type="button"><b>View log</b><small>Shows the log. Newest lines are at the bottom.</small></button>
+<button data-g="l" class="btn act" id="clogc" type="button"><b>Copy log</b><small>Copies the log as text, to paste into a message.</small></button>
+<button data-g="l" class="btn act" id="clogs" type="button"><b>Save log file</b><small>Saves the log as a text file.</small></button>
+<button data-g="l" class="btn act" id="cstor" type="button"><b>Check storage</b><small>Shows how big your library, backups and log are, and how much room this device allows.</small></button>
+<h5 data-g="r" class="bh">Start fresh</h5>
+<button data-g="r" class="btn act" id="crst" type="button"><b>Reset…</b><small>Clear songs, setlists, drum patterns, pedalboards, loops and settings, then start again, for example before importing a large OnSong backup. You choose what to clear and a backup file is saved first.</small></button>
+<h5 data-g="r" class="bh">Try the app</h5>
+<button data-g="r" class="btn act" id="ctest" type="button"><b>Add sample songs</b><small>Replaces all your songs with a set of sample songs and setlists, just for trying the app. You are asked to confirm first.</small></button>
+<p data-g="r" class="status">You can also drag a backup file onto this page from the Files app in Split View.</p>
 </div></div>
 <div id="fresh" class="ov" role="dialog" aria-modal="true" aria-label="Restore from a backup"><div class="box"><b>Restore from a backup?</b><p class="status">This looks like a new device or browser. If you have backup files, choose them now. You can pick your songs file and your settings file together, or one at a time. Nothing changes until you confirm.</p><input type="file" id="ffile" multiple hidden><div class="row"><button class="btn main" id="ffiles" type="button">Choose files…</button><button class="btn" id="fpaste" type="button">Paste text…</button><button class="btn" id="fno" type="button">Not now</button></div><p class="status" id="fmsg" role="status"></p></div></div>
 <div id="rst" class="ov" role="dialog" aria-modal="true"><div class="box">
@@ -2633,10 +2637,13 @@ $("dev").onchange=cloudUI;cloudUI();
 (function(){var m=$("fmenu"),b=$("filebtn");
  function close(){m.hidden=true;b.setAttribute("aria-expanded","false")}
  b.onclick=function(e){e.stopPropagation();if(!m.hidden){close();return}var r=b.getBoundingClientRect();m.hidden=false;m.style.left=Math.max(8,Math.min(r.left,innerWidth-m.offsetWidth-8))+"px";m.style.top=(r.bottom+4)+"px";b.setAttribute("aria-expanded","true")};
- m.onclick=function(e){var x=e.target.closest("button[data-h]");if(!x)return;close();$("cloudbtn").click();setTimeout(function(){var hs=$("cloud").querySelectorAll("h5.bh");for(var i=0;i<hs.length;i++)if(hs[i].textContent.trim()==x.dataset.h){hs[i].scrollIntoView({block:"start"});break}},80)};
+ m.onclick=function(e){var x=e.target.closest("button[data-m]");if(!x)return;close();window.__cm=x.dataset.m;$("cloudbtn").click()};
  document.addEventListener("pointerdown",function(e){if(!m.hidden&&!e.target.closest("#fmenu,#filebtn"))close()},true);
  document.addEventListener("keydown",function(e){if(e.key=="Escape"&&!m.hidden){close();b.focus()}})})();
 var _ob=$("cloudbtn").onclick;$("cloudbtn").onclick=function(){cloudUI();_ob()};
+/* v3.306 three windows from the File menu */
+(function(){var f=$("cloudbtn").onclick,T={b:"Backup",r:"Restore",l:"Log files"};
+ $("cloudbtn").onclick=function(){var c=$("cloud"),m=window.__cm||"";window.__cm="";if(m)c.dataset.m=m;else delete c.dataset.m;c.querySelector(".tnh b").textContent=T[m]||"Backup and restore";f()}})();
 /* ---- library file saving (pattern adapted from myLedger) ---- */
 var TOUCH=navigator.maxTouchPoints>1,ACC=".json,.txt,application/json,text/plain",fileMode=false,fileDirty=false,lastFileAt=0;
 try{fileMode=localStorage.getItem("songtrak-filemode")=="1";lastFileAt=+localStorage.getItem("songtrak-lastfile")||0}catch(e){}
